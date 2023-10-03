@@ -1,0 +1,47 @@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Usuário";
+}
+
+<style>
+    h3{
+        color: lawngreen;
+    }
+    .formulario{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    fieldset {   
+        display:flex;        
+        width: 400px;    
+        padding: 25px;
+        border: solid black 2px;
+        justify-content: center;
+        align-items: center;
+    }
+   
+</style>
+<h3>Cadastro de usuários</h3>
+<div>
+    <form>
+       <div class="formulario">            
+            <legend>Insira suas informações:</legend>
+            <label for="txtNome">Nome:</label> 
+            <input id="txtNome" type="text">            
+            
+            <label for="txtCPF">CPF:</label> 
+            <input id="txtCPF" type="text">            
+            
+            <label for="txtEmail">Email:</label> 
+            <input id="txtEmail" type="text">            
+            
+            <label for="txtPassword">Senha:</label> 
+            <input id="txtPassword" type="text">
+            <br>
+             <a class="btn btn-success" asp-controller="User" asp-action="Index">Voltar</a>                
+            
+       </div>              
+    </form>
+</div>
