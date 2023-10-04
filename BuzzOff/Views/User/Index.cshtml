@@ -1,32 +1,50 @@
-﻿<div>
-    <h3>User</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-<<<<<<< HEAD
-                <th>CPF</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>accessLevel</th>
-=======
->>>>>>> 8dd7fa1dd8064bffdd44b7cb1fb4a19f996cd511
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-<<<<<<< HEAD
-                @foreach()
-                {
-                <td>1</td>
-                    
-                }
-=======
-                <td>1</td>
-                <td>Marco Antonio Angelo</td>
->>>>>>> 8dd7fa1dd8064bffdd44b7cb1fb4a19f996cd511
-            </tr>
-        </tbody>
-    </table>
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Usuário";
+}
+
+<style>
+    h3{
+        color: lawngreen;
+    }
+    .formulario{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    fieldset {   
+        display:flex;        
+        width: 400px;    
+        padding: 25px;
+        border: solid black 2px;
+        justify-content: center;
+        align-items: center;
+    }
+   
+</style>
+<h3>Cadastro de usuários</h3>
+<div>
+    <form>
+       <div class="formulario">
+            
+            <legend>Insira suas informações:</legend>
+            <label for="txtNome">Nome:</label> 
+            <input id="txtNome" type="text">            
+            
+            <label for="txtCPF">CPF:</label> 
+            <input id="txtCPF" type="text">            
+            
+            <label for="txtEmail">Email:</label> 
+            <input id="txtEmail" type="text">            
+            
+            <label for="txtPassword">Senha:</label> 
+            <input id="txtPassword" type="text">
+            <br>
+             <a class="btn btn-success" asp-controller="User" asp-action="Index">Voltar</a>
+        
+        
+            
+       </div>              
+    </form>
 </div>

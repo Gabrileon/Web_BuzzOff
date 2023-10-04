@@ -4,11 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-<<<<<<< HEAD:Generics/Generics/Visit.cs
 namespace Business.Generics
-=======
-namespace ClassLibrary
->>>>>>> 8dd7fa1dd8064bffdd44b7cb1fb4a19f996cd511:Generics/Visit.cs
 {
     internal class Visit
     {
@@ -28,4 +24,5 @@ namespace ClassLibrary
         public string Assement { get; set; }
 
     }
+
 }
