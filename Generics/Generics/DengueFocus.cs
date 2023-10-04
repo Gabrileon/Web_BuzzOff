@@ -1,19 +1,11 @@
-<<<<<<< HEAD:Generics/Generics/DengueFocus.cs
-﻿using Business.Others;
-=======
-﻿using BuzzOff.Others;
->>>>>>> 8dd7fa1dd8064bffdd44b7cb1fb4a19f996cd511:Generics/DengueFocus.cs
+using Common.Others;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-<<<<<<< HEAD:Generics/Generics/DengueFocus.cs
 namespace Business.Generics
-=======
-namespace ClassLibrary
->>>>>>> 8dd7fa1dd8064bffdd44b7cb1fb4a19f996cd511:Generics/DengueFocus.cs
 {
     internal class DengueFocus
     {
