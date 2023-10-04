@@ -16,6 +16,7 @@ namespace BuzzOff.Controllers
                 {
                     Id = user.Id,
                     Name = user.Name,
+                    CPF = user.CPF,
                     Email = user.Email,
                     Password = user.Password,
                     AccessLevel = user.AccessLevel,
