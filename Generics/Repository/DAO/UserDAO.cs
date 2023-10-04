@@ -15,7 +15,7 @@ namespace Business.Repository.DAO
 {
     public class UserDAO
     {
-        public void Insert(IUser model)
+        public static void Insert(IUser model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -28,8 +28,8 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
-                cmd.Parameters.AddWithValue("@ACCESSLEVEL", model.AccessLevel);
-
+                cmd.Parameters.AddWithValue("@ACCESSLEVEL", 1);
+                User
                 cmd.ExecuteNonQuery();
             }
         }
@@ -87,7 +87,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public List<IUser> GetAll()
+        public static List<IUser> GetAll()
         {
             var list = new List<IUser>();
 
