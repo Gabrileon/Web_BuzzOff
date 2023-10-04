@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    internal class User : IUser
+    public class User : IUser
     {
         /// <summary>
         /// Insert.
@@ -29,6 +29,10 @@ namespace Business.Generics
             CPF = cPF;
             AccessLevel = accessLevel;
         }
+        public User()
+        {
+
+        }
         /// <summary>
         /// Get
         /// </summary>
@@ -46,6 +50,12 @@ namespace Business.Generics
             CPF = cPF;
             AccessLevel = accessLevel;
         }
+        public static List<User> Users = new List<User>()
+        {
+            new User("Marco Antonio Angelo", "marco.angelo@prof.sc.senac.br","13426542935", "Bolinha", MyEnuns.Access.Agent),
+            new User("Viniezao", "vinicius.macaneiro@alunos.sc.senac.br","13426542935", "Bolinha", MyEnuns.Access.Common),
+            new User("Ladeiro", "ladeiro@alunos.sc.senac.br","13426542935", "Bolinha", MyEnuns.Access.Common)
+        };
 
         public int Id { get; set; }
         public string Name { get; set; }
