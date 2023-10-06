@@ -29,7 +29,6 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
                 cmd.Parameters.AddWithValue("@ACCESSLEVEL", 1);
-                User
                 cmd.ExecuteNonQuery();
             }
         }
