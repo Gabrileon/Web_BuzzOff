@@ -1,0 +1,24 @@
+﻿@model UserModel
+<div>
+    <form asp-controller="User" asp-action="Add" method="post">
+        <div class="form-group">
+            <label for="Cpf">CPF</label>
+            <input type="text" id="Cpf" class="form-control" asp-for="CPF" maxlength="11"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" class="form-control" asp-for="Name" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="form-control" asp-for="Email" />
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" class="form-control" asp-for="Password" />
+        </div>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+        <a class="btn btn-secondary float-end" asp-controller="Users" asp-action="Index">Voltar</a>
+
+    </form>
+</div>

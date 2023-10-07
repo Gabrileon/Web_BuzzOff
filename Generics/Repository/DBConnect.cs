@@ -11,10 +11,10 @@ namespace Business.Repository
 
 
         public static string initialCatalog = "BuzzOffDB";
-        static string dataSource = @"BUE0001D022\SQLEXPRESS";
+        static string dataSource = @"localhost\SQLEXPRESS";
 
         static string userID = "sa";
-        static string password = "Senac@2021";
+        static string password = "Bolinha";
 
 
         public static string Connect()
@@ -29,7 +29,7 @@ namespace Business.Repository
                 $"Data Source={dataSource};" +
                 $"Initial Catalog={initialCatalog};" +
                 $"User ID={userID};" +
-                $"Password={password};";
+                $"Password={password};TrustServerCertificate=true;";
 
         }
         public static string Create()
