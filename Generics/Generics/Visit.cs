@@ -24,4 +24,5 @@ namespace Business.Generics
         public string Assement { get; set; }
 
     }
+
 }
