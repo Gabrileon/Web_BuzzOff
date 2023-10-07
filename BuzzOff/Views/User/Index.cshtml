@@ -4,32 +4,46 @@
     // Setar o título da página
     ViewData["Title"] = "Usuários";
 }
-<div class="text-center">
-    <h3>User</h3>
-    <a type="button" class="btn btn-primary float-end" asp-controller="User" asp-action="Add">Novo</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Access Level</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model.Users)
-            {
-                <tr>
-                    <td>@user.Id</td>
-                    <td>@user.Name</td>
-                    <td>@user.CPF</td>
-                    <td>@user.Email</td>
-                    <td>@user.Password</td>
-                    <td>@user.AccessLevel</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+
+<style>
+    h3{
+        color: lawngreen;
+    }
+    .formulario{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    fieldset {   
+        display:flex;        
+        width: 400px;    
+        padding: 25px;
+        border: solid black 2px;
+        justify-content: center;
+        align-items: center;
+    }
+   
+</style>
+<h3>Cadastro de usuários</h3>
+<div>
+    <form>
+       <div class="formulario">            
+            <legend>Insira suas informações:</legend>
+            <label for="txtNome">Nome:</label> 
+            <input id="txtNome" type="text">            
+            
+            <label for="txtCPF">CPF:</label> 
+            <input id="txtCPF" type="text">            
+            
+            <label for="txtEmail">Email:</label> 
+            <input id="txtEmail" type="text">            
+            
+            <label for="txtPassword">Senha:</label> 
+            <input id="txtPassword" type="text">
+            <br>
+             <a class="btn btn-success" asp-controller="User" asp-action="Index">Voltar</a>                
+            
+       </div>              
+    </form>
 </div>
