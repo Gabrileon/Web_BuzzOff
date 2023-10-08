@@ -1,4 +1,6 @@
+using Common.Interfaces;
 using Common.Others;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    internal class DengueFocus
+    internal class DengueFocus: IDengueFocus
     {
         /// <summary>
         /// Insert
@@ -17,10 +19,10 @@ namespace Business.Generics
         /// <param name="isEradicated"></param>
         public DengueFocus(int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
         {
-            IdAddress = idAddress;
+            this.IdAddress = idAddress;
             this.IdVisit = IdVisit;
-            Type = type;
-            IsEradicated = false;
+            this.Type = type;
+            this.IsEradicated = false;
         }
         /// <summary>
         /// Get
@@ -31,11 +33,11 @@ namespace Business.Generics
         /// <param name="isEradicated"></param>
         public DengueFocus(int id, int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
         {
-            Id = id;
-            IdAddress = idAddress;
+            this.Id = id;
+            this.IdAddress = idAddress;
             this.IdVisit = IdVisit;
-            Type = type;
-            IsEradicated = isEradicated;
+            this.Type = type;
+            this.IsEradicated = isEradicated;
         }
 
         public int Id { get; set; }
@@ -46,3 +48,4 @@ namespace Business.Generics
         public bool IsEradicated { get; set; }
     }
 }
+

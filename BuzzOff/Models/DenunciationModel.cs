@@ -1,4 +1,5 @@
 ﻿using Business.Generics;
+using Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DenunciationModel
+    public class DenunciationModel: IDenunciation
     {
         /// <summary>
         /// Insert

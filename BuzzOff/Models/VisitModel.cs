@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class VisitModel
+    public class VisitModel: IVisit
     {
         public VisitModel(int id, int idAgent, int idDenunciation, DateTime dateVisit, string assement)
         {
