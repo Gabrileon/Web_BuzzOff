@@ -4,23 +4,27 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<style>   
-  .form-login{
-      margin-right: 18%
-  }
-  .container{
-      margin: 0;
-      padding: 0;
-  }
-    .txtLogin {
-        display:flex;
-        color: #84CC16;
-        font-size: 64px; 
-        margin-bottom: 150px;
-        font-style:italic;
-        font-weight:500;
+<style>
+
+    .form-login {
+        margin-right: 18%
     }
-    fieldset{
+
+    .container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .txtLogin {
+        display: flex;
+        color: #84CC16;
+        font-size: 64px;
+        margin-bottom: 150px;
+        font-style: italic;
+        font-weight: 500;
+    }
+
+    fieldset {
         display: flex;
         width: 400px;
         height: 700px;
@@ -28,78 +32,87 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        
-    }
-    .login-form{           
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;   
-        width:100%;        
     }
 
-    input{
+    .login-form {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+
+    .form-control {
         width: 450px;
         height: 60px;
         border-radius: 10px;
         border: solid lightgray;
-        margin: 10px; 
+        margin: 10px;
         padding: 20px;
     }
 
-    ::placeholder{
+    ::placeholder {
         color: #84CC16;
         font-size: 1.2rem;
-        
     }
-   
-    .btn-success{
-        background-color:#84CC16;
-        width: 120px;    
-        height:45px;
+
+    .btn-success {
+        background-color: #84CC16;
+        width: 120px;
+        height: 45px;
         margin-top: 20px;
         font-size: 1.2rem;
     }
-    .esqueceu{
+
+    .esqueceu {
         display: block;
-        width:120%;                
-    }   
-    #p-senha{
-       float: right;
-       text-decoration: none;
+        width: 120%;
     }
 
-    input:focus{
+    #p-senha {
+        float: right;
+        text-decoration: none;
+        color: black;
+    }
+
+    form-control:focus {
         outline: none;
     }
 
-    .bg-login{
+    .bg-login {
         display: flex;
-        justify-content:flex-start;
-        
+        justify-content: flex-start;
     }
 
-    .geral{
+    .geral {
         display: flex;
         justify-content: space-between;
         width: 100%;
+    }
+
+    .semConta {
+        text-decoration: none;
+        margin-top: 15px;
     }
 </style>
 
 <div class="geral">
     <img class="bg-login" src="/img/amico.svg">
-    <form class="form-login" action="http://localhost:5059/User/Login" method="post">
-        <div class="login-form">            
+    <form class="form-login" asp-controller="User" asp-action="Login" method="post">
+        <div class="login-form">
             <fieldset>
-            <h3 class="txtLogin">LOGIN</h3>            
-            <input id="txtNome" placeholder="Usuário" type="text">            
-            <input id="txtPassword" placeholder="Senha" type="text">
-            <div class="esqueceu">
-                <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
-            </div>
-            <br>            
-            <a class="btn btn-success" asp-controller="User" asp-action="Index">Entrar</a>
-            </fieldset>            
+                <h3 class="txtLogin">LOGIN</h3>
+                <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" required />
+                <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
+                <div class="esqueceu">
+                    <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
+                </div>
+                <br>
+                <a class="btn btn-success" asp-controller="Home" asp-action="Index">Entrar</a>
+                <div class="sem-conta">
+                    <p class="semConta"> Não possui uma conta? <a id="p-semConta" href="pagina de nova conta">Criar conta</a></p>
+                </div>
+            </fieldset>
         </div>
-        
+
     </form>
 </div>
