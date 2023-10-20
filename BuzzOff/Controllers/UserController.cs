@@ -27,6 +27,15 @@ namespace BuzzOff.Controllers
             return View(model);
 
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Cadastro()
+        {
+            return View();
+        }
         public IActionResult Add()
         {
             return View();
