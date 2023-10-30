@@ -60,6 +60,32 @@ namespace Business.Repository.DAO
             }
         }
 
+        public static IUser GetOne(string User, string Password)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE NAME = @NAME AND PASSWORD = @PASSWORD";
+                cmd.Parameters.AddWithValue("@NAME", User);
+                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(Password));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        return model;
+                    }
+                }
+                return null;
+            }
+        }
 
         public static IUser GetOne(int id)
         {
@@ -84,6 +110,31 @@ namespace Business.Repository.DAO
                     }
                 }
                 return null;
+            }
+        }
+        public static bool Verify(int id)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE ID = @ID";
+                cmd.Parameters.AddWithValue("@ID", id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        return true;
+                    }
+                }
+                return false;
             }
         }
 

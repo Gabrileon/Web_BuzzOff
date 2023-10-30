@@ -89,17 +89,17 @@
 
 <div class="geral">
     <img class="bg-login" src="/img/amico.svg">
-    <form class="form-login" action="http://localhost:5059/User/Login" method="post">
+    <form class="form-login" asp-controller="Login" asp-action="TryVerification" method="post">
         <div class="login-form">
             <fieldset>
                 <h3 class="txtLogin">LOGIN</h3>
-                <input id="txtNome" placeholder="Usuário" type="text">
-                <input id="txtPassword" placeholder="Senha" type="text">
+                <input id="txtNome" placeholder="Usuário" type="text" asp-for="Name">
+                <input id="txtPassword" placeholder="Senha" type="password" asp-for="Password">
                 <div class="esqueceu">
                     <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
                 </div>
                 <br>
-                <a class="btn btn-success" asp-controller="User" asp-action="Index">Entrar</a>
+                <button type="submit" class="btn btn-primary float-end">Entrar</button>
             </fieldset>
         </div>
 
