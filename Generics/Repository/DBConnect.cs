@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,20 @@ namespace Business.Repository
                 $"User ID={userID};" +
                 $"Password={password};TrustServerCertificate=true;";
 
+        }
+        public static bool TestConnect()
+        {
+            try
+            {
+                using (var conn = new SqlConnection(Connect()))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
         public static string Create()
         {

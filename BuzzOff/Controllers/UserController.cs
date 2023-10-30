@@ -1,4 +1,5 @@
-﻿using Business.Repository.DAO;
+﻿using Business.Generics;
+using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,21 +12,9 @@ namespace BuzzOff.Controllers
         public IActionResult Index()
         {
             var model = new UsersModel();
-            List<IUser> Usuario = UserDAO.GetAll();
-            foreach (var user in Usuario)
-            {
-                model.Users.Add(new UserModel()
-                {
-                    Id = user.Id,
-                    CPF = user.CPF,
-                    Name = user.Name,
-                    Email = user.Email,
-                    AccessLevel = user.AccessLevel,
-                });
-            }
+            model.Users = UserDAO.GetAll();
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
-
         }
         public IActionResult Add()
         {
@@ -37,10 +26,14 @@ namespace BuzzOff.Controllers
             UserDAO.Insert(model);
             return RedirectToAction("Index");
         }
+        public IActionResult Update(long id)
+        {
+            return View(UserDAO.GetOne(Convert.ToInt32(id)));
+        }
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
-
+            UserDAO.Update(model);
             return RedirectToAction("Index");
         }
     }

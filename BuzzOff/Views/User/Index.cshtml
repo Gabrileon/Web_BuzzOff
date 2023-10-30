@@ -27,6 +27,12 @@
                     <td>@user.Email</td>
                     <td>@user.Password</td>
                     <td>@user.AccessLevel</td>
+                    <td>
+                        <a type ="button" class="btn btn-warning float-end" asp-controller="User" asp-action="Update">Editar</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-danger float-end" asp-controller="User" asp-action="Delete">Excluir</a>
+                    </td>
                 </tr>
             }
         </tbody>

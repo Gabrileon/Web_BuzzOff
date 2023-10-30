@@ -23,7 +23,8 @@ namespace Business.Repository.DAO
                 var cmd = conn.CreateCommand();
                 cmd.CommandText =
                     "INSERT INTO Users (NAME, EMAIL, PASSWORD, CPF, ACCESSLEVEL)" +
-                    "VALUES (@NAME, @EMAIL, @PASSWORD, @CPF, @ACCESSLEVEL)";
+                    $"VALUES (@NAME, @EMAIL, @PASSWORD, @CPF, @ACCESSLEVEL)";
+                //$"VALUES ('{model.Name}', '{model.Email}', '{HashGenerator.GenerateHash(model.Password)}', '{model.CPF}', {model.AccessLevel})";
                 cmd.Parameters.AddWithValue("@NAME", model.Name);
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
@@ -34,7 +35,7 @@ namespace Business.Repository.DAO
         }
 
 
-        public void Update(IUser model)
+        public static void Update(IUser model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -60,7 +61,7 @@ namespace Business.Repository.DAO
         }
 
 
-        public IUser GetOne(int id)
+        public static IUser GetOne(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -114,7 +115,7 @@ namespace Business.Repository.DAO
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -128,7 +129,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public void UpdatePassword(string password)
+        public static void UpdatePassword(string password)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
