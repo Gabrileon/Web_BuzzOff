@@ -1,5 +1,6 @@
 ﻿using Business.Generics;
 using Common.Interfaces;
+using Common.Others;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,47 @@ namespace Business.Repository.DAO
         {
             var list = new List<IVisit>();
 
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID, IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT FROM VISITS;";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        IVisit model = new Visit(
+                            reader.GetInt32(1),
+                            reader.GetInt32(2),
+                            reader.GetInt32(3),
+                            reader.GetDateTime(4),
+                            reader.GetString(5)
+                            );
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+        public static void Insert(int idAgent, int idDenunciation, DateTime dateTime, string assessment)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
+
+                cmd.Parameters.Add(new SqlParameter("@IDAGENT", idAgent));
+                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", idDenunciation));
+                cmd.Parameters.Add(new SqlParameter("@DATAVISIT", dateTime));
+                cmd.Parameters.Add(new SqlParameter("@ASSESMENT", assessment));
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public static List<IVisit> GetAllVisitsAgent()
+        {
+            var list = new List<IVisit>();
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();

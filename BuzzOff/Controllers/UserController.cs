@@ -11,7 +11,7 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            var model = new UsersModel();
+            UsersModel model = new();
             model.Users = UserDAO.GetAll();
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
@@ -26,9 +26,9 @@ namespace BuzzOff.Controllers
             UserDAO.Insert(model);
             return RedirectToAction("Index");
         }
-        public IActionResult Update(long id)
+        public IActionResult Update(int id)
         {
-            return View(UserDAO.GetOne(Convert.ToInt32(id)));
+            return View(UserDAO.GetOne(id));
         }
         [HttpPost]
         public IActionResult Update(UserModel model)
