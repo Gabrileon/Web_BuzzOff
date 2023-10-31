@@ -56,7 +56,7 @@ namespace Business.Repository
             }
         }
 
-        public IDenunciation GetOne(int id)
+        public static IDenunciation GetOne(int id)
         {
             IDenunciation model = null;
             using (var conn = new SqlConnection(DBConnect.Connect()))
