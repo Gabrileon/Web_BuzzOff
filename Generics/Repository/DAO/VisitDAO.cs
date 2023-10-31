@@ -44,7 +44,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public IVisit GetOne(int id)
+        public static IVisit GetOne(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
