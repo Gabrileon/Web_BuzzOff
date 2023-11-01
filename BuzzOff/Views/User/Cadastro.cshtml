@@ -63,7 +63,7 @@
         height: 45px;
         margin-top: 20px;
         font-size: 1.2rem;
-    }   
+    }
 
     form-control:focus {
         outline: none;
@@ -76,7 +76,7 @@
     }
 
     .geral {
-        display: flex;        
+        display: flex;
         width: 100%;
     }
 
@@ -90,7 +90,7 @@
 
 <div class="geral">
     <div class="bloco-cadastro"></div>
-    <img class="bg-cadastro" src="/img/cadastro.svg">   
+    <img class="bg-cadastro" src="/img/cadastro.svg">
     <form class="form-cadastro" asp-controller="User" asp-action="Add" method="post">
         <div class="cadastro-form">
             <fieldset>
@@ -100,7 +100,7 @@
                 <input type="email" id="email" class="form-control" asp-for="Email" placeholder="Email" required />
                 <input type="text" id="CPF" class="form-control" asp-for="CPF" placeholder="CPF" required />
                 <br>
-                <button type="submit" class="btn btn-success">Cadastrar</button>                
+                <button type="submit" class="btn btn-success">Cadastrar</button>
             </fieldset>
         </div>
 
