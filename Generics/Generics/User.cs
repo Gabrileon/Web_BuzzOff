@@ -29,10 +29,7 @@ namespace Business.Generics
             CPF = cPF;
             AccessLevel = accessLevel;
         }
-        public User()
-        {
 
-        }
         /// <summary>
         /// Get
         /// </summary>
