@@ -17,7 +17,7 @@ namespace BuzzOff.Models
         //public DateTime createdAt { get; set; }
         //public IUser user { get; set; }
         // Precisa de um status para controlar o andamento da denuncia, ex: Pendente, em andamento, resolvido
-        // public MyEnuns.Denouncement status { get; set; }
+        // public MyEnuns.Denouncement status { get; set; } 
 
         //public DenouncementModel(int id, string cep, int number, string uf, string address, string city, string comment, byte[] media, DateTime createdAt, UserModel user)
         //{
