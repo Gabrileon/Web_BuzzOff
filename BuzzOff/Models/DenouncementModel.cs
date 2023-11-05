@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DenunciationModel
+    public class DenouncementModel
     {
         /// <summary>
         /// Insert
@@ -21,7 +21,7 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int idAddress, byte[] media)
+        public DenouncementModel(int idAddress, byte[] media)
         {            
             this.IdInformer = LoggedUser.loggedUser.Id;            
             this.IdAddress = idAddress;
@@ -41,7 +41,7 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public DenouncementModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
         {
             this.Id = id;
             this.IdInformer = idInformer;
