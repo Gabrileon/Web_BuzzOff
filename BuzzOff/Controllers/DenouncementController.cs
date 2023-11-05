@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace BuzzOff.Controllers
 {
-    public class ComplaintController : Controller
+    public class DenouncementController : Controller
     {
         public IActionResult Index()
         {
