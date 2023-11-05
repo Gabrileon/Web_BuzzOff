@@ -1,61 +1,36 @@
-﻿using Business.Generics;
+﻿using Common.Interfaces;
+using Common.Others;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DenouncementModel
+    public class DenouncementModel : IDenouncement
     {
-        /// <summary>
-        /// Insert
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="idInformer"></param>
-        /// <param name="idAgent"></param>
-        /// <param name="idAddress"></param>
-        /// <param name="dataDenunciation"></param>
-        /// <param name="dataVisit"></param>
-        /// <param name="media"></param>
-        /// <param name="isAnswered"></param>
-        public DenouncementModel(int idAddress, byte[] media)
-        {            
-            this.IdInformer = LoggedUser.loggedUser.Id;            
-            this.IdAddress = idAddress;
-            this.DataDenunciation = DateTime.Now;            
-            this.media = media;
-            this.IsAnswered = false;
-        }
-
-        /// <summary>
-        /// Get
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="idInformer"></param>
-        /// <param name="idAgent"></param>
-        /// <param name="idAddress"></param>
-        /// <param name="dataDenunciation"></param>
-        /// <param name="dataVisit"></param>
-        /// <param name="media"></param>
-        /// <param name="isAnswered"></param>
-        public DenouncementModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
-        {
-            this.Id = id;
-            this.IdInformer = idInformer;
-            this.IdAddress = idAddress;
-            this.DataDenunciation = dataDenunciation;            
-            this.media = media;
-            this.IsAnswered = isAnswered;
-        }
-
         public int Id { get; set; }
-        public int IdInformer { get; set; }        
-        public int IdAddress { get; set; }
-        public DateTime DataDenunciation { get; set; }        
-        public byte[] media { get; set; }
-        public bool IsAnswered { get; set; }
+        public string cep { get; set; }
+        public int number { get; set; }
+        public string uf { get; set; }
+        public string address { get; set; }
+        public string city { get; set; }
+        public string comment { get; set; }
+        //public byte[] media { get; set; }
+        //public DateTime createdAt { get; set; }
+        //public IUser user { get; set; }
+        // Precisa de um status para controlar o andamento da denuncia, ex: Pendente, em andamento, resolvido
+        // public MyEnuns.Denouncement status { get; set; }
+
+        //public DenouncementModel(int id, string cep, int number, string uf, string address, string city, string comment, byte[] media, DateTime createdAt, UserModel user)
+        //{
+        //    Id = id;
+        //    this.cep = cep;
+        //    this.number = number;
+        //    this.uf = uf;
+        //    this.address = address;
+        //    this.city = city;
+        //    this.comment = comment;
+        //    this.media = media;
+        //    this.createdAt = createdAt;
+        //    this.user = user;
+        //}
     }
 }

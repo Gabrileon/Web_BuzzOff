@@ -1,4 +1,5 @@
-﻿using Business.Repository.DAO;
+﻿using Azure;
+using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -32,18 +33,18 @@ namespace BuzzOff.Controllers
 
         }
        
-        public IActionResult Cadastro()
-        {
-            return View();
-        }
         public IActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Add(UserModel model)
+        public IActionResult Insert(DenouncementModel model)
         {
-            UserDAO.Insert(model);
+            Console.WriteLine("DenouncementModel: ");
+            Console.WriteLine(model);
+
+
             return RedirectToAction("Index");
         }
         [HttpPost]
