@@ -11,7 +11,7 @@ namespace Business.Repository.DAO
 {
     public class DenunciationVisitDAO
     {
-        public static void Insert(IDenunciationVisit denunciationsVisits)
+        public void Insert(IVisitSolicitations visitSolicitations)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -27,7 +27,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public void Update(IDenunciationVisit denunciationsVisits)
+        public void Update(IVisitSolicitations visitSolicitations)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -44,7 +44,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public static IDenunciationVisit GetOne(int id)
+        public IVisitSolicitations GetOne(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -73,7 +73,7 @@ namespace Business.Repository.DAO
             return null;
         }
 
-        public static List<IDenunciationVisit> GetAll()
+        public List<IVisitSolicitations> GetAll()
         {
             var model = new List<IDenunciationVisit>();
 
@@ -102,7 +102,7 @@ namespace Business.Repository.DAO
             return model;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
