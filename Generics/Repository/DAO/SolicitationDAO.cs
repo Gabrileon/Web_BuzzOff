@@ -12,7 +12,7 @@ namespace Business.Repository.DAO
 {
     internal class SolicitationDAO
     {
-        public void Insert(ISolicitation model)
+        public static void Insert(ISolicitation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -28,7 +28,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public void Update(ISolicitation model)
+        public static void Update(ISolicitation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -45,7 +45,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public ISolicitation GetOne(int id)
+        public static ISolicitation GetOne(int id)
         {
             ISolicitation model = null;
 
@@ -72,7 +72,7 @@ namespace Business.Repository.DAO
             return model;
         }
 
-        public List<ISolicitation> GetAll()
+        public static List<ISolicitation> GetAll()
         {
             var list = new List<ISolicitation>();
 
@@ -100,7 +100,7 @@ namespace Business.Repository.DAO
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {

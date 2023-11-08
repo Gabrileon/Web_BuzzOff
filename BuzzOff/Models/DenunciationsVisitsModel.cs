@@ -2,6 +2,6 @@
 {
     public class DenunciationsVisitsModel
     {
-        public List<DenunciationsVisitModel> denunciationsVisits { get; set;} = new List<DenunciationsVisitModel>();
+        public List<DenunciationVisitModel> denunciationsVisits { get; set;} = new List<DenunciationVisitModel>();
     }
 }

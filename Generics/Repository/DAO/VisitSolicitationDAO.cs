@@ -9,60 +9,60 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    public class DenunciationVisitDAO
+    public class VisitSolicitationDAO
     {
-        public static void Insert(IDenunciationVisit denunciationsVisit)
+        public static void Insert(IVisitSolicitation visitSolicitation)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
 
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO DenunciationsVisits (IDDENUNCIATION, IDVISIT) " +
-                    "VALUES (@IDVISIT, @IDDENUNCIATION)";
-                cmd.Parameters.AddWithValue("@IDDENUNCIATION", denunciationsVisit.Denunciation.Id);
-                cmd.Parameters.AddWithValue("@IDVISIT", denunciationsVisit.Visit.Id);
+                cmd.CommandText = "INSERT INTO VisitsSolicitations (IDVISIT, IDSOLICITATION) " +
+                    "VALUES (@IDVISIT, @IDSOLICITATION)";
+                cmd.Parameters.AddWithValue("@IDVISIT", visitSolicitation.Visit.Id);
+                cmd.Parameters.AddWithValue("@IDSOLICITATION", visitSolicitation.Solicitation.Id);
 
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public static void Update(IDenunciationVisit denunciationsVisit)
+        public static void Update(IVisitSolicitation visitSolicitation)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
 
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE DenunciationsVisits SET IDVISIT = @IDVISIT, " +
-                    "IDDENUNCIATION = @IDDENUNCIATION WHERE Id = @Id";
-                cmd.Parameters.AddWithValue("@IDVISIT", denunciationsVisit.Visit.Id);
-                cmd.Parameters.AddWithValue("@IDDENUNCIATION", denunciationsVisit.Denunciation.Id);
+                cmd.CommandText = "UPDATE VisitsSolicitations SET IDVISIT = @IDVISIT, " +
+                    "IDSOLICITATION = @IDSOLICITATION WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@IDVISIT", visitSolicitation.Visit.Id);
+                cmd.Parameters.AddWithValue("@IDSOLICITATION", visitSolicitation.Solicitation.Id);
 
-                cmd.Parameters.AddWithValue("@Id", denunciationsVisit.Id);
+                cmd.Parameters.AddWithValue("@Id", visitSolicitation.Id);
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public static IDenunciationVisit GetOne(int id)
+        public static IVisitSolicitation GetOne(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
 
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IDVISIT, IDDENUNCIATION FROM DenunciationsVisits WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id, IDVISIT, IDSOLICITATION FROM VisitsSolicitations WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (var reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        IDenunciationVisit model = new DenunciationsVisit()
+                        IVisitSolicitation model = new VisitSolicitation()
                         {
                             Id = (int)reader["ID"],
                             Visit = VisitDAO.GetOne((int)reader["VISIT"]),
-                            Denunciation = DenunciationDAO.GetOne((int)reader["IDDENUNCIATION"])
+                            Solicitation = SolicitationDAO.GetOne((int)reader["SOLICITATION"])
                         };
                         return model;
 
@@ -73,26 +73,26 @@ namespace Business.Repository.DAO
             return null;
         }
 
-        public static List<IDenunciationVisit> GetAll()
+        public static List<IVisitSolicitation> GetAll()
         {
-            var model = new List<IDenunciationVisit>();
+            var model = new List<IVisitSolicitation>();
 
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IDVISIT, IDDENUNCIATION FROM DenunciationsVisits";
+                cmd.CommandText = "SELECT Id, IDVISIT, IDSOLICITATION FROM VisitsSolicitations";
 
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        model.Add(new DenunciationsVisit()
+                        model.Add(new VisitSolicitation()
                         {
 
                             Id = (int)reader["ID"],
                             Visit = VisitDAO.GetOne((int)reader["VISIT"]),
-                            Denunciation = DenunciationDAO.GetOne((int)reader["IDDENUNCIATION"])
+                            Solicitation = SolicitationDAO.GetOne((int)reader["SOLICITATION"])
 
                         });
                     }
@@ -108,7 +108,7 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "DELETE FROM DenunciationsVisits WHERE Id = @Id";
+                cmd.CommandText = "DELETE FROM VisitsSolicitations WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.ExecuteNonQuery();
             }

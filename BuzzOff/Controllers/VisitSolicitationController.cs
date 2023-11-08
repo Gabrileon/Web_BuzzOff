@@ -15,7 +15,7 @@ namespace BuzzOff.Controllers
 
             foreach (IVisitSolicitation result in list)
             {
-                model.visitSolicitation.Add(new VisitSolicitationModel()
+                model.visitSolicitations.Add(new VisitSolicitationModel()
                 {
                     Id = result.Id,
                     Solicitation = result.Solicitation,

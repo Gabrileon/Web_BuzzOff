@@ -15,7 +15,7 @@ namespace BuzzOff.Controllers
 
             foreach (IDenunciationVisit result in list)
             {
-                model.denunciationsVisits.Add(new DenunciationsVisitModel()
+                model.denunciationsVisits.Add(new DenunciationVisitModel()
                 {
                     Id = result.Id,
                     Denunciation = result.Denunciation,
@@ -31,13 +31,13 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(DenunciationsVisitModel model)
+        public IActionResult Add(DenunciationVisitModel model)
         {
             DenunciationVisitDAO.Insert(model);
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult Update(DenunciationsVisitModel model)
+        public IActionResult Update(DenunciationVisitModel model)
         {
             DenunciationVisitDAO.Insert(model);
             return RedirectToAction("Index");
