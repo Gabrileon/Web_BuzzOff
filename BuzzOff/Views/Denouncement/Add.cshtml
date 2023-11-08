@@ -2,6 +2,45 @@
 @{
     ViewData["Title"] = "Cadastro denuncias";
 }
+<style>
+    .btn-primary {
+        background-color: #84CC16;
+        width: 120px;
+        height: 45px;
+        margin-top: 20px;
+        font-size: 1.2rem;
+
+    }
+
+    fieldset {
+        display: flex;
+        width: 400px;
+        height: 700px;
+        padding: 25px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .Denouncement-form {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        margin-left: 50%;
+    }
+
+
+
+
+
+</style>
+
+
+<h3 class="txtCadastro">Realize sua Denúncia</h3>
+
+<button type="submit" class="btn btn-primary">Voltar</button>
+
 
 <form class="container" method="POST" asp-controller="Denouncement" asp-action="Insert">
     <div class="row">
@@ -35,7 +74,11 @@
                     <label for="DENOUNCEMENT_ID" class="form-label">Tipo de denúncia</label>
                     <select class="form-control" id="DENOUNCEMENT_ID">
                         <option selected>Selecione uma opção</option>
-                        <option value="1" >Denúncia 1</option>
+                        <option value="1" >Ovos</option>
+                        <option value="2">Larvas</option>
+                        <option value="3">Pupas</option>
+                        <option value="4">Adultas</option>
+
                     </select>
                 </div>
             </div>
@@ -47,9 +90,13 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
-            <label for="media" class="form-label">Informe a imagem</label>
+            <label for="media" class="form-label">Informe a imagem:</label>
             @* <input class="form-control" type="file" id="media" asp-for="media"> *@
+
+            <button type="submit" class="btn btn-primary">Adicionar imagem</button>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-primary">Enviar</button> 
 </form>
+
+

@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.btn-primary {
+    background-color: #84CC16;
+    width: 120px;
+    height: 45px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+fieldset {
+    display: flex;
+    width: 400px;
+    height: 700px;
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
