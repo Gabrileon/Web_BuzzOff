@@ -137,23 +137,6 @@ namespace Business.Repository.DAO
                 return false;
             }
         }
-
-                using (var reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        IUser model = new User(
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            (MyEnuns.Access)reader.GetInt32(4),
-                            reader.GetInt32(0));
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
         public static List<IUser> GetAll()
         {
             var list = new List<IUser>();
