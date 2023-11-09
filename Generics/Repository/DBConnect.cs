@@ -14,7 +14,7 @@ namespace Business.Repository
         static string dataSource = @"localhost\SQLEXPRESS";
 
         static string userID = "sa";
-        static string password = "Bolinha";
+        static string password = "Senac@2021";
 
 
         public static string Connect()
