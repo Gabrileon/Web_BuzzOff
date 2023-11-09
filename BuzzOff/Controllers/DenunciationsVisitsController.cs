@@ -42,5 +42,10 @@ namespace BuzzOff.Controllers
             DenunciationVisitDAO.Insert(model);
             return RedirectToAction("Index");
         }
+        public IActionResult Delete(DenunciationVisitModel model)
+        {
+            DenunciationVisitDAO.Delete(model.Id);
+            return RedirectToAction("Index");
+        }
     }
 }

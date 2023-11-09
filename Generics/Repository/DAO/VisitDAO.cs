@@ -24,9 +24,9 @@ namespace Business.Repository.DAO
                 cmd.CommandText = "SELECT ID, IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT FROM VISITS;";
 
                 using (var reader = cmd.ExecuteReader())
-        {
+                {
                     while (reader.Read())
-            {
+                    {
                         IVisit model = new Visit(
                             reader.GetInt32(1),
                             reader.GetInt32(2),
@@ -35,10 +35,37 @@ namespace Business.Repository.DAO
                             reader.GetString(5)
                             );
                         list.Add(model);
-            }
-        }
+                    }
+                }
             }
             return list;
+        }
+
+        public static IVisit GetOne(int id)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Id, IdAgent, IdDenunciation, DateVisit, Assement FROM Visits WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@Id", id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new Visit(
+                            id: reader.GetInt32(0),
+                            idAgent: reader.GetInt32(1),
+                            idDenunciation: reader.GetInt32(2),
+                            dateVisit: reader.GetDateTime(3),
+                            assessment: reader.GetString(4)
+                        );
+                    }
+                }
+            }
+            return null;
         }
         public static void Insert(int idAgent, int idDenunciation, DateTime dateTime, string assessment)
         {
@@ -55,8 +82,6 @@ namespace Business.Repository.DAO
                 cmd.Parameters.Add(new SqlParameter("@ASSESMENT", assessment));
                 cmd.ExecuteNonQuery();
             }
-
-            return null;
         }
         public static List<IVisit> GetAllVisitsAgent()
         {
@@ -79,12 +104,15 @@ namespace Business.Repository.DAO
                         //    reader.GetInt32(0));
 
                         //list.Add(model);
-            }
+                    }
 
-            return model;
+                    return list;
+                }
+            }
         }
 
-        public void Delete(int id)
+
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -94,7 +122,10 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.ExecuteNonQuery();
             }
-            return list;
+
         }
     }
 }
+
+
+
