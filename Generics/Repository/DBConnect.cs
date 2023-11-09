@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,10 @@ namespace Business.Repository
 
 
         public static string initialCatalog = "BuzzOffDB";
-        static string dataSource = @"localhost\SQLEXPRESS";
+        static string dataSource = @"BUE0001D019\SQLEXPRESS";
 
         static string userID = "sa";
-        static string password = "Bolinha";
+        static string password = "Senac@2021";
 
 
         public static string Connect()
@@ -31,6 +32,20 @@ namespace Business.Repository
                 $"User ID={userID};" +
                 $"Password={password};TrustServerCertificate=true;";
 
+        }
+        public static bool TestConnect()
+        {
+            try
+            {
+                using (var conn = new SqlConnection(Connect()))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
         public static string Create()
         {

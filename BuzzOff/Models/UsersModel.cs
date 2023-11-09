@@ -1,7 +1,9 @@
-﻿namespace BuzzOff.Models
+﻿using Common.Interfaces;
+
+namespace BuzzOff.Models
 {
     public class UsersModel
     {
-        public List<UserModel> Users { get; set; } = new List<UserModel>();
+        public List<IUser> Users { get; set; } = new List<IUser>();
     }
 }
