@@ -1,4 +1,5 @@
 
+using Common.Interfaces;
 using Common.Others;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class SolicitationModel
+    public class SolicitationModel: ISolicitation
     {
         /// <summary>
         /// Insert

@@ -1,13 +1,12 @@
-﻿using Common.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Generics
+namespace Common.Interfaces
 {
-    internal class ConclusionVisit: IConclusionVisit
+    public interface IConclusionVisit
     {
         public int Id { get; set; }
         public int IdDenunciation { get; set; }

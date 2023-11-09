@@ -19,13 +19,14 @@ namespace Business.Repository.DAO
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
+
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "SELECT ID, IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT FROM VISITS;";
 
                 using (var reader = cmd.ExecuteReader())
-                {
+        {
                     while (reader.Read())
-                    {
+            {
                         IVisit model = new Visit(
                             reader.GetInt32(1),
                             reader.GetInt32(2),
@@ -34,8 +35,8 @@ namespace Business.Repository.DAO
                             reader.GetString(5)
                             );
                         list.Add(model);
-                    }
-                }
+            }
+        }
             }
             return list;
         }
@@ -44,6 +45,7 @@ namespace Business.Repository.DAO
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
+
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
 
@@ -53,6 +55,8 @@ namespace Business.Repository.DAO
                 cmd.Parameters.Add(new SqlParameter("@ASSESMENT", assessment));
                 cmd.ExecuteNonQuery();
             }
+
+            return null;
         }
         public static List<IVisit> GetAllVisitsAgent()
         {
@@ -75,8 +79,20 @@ namespace Business.Repository.DAO
                         //    reader.GetInt32(0));
 
                         //list.Add(model);
-                    }
-                }
+            }
+
+            return model;
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Visits WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.ExecuteNonQuery();
             }
             return list;
         }

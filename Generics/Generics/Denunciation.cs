@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    internal class Denunciation
+    internal class Denunciation: IDenunciation
     {
         /// <summary>
         /// Insert

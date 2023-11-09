@@ -25,4 +25,5 @@ namespace Business.Generics
         public string Assessment { get; set; }
 
     }
+
 }
