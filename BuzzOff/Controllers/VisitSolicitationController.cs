@@ -9,20 +9,11 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            var model = new VisitSolicitationsModel();
-
-            List<IVisitSolicitation> list = VisitSolicitationDAO.GetAll();
-
-            foreach (IVisitSolicitation result in list)
+            var model = new VisitSolicitationsModel
             {
-                model.visitSolicitations.Add(new VisitSolicitationModel()
-                {
-                    Id = result.Id,
-                    Solicitation = result.Solicitation,
-                    Visit = result.Visit,
-                });
-            }
-                return View(model);
+                visitSolicitations = VisitSolicitationDAO.GetAll()
+            };
+            return View(model);
         }
 
         public IActionResult Add()

@@ -11,8 +11,10 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            UsersModel model = new();
-            model.Users = UserDAO.GetAll();
+            UsersModel model = new()
+            {
+                Users = UserDAO.GetAll()
+            };
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
         }
