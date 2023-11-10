@@ -1,4 +1,5 @@
 ﻿using Business.Repository.DAO;
+using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuzzOff.Controllers
@@ -11,8 +12,10 @@ namespace BuzzOff.Controllers
         }
         public IActionResult TryVerification(string name, string password)
         {
-            if (UserDAO.GetOne(name, password) != null)
+            var model = UserDAO.GetOne(name, password);
+            if (model != null)
             {
+                ViewBag.loggedUser = model;
             return RedirectToAction("Index", "User");                    
             }
             else
