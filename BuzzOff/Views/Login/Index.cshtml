@@ -2,26 +2,73 @@
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
-}
+    }
 
+    input {
+        width: 450px;
+        height: 60px;
+        border-radius: 10px;
+        border: solid lightgray;
+        margin: 10px;
+        padding: 20px;
+    }
+
+    ::placeholder {
+        color: #84CC16;
+        font-size: 1.2rem;
+    }
+
+    .btn-success {
+        background-color: #84CC16;
+        width: 120px;
+        height: 45px;
+        margin-top: 20px;
+        font-size: 1.2rem;
+    }
+
+    .esqueceu {
+        display: block;
+        width: 120%;
+    }
+
+    #p-senha {
+        float: right;
+        text-decoration: none;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .bg-login {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .geral {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+</style>
 
 <div class="geral">
     <img class="bg-login" src="/img/amico.svg">
     <form class="form-login" asp-controller="User" asp-action="Login" method="post">
-        <div class="login-form">            
+        <div class="login-form">
             <fieldset>
-            <h3 class="txtLogin">LOGIN</h3>
+                <h3 class="txtLogin">LOGIN</h3>
                 <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" required />
                 <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
-            <div class="esqueceu">
-                <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
-            </div>
-            <br>            
+                <div class="esqueceu">
+                    <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
+                </div>
+                <br>
             <a class="btn btn-success" asp-controller="Home" asp-action="Index">Entrar</a>
                 <div class="sem-conta">
                     <p class="semConta"> Não possui uma conta? <a id="p-semConta" href="pagina de nova conta">Criar conta</a></p>
                 </div>
-            </fieldset>            
+            </fieldset>
         </div>
 
     </form>

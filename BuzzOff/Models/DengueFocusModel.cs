@@ -1,4 +1,5 @@
-﻿using Common.Others;
+﻿using Common.Interfaces;
+using Common.Others;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DengueFocusModel
+    public class DengueFocusModel:IDengueFocus
     {
         /// <summary>
         /// Insert

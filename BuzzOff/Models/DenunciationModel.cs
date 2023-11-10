@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using Business.Generics;
+using Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Generics
+namespace BuzzOff.Models
 {
-    internal class Denunciation: IDenunciation
+    public class DenunciationModel: IDenunciation
     {
         /// <summary>
         /// Insert
@@ -21,13 +22,13 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int idAddress, byte[] media)
-        {
-            IdInformer = LoggedUser.loggedUser.Id;
-            IdAddress = idAddress;
-            DataDenunciation = DateTime.Now;
+        public DenunciationModel(int idAddress, byte[] media)
+        {            
+            this.IdInformer = LoggedUser.loggedUser.Id;            
+            this.IdAddress = idAddress;
+            this.DataDenunciation = DateTime.Now;            
             this.media = media;
-            IsAnswered = false;
+            this.IsAnswered = false;
         }
 
         /// <summary>
@@ -41,21 +42,21 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
         {
-            Id = id;
-            IdInformer = idInformer;
-            IdAddress = idAddress;
-            DataDenunciation = dataDenunciation;
+            this.Id = id;
+            this.IdInformer = idInformer;
+            this.IdAddress = idAddress;
+            this.DataDenunciation = dataDenunciation;            
             this.media = media;
-            IsAnswered = isAnswered;
+            this.IsAnswered = isAnswered;
         }
 
         public int Id { get; set; }
-        public int IdInformer { get; set; }
+        public int IdInformer { get; set; }        
         public int IdAddress { get; set; }
-        public DateTime DataDenunciation { get; set; }
+        public DateTime DataDenunciation { get; set; }        
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
     }
-} 
+}

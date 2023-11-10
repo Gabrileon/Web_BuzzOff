@@ -13,7 +13,7 @@ namespace BuzzOff.Controllers
         {
             if (UserDAO.GetOne(name, password) != null)
             {
-                return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "User");                    
             }
             else
             {

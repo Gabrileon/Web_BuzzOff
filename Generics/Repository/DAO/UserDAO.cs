@@ -23,7 +23,8 @@ namespace Business.Repository.DAO
                 var cmd = conn.CreateCommand();
                 cmd.CommandText =
                     "INSERT INTO Users (NAME, EMAIL, PASSWORD, CPF, ACCESSLEVEL)" +
-                    "VALUES (@NAME, @EMAIL, @PASSWORD, @CPF, @ACCESSLEVEL)";
+                    $"VALUES (@NAME, @EMAIL, @PASSWORD, @CPF, @ACCESSLEVEL)";
+                //$"VALUES ('{model.Name}', '{model.Email}', '{HashGenerator.GenerateHash(model.Password)}', '{model.CPF}', {model.AccessLevel})";
                 cmd.Parameters.AddWithValue("@NAME", model.Name);
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
@@ -34,7 +35,7 @@ namespace Business.Repository.DAO
         }
 
 
-        public void Update(IUser model)
+        public static void Update(IUser model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -58,7 +59,6 @@ namespace Business.Repository.DAO
                 cmd.ExecuteNonQuery();
             }
         }
-
 
         public static IUser GetOne(string User, string Password)
         {
@@ -87,6 +87,57 @@ namespace Business.Repository.DAO
             }
         }
 
+        public static IUser GetOne(int id)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE NAME = @NAME AND PASSWORD = @PASSWORD";
+                cmd.Parameters.AddWithValue("@NAME", User);
+                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(Password));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        return model;
+                    }
+                }
+                return null;
+            }
+        }
+        public static bool Verify(int id)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE ID = @ID";
+                cmd.Parameters.AddWithValue("@ID", id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
         public static List<IUser> GetAll()
         {
             var list = new List<IUser>();
@@ -115,7 +166,7 @@ namespace Business.Repository.DAO
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -129,7 +180,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public void UpdatePassword(string password)
+        public static void UpdatePassword(string password)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
