@@ -1,14 +1,8 @@
 ﻿using Business.Authentications.Cryptography;
 using Business.Generics;
-using Business.Repository;
 using Common.Interfaces;
 using Common.Others;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Business.Repository.DAO
@@ -60,7 +54,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public static IUser GetOne(string User, string Password)
+        public static IUser? GetOne(string User, string Password)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -93,10 +87,8 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE NAME = @NAME AND PASSWORD = @PASSWORD";
-                cmd.Parameters.AddWithValue("@NAME", User);
-                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(Password));
-
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE ID = @ID";
+                cmd.Parameters.AddWithValue("@ID", id);
                 using (var reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
@@ -196,31 +188,6 @@ namespace Business.Repository.DAO
 
 
                 cmd.ExecuteNonQuery();
-            }
-        }
-        public static bool Verify(int id)
-        {
-            using (var conn = new SqlConnection(DBConnect.Connect()))
-            {
-                conn.Open();
-                var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE ID = @ID";
-                cmd.Parameters.AddWithValue("@ID", id);
-
-                using (var reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        IUser model = new User(
-                            reader.GetString(1),
-                            reader.GetString(2),
-                            reader.GetString(3),
-                            (MyEnuns.Access)reader.GetInt32(4),
-                            reader.GetInt32(0));
-                        return true;
-                    }
-                }
-                return false;
             }
         }
     }
