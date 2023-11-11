@@ -12,7 +12,7 @@ namespace Common.Interfaces
         public int IdInformer { get; set; }
         public int IdAddress { get; set; }
         public DateTime DataDenunciation { get; set; }
-        public byte[] media { get; set; }
+        public byte[] midia { get; set; }
         public bool IsAnswered { get; set; }
     }
 }
