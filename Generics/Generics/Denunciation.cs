@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    internal class Denunciation
+    public class Denunciation: IDenunciation
     {
         /// <summary>
         /// Insert
