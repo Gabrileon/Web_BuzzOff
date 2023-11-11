@@ -16,3 +16,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbar {
+    margin: 0;
+}
+
+.message {
+    margin-top: 5%;
+    color: white;
+}

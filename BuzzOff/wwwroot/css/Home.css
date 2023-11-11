@@ -1,0 +1,32 @@
+﻿body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.left {
+    padding-top: 20vh;
+    padding-left: 5vh;
+    background-color: #2F3C33;
+    height: 100vh;
+}
+
+.right {
+    background-color: #84CC16;
+    height: 100vh;
+}
+
+.btn-success {
+    background-color: #5E940D;
+    border-color: #5E940D;
+    filter: drop-shadow(#2F3C33 0.3rem 0.3rem 5px)
+}
+
+.green-h3 {
+    color: #84CC16;
+    font-size: 36px;
+}
+
+.btn-success:hover {
+    background-color: #2F3C33;
+}
