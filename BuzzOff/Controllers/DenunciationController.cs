@@ -12,11 +12,11 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            var model = new UsersModel();
-            List<IDenunciation> Usuario = DenunciationDAO.GetAll(); ;
-            foreach (var user in Usuario)
+            var model = new UserModel();
+            List<IDenunciation> Denuncia = DenunciationDAO.GetAll(); 
+            foreach (var user in Denuncia)
             {
-                model.Users.Add(new UserModel()
+                model.denunciations.Add(new UserModel()
                 {
                     Id = user.Id,
                     CPF = user.CPF,
@@ -30,16 +30,15 @@ namespace BuzzOff.Controllers
 
         }
        
-        public IActionResult Add()
+        public IActionResult Insert()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Insert(DenouncementModel model)
+        public IActionResult Insert(IDenunciation model)
         {
-            
-
+            DenunciationDAO.Insert(model);
             return RedirectToAction("Index");
         }
         [HttpPost]
@@ -48,5 +47,12 @@ namespace BuzzOff.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult Delete(IDenunciation model)
+        {
+            DenunciationDAO.Delete(model.Id);
+            return RedirectToAction("Index");
+        }
+
     }
 }
