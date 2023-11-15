@@ -24,7 +24,7 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                cmd.Parameters.AddWithValue("@Media", null); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
 
                 cmd.ExecuteNonQuery();
@@ -173,7 +173,7 @@ namespace Business.Repository
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {

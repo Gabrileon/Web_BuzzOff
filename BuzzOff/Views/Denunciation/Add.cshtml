@@ -1,4 +1,4 @@
-﻿@model DenouncementModel
+﻿@* @model DenunciationModel
 @{
     ViewData["Title"] = "Cadastro denuncias";
    
@@ -33,7 +33,7 @@
 <button type="submit" class="btn btn-primary">Voltar</button>
 
 
-<form class="container" method="POST" asp-controller="Denouncement" asp-action="Insert">
+<form class="container" method="POST" asp-controller="Denunciation" asp-action="Insert">
     <div class="row">
         <div class="col-sm-12 col-md-8">
             <div class="row g-3 align-items-center">
@@ -82,7 +82,7 @@
         </div>
         <div class="col-sm-12 col-md-4">
             <label for="media" class="form-label">Informe a imagem:</label>
-            @* <input class="form-control" type="file" id="media" asp-for="media"> *@
+            @* <input class="form-control" type="file" id="media" asp-for="media"> 
 
             <button type="submit" class="btn btn-primary">Adicionar imagem</button>
         </div>
@@ -91,3 +91,4 @@
 </form>
 
 
+ *@

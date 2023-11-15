@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Business.Generics;
 using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
@@ -12,24 +13,14 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            var model = new UserModel();
-            List<IDenunciation> Denuncia = DenunciationDAO.GetAll(); 
-            foreach (var user in Denuncia)
+            DenunciationsModel model = new()
             {
-                model.denunciations.Add(new UserModel()
-                {
-                    Id = user.Id,
-                    CPF = user.CPF,
-                    Name = user.Name,
-                    Email = user.Email,
-                    AccessLevel = user.AccessLevel,
-                });
-            }
+                Denunciations = DenunciationDAO.GetAll()
+            };
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
-
         }
-       
+
         public IActionResult Insert()
         {
             return View();

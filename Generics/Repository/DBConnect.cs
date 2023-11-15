@@ -24,7 +24,13 @@ namespace Business.Repository
             {
                 dataSource = @"localhost\SQLSERVER";
                 password = "sa";
+            }   
+            
+            if (Environment.MachineName == "TIAGO")
+            {
+                dataSource = @"TIAGO\SQLEXPRESS";
             }
+
 
             return
                 $"Data Source={dataSource};" +
