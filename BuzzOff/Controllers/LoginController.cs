@@ -1,6 +1,11 @@
 ﻿using Business.Repository.DAO;
+using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BuzzOff.Controllers
 {
@@ -10,18 +15,41 @@ namespace BuzzOff.Controllers
         {
             return View();
         }
-        public IActionResult TryVerification(string name, string password)
+
+        [HttpPost]
+        public async Task<IActionResult> TryVerification(string name, string password)
         {
             var model = UserDAO.GetOne(name, password);
             if (model != null)
             {
-                ViewBag.loggedUser = model;
-            return RedirectToAction("Index", "User");                    
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
+                    new Claim(ClaimTypes.Name, model.Name.ToString()),
+                    new Claim("AccessLevel", model.AccessLevel.ToString()),
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            ModelState.AddModelError(string.Empty, "Credenciais inválidas");
+
+            return View(model);
+        }
+        public IActionResult Cadastro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(UserModel model)
+        {
+            UserDAO.Insert(model);
+            return RedirectToAction("Index");
         }
     }
 }
