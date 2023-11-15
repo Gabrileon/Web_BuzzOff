@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Denouncement\Cadastro.cshtml" />
+    <Content Remove="Views\Denunciation\Cadastro.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

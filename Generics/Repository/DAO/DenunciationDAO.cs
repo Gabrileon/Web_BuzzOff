@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Business.Repository
 {
-    internal class DenunciationDAO
+    public class DenunciationDAO
     {
         byte[] midia = new byte[10];
 
-        public void Insert(IDenunciation model)
+        public static void Insert(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -144,7 +144,7 @@ namespace Business.Repository
             return list;
         }
 
-        public List<IDenunciation> GetAll()
+        public static List<IDenunciation> GetAll()
         {
             var list = new List<IDenunciation>();
             using (var conn = new SqlConnection(DBConnect.Connect()))
