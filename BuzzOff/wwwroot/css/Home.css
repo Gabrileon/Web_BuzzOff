@@ -4,29 +4,34 @@
     height: 100%;
 }
 
-.left {
-    padding-top: 20vh;
-    padding-left: 5vh;
-    background-color: #2F3C33;
-    height: 100vh;
+.left-block{
+    height: 80vh;
+    padding: 50px;
 }
 
-.right {
-    background-color: #84CC16;
-    height: 100vh;
+h3{
+    font-size: 40px;
+    font-weight: bold;
 }
 
-.btn-success {
-    background-color: #5E940D;
-    border-color: #5E940D;
-    filter: drop-shadow(#2F3C33 0.3rem 0.3rem 5px)
+span{
+    font-size: 28px;
 }
 
-.green-h3 {
+a {
     color: #84CC16;
-    font-size: 36px;
+    font-weight: bold;
+    margin: 20px;
+    text-decoration: none;
+    font-size: 26px;
+    text-align: center;
 }
 
-.btn-success:hover {
-    background-color: #2F3C33;
+.arrow{
+    font-size: 28px;
+}
+
+.right-block {
+    height: 80vh;
+    padding: 50px;
 }

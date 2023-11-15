@@ -9,57 +9,51 @@
     <link rel="stylesheet" href="~/BuzzOff.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="">
+    <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img class="logo" src="~/img/Logo_Mosquito.svg" alt="Logo Buzzoff"/>
+            </a>
+
+                @{
+                    var messages = new List<String>()
+                    {
+                        "Previna-se!",
+                        "Combata a dengue",
+                        "Olá, combatente!",
+                        "Bzzzzz..."
+                    };
+                    int index = new Random().Next(messages.Count);
+                }
+            <span class="message">@messages[index]</span>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end d-flex">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="btn btn-success text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Quem Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Campeonatos" asp-action="Index">Mapa de focos</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </header>
 
         @RenderBody()
         <main role="main" class="pb-3">
-            <header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow">
-                    <div class="container-fluid">
-                        <div class="d-flex">
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                                <img src="~/img/BuzzOffImageLogo.svg" />
-                            </a>
-
-                            @{
-                                var messageList = new List<String>()
-                            {
-                            "Olá combatente!",
-                            "Querida, cheguei!",
-                            "Hoje o dia está BuzzOff",
-                            "Seja a diferença",
-                            "Previna-se"
-                            };
-                                int index = new Random().Next(messageList.Count);
-                            }
-                            <h1 class="message">@messageList[index]</h1>
-
-                        </div>
-                        <div>
-                            <div class="">
-                                <ul class="navbar-nav flex-grow-1">
-                                    <li class="nav-item mx-3">
-                                        <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                    </li>
-                                    <li class="nav-item mx-3">
-                                        <a class="btn btn-success" asp-area="" asp-controller="" asp-action="">Fale conosco</a>
-                                    </li>
-                                    <li class="nav-item mx-3">
-                                        <a class="btn btn-success" asp-area="" asp-controller="" asp-action="">Mapa de focos</a>
-                                    </li>
-                                    <li class="nav-item mx-3">
-                                        <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </header>
+ 
         </main>
-    </div>
 
-    <footer class="border-top footer text-muted bg-black">
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - BuzzOff - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

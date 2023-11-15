@@ -17,11 +17,29 @@ body {
   margin-bottom: 60px;
 }
 
-.navbar {
-    margin: 0;
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.navbar-nav {
+    text-align: left;
+    justify-content: end;
 }
 
 .message {
-    margin-top: 5%;
-    color: white;
+    color: #2F3C33;
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.btn-success {
+    background-color: #84CC16;
+    border-color: #2F3C33;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.footer {
+    background-color: #2F3C33;
 }
