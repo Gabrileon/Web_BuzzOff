@@ -46,23 +46,10 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(UserModel model)
+        public IActionResult Add(UserModel model)
         {
             UserDAO.Insert(model);
-            var user = UserDAO.GetOne(model.Name, model.Password);
-
-            var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Name.ToString()),
-                    new Claim("AccessLevel", user.AccessLevel.ToString()),
-                };
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index");
         }
     }
 }
