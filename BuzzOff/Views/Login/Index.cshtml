@@ -3,9 +3,10 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
     }
+
 <div class="geral">
     <img class="bg-login" src="/img/amico.svg">
-    <form class="form-login" asp-controller="User" asp-action="Login" method="post">
+    <form class="form-login" asp-controller="Login" asp-action="TryVerification" method="post">
         <div class="login-form">
             <fieldset>
                 <h3 class="txtLogin">LOGIN</h3>
@@ -15,12 +16,12 @@
                     <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
                 </div>
                 <br>
-            <a class="btn btn-success" asp-controller="Home" asp-action="Index">Entrar</a>
+                <div asp-validation-summary="All" class="text-danger"></div>
+            <button class="btn btn-success" type="submit">Entrar</button>
                 <div class="sem-conta">
-                    <p class="semConta"> Não possui uma conta? <a id="p-semConta" asp-controller="User" asp-action="Cadastro">Criar conta</a></p>
+                    <p class="semConta"> Não possui uma conta? <a id="p-semConta" asp-controller="Login" asp-action="Cadastro">Criar conta</a></p>
                 </div>
             </fieldset>
         </div>
-
     </form>
 </div>
