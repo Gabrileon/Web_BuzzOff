@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Denouncement\Cadastro.cshtml" />
+    <Content Remove="Views\Shared\_LayoutContato.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
