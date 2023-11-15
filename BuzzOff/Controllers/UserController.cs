@@ -2,11 +2,13 @@
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 
 namespace BuzzOff.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         public IActionResult Index()
@@ -17,25 +19,6 @@ namespace BuzzOff.Controllers
             };
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-        public IActionResult Cadastro()
-        {
-            return View();
-        }
-        public IActionResult Add()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Add(UserModel model)
-        {
-            UserDAO.Insert(model);
-            return RedirectToAction("Index");
         }
         public IActionResult Update(int id)
         {
