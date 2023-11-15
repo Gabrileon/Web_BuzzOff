@@ -40,6 +40,24 @@ body {
     margin-right: 15px;
 }
 
+a {
+    color: #84CC16;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 26px;
+    text-align: center;
+}
+
 .footer {
     background-color: #2F3C33;
+}
+
+.footer-text{
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: medium;
+
 }

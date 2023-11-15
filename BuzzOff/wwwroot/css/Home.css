@@ -14,17 +14,8 @@ h3{
     font-weight: bold;
 }
 
-span{
+span {
     font-size: 28px;
-}
-
-a {
-    color: #84CC16;
-    font-weight: bold;
-    margin: 20px;
-    text-decoration: none;
-    font-size: 26px;
-    text-align: center;
 }
 
 .arrow{
