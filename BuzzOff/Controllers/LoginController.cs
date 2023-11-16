@@ -17,28 +17,32 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> TryVerification(string name, string password)
+        public async Task<IActionResult> TryVerification(LoggedUserModel model)
         {
-            var model = UserDAO.GetOne(name, password);
-            if (model != null)
+            var user = UserDAO.GetOne(model.Name, model.Password);
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
-                    new Claim(ClaimTypes.Name, model.Name.ToString()),
-                    new Claim("AccessLevel", model.AccessLevel.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Name.ToString()),
+                    new Claim("AccessLevel", user.AccessLevel.ToString()),
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
 
+                var authProperties = new AuthenticationProperties()
+                {
+                    IsPersistent = model.rememberMe
+                };
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError(string.Empty, "Credenciais inválidas");
-
-            return View(model);
+            
+            return View(user);
         }
         public IActionResult Cadastro()
         {
