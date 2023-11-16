@@ -6,15 +6,26 @@ namespace BuzzOff.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
+<<<<<<< HEAD
+
+=======
+            var messages = new List<string>()
+            {
+                "Olá, combatente!",
+                "Bzzzzz...",
+                "Previna-se!",
+                "Combata a dengue",
+                "Use repelente",
+                "Não deixe água parada"
+            };
+
+            var message = messages[new Random().Next(messages.Count)];
+
+            ViewBag.Message = message;
+>>>>>>> be5f25866f6f5cfd22f999c16e4efc41c4a6d314
             return View();
         }
 

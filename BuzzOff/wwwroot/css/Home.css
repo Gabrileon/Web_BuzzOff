@@ -26,14 +26,3 @@ span {
     height: 80vh;
     padding: 50px;
 }
-
-.carousel-control {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50px, -50px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}

@@ -1,4 +1,4 @@
-﻿@model UserModel
+﻿@model LoggedUserModel
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
@@ -10,11 +10,20 @@
         <div class="login-form">
             <fieldset>
                 <h3 class="txtLogin">LOGIN</h3>
+                
                 <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                
                 <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
                 <div class="esqueceu">
                     <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
+                    <div class="left-block">
+                        <label asp-for="rememberMe">Lembre-me</label>
+                        <input asp-for="rememberMe" type="checkbox"/>
+                    </div>
                 </div>
+                
                 <br>
                 <div asp-validation-summary="All" class="text-danger"></div>
             <button class="btn btn-success" type="submit">Entrar</button>

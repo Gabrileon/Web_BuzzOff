@@ -23,7 +23,7 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
-                cmd.Parameters.AddWithValue("@ACCESSLEVEL", 1);
+                cmd.Parameters.AddWithValue("@ACCESSLEVEL", 3);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -39,16 +39,12 @@ namespace Business.Repository.DAO
                     "UPDATE Users SET " +
                     "NAME = @NAME," +
                     "EMAIL = @EMAIL," +
-                    "PASSWORD = @PASSWORD," +
                     "CPF = @CPF, " +
-                    "ACCESSLEVEL = @ACCESSLEVEL " +
                     "WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@NAME", model.Name);
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
-                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
-                cmd.Parameters.AddWithValue("@ACCESSLEVEL", model.AccessLevel);
 
                 cmd.ExecuteNonQuery();
             }
@@ -171,7 +167,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public static void UpdatePassword(string password)
+        public static void UpdatePassword(string password, int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
