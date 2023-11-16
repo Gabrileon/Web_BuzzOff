@@ -6,6 +6,7 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Message = "Entre em contato!";
             return View();
         }
     }

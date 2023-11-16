@@ -16,26 +16,7 @@
                     <img class="logo" src="~/img/Logo_Mosquito.svg" alt="Logo Buzzoff" />
                 </a>
 
-                @{
-                    string message = String.Empty;
-                    var messages = new List<String>()
-                {
-                "Previna-se!",
-                "Combata a dengue",
-                "Olá, combatente!",
-                "Bzzzzz..."
-                };
-                    if (ViewData["Title"] == "Nos contate!")
-                    {
-                        message = "Entre em contato!";
-                    }
-                    else
-                    {
-                        int index = new Random().Next(messages.Count);
-                        message = messages[index];
-                    }
-                }
-                <span class="message">@message</span>
+                <span class="message">@ViewBag.Message</span>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end d-flex">
                     <ul class="navbar-nav flex-grow-1">
