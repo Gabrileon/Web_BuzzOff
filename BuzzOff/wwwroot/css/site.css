@@ -17,11 +17,47 @@ body {
   margin-bottom: 60px;
 }
 
-.navbar {
-    margin: 0;
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.navbar-nav {
+    text-align: left;
+    justify-content: end;
 }
 
 .message {
-    margin-top: 5%;
-    color: white;
+    color: #2F3C33;
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.btn-success {
+    background-color: #84CC16;
+    border-color: #2F3C33;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+a {
+    color: #84CC16;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 26px;
+    text-align: center;
+}
+
+.footer {
+    background-color: #2F3C33;
+}
+
+.footer-text{
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: medium;
+
 }

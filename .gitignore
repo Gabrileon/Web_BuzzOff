@@ -361,5 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/Generics/Business.csproj
-/BuzzOff/BuzzOff.csproj
+/Common/Interfaces/IDenunciation.cs

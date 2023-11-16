@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Business.Repository
 {
-    internal class DenunciationDAO
+    public class DenunciationDAO
     {
         byte[] midia = new byte[10];
 
-        public void Insert(IDenunciation model)
+        public static void Insert(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -24,14 +24,14 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", model.midia);
+                cmd.Parameters.AddWithValue("@Media", model.midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
 
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public void Update(IDenunciation model)
+        public static void Update(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -48,7 +48,7 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
@@ -84,7 +84,7 @@ namespace Business.Repository
             return model;
         }
 
-        public List<IDenunciation> GetByInformerId(int id)
+        public static List<IDenunciation> GetByInformerId(int id)
         {
             var list = new List<IDenunciation>();
 
@@ -113,7 +113,7 @@ namespace Business.Repository
             }
             return list;
         }
-        public List<IDenunciation> GetByInformerIdAndIsAnswered(int id, bool b)
+        public static List<IDenunciation> GetByInformerIdAndIsAnswered(int id, bool b)
         {
             var list = new List<IDenunciation>();
 
@@ -144,7 +144,7 @@ namespace Business.Repository
             return list;
         }
 
-        public List<IDenunciation> GetAll()
+        public static List<IDenunciation> GetAll()
         {
             var list = new List<IDenunciation>();
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -173,7 +173,7 @@ namespace Business.Repository
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
