@@ -4,21 +4,63 @@
 
 <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
 
-<div class="parent h-100 w-100 d-flex flex-row position-absolute">
-    <div class="left w-50">
-        <div class="content align-content-center justify-content-center">
-            <h3 class="green-h3">
-                Proteja-se da dengue.
-                <br />
-                Tenha acesso à informação.
-            </h3>
+<!-- Carousel -->
+<div id="homeCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="8000">
+            <div class="d-flex flex-row">
+                <div class="left-block d-flex flex-column w-50">
+                    <h3>Proteja-se contra a dengue com as nossas dicas</h3>
+                    <span>A dengue é uma ameaça global e  não é de hoje. Essa doença atinge ao ano milhares de pessoas. Levando em consideração a situação atual, elaboramos algumas dicas de prevenção para se proteger desse terrível mal. </span>
+                    <a href="https://www.minhavida.com.br/saude/temas/dengue">Conheça a página <span class="arrow">&#8594</span></a>
+                </div>
 
-            <br />
+                <div class="right-block d-flex flex-column w-50 text-center">
+                    <h3>Navegue pelo conteúdo</h3>
+                    <img src="~/img/Campanha.svg" alt="Campanha" class="d-block w-100">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="8000">
+            <div class="d-flex flex-row">
+                <div class="left-block d-flex flex-column w-50">
+                    <h3>Conheça o mosquito Aedes aegypti</h3>
+                    <span>É um mosquito doméstico, que vive dentro ou ao redor de domicílios ou de outros locais frequentados por pessoas, como estabelecimentos comerciais, escolas ou igrejas, por exemplo. </span>
+                    <a href="https://www.minhavida.com.br/saude/temas/dengue">Mais informações <span class="arrow">&#8594</span></a>
+                </div>
 
-            <p class="text-xxl-start text-white w-50">
-                A dengue é uma ameaça global e  não é de hoje. Essa doença atinge ao ano milhares de pessoas. Levando em consideração a situação atual, elaboramos algumas dicas de prevenção para se proteger desse terrível mal.
-            </p>
+                <div class="right-block d-flex flex-column w-50 text-center" >
+                    <h3>Aedes aegypti</h3>
+                    <img src="~/img/foto_dengue_1.svg" alt="Campanha" class="d-block w-100">
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="8000">
+            <div class="d-flex flex-row">
+                <div class="left-block d-flex flex-column w-50">
+                    <h3>Conheça nosso sistema de denúncias</h3>
+                    <span>O BuzzOff disponibiliza um sistema de denúnicas de focos e casos de dengue. Rápido e fácil. </span>
+                    <a href="https://www.minhavida.com.br/saude/temas/dengue">Faça sua denúncia <span class="arrow">&#8594</span></a>
+                </div>
+
+                <div class="right-block d-flex flex-column w-50 text-center">
+                    <h3>Denuncie</h3>
+                    <img src="~/img/agente_saude.svg" alt="Campanha" class="d-block w-100">
+                </div>
+            </div>
         </div>
     </div>
-    <div class="right w-50"></div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>

@@ -1,9 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Denúncias";
+    Layout = "~/Views/Shared/_LayoutDenouncement.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Welcome form</a>.</p>
+<link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+
+<div class="parent h-100 w-100 d-flex flex-row position-absolute">
+    <div class="left w-25">
+        <div class="content justify-content-center">
+            <h3 class="green-h3">
+                O que são as
+                <br />
+                Denúncias?
+            </h3>
+
+            <br />
+
+            <p class="text-xxl-start text-white w-75">
+                Realize uma denúncia para alertar à sua vizinhaça um possível foco de dengue. Nossos agentes de saúde farão uma visita para averiguar o local.
+            </p>
+        </div>
+    </div>
+    <div class="right w-75">
+        <div></div>
+    </div>
 </div>
- 
