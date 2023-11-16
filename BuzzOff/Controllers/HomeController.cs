@@ -9,9 +9,6 @@ namespace BuzzOff.Controllers
 
         public IActionResult Index()
         {
-<<<<<<< HEAD
-
-=======
             var messages = new List<string>()
             {
                 "Olá, combatente!",
@@ -25,7 +22,6 @@ namespace BuzzOff.Controllers
             var message = messages[new Random().Next(messages.Count)];
 
             ViewBag.Message = message;
->>>>>>> be5f25866f6f5cfd22f999c16e4efc41c4a6d314
             return View();
         }
 
