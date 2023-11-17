@@ -24,7 +24,7 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", model.midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                //cmd.Parameters.AddWithValue("@Media", model.midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
 
                 cmd.ExecuteNonQuery();
@@ -48,7 +48,7 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                //cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
