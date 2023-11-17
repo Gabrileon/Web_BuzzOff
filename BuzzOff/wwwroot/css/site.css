@@ -34,10 +34,12 @@ body {
 }
 
 .btn-success {
-    background-color: #84CC16;
+    color: #84CC16;
+    background-color: #2F3C33;
     border-color: #2F3C33;
     margin-left: 15px;
     margin-right: 15px;
+    font-weight: bolder;
 }
 
 a {
@@ -60,4 +62,26 @@ a {
     margin-right: 10px;
     font-size: medium;
 
+}
+
+.username {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #84CC16;
+}
+
+.dropdown-item {
+    background-color: #2F3C33;
+    color: #84CC16;
+    width: fit-content;
+}
+
+.dropdown {
+    padding-right: 50px;
+    color: #84CC16;
+}
+
+.dropdown-menu {
+    background-color: #2F3C33;
+    color: #84CC16;
 }
