@@ -21,9 +21,9 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int idAddress, byte[] media)
+        public Denunciation(int idInformer, int idAddress, byte[] media)
         {
-            IdInformer = LoggedUser.loggedUser.Id;
+            IdInformer = idInformer;
             IdAddress = idAddress;
             DataDenunciation = DateTime.Now;
             this.media = media;
@@ -57,5 +57,6 @@ namespace Business.Generics
         public DateTime DataDenunciation { get; set; }
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public bool IsFocus { get; set; }
     }
 } 

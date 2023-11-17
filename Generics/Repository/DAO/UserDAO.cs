@@ -9,7 +9,7 @@ namespace Business.Repository.DAO
 {
     public class UserDAO
     {
-        public static void Insert(IUser model)
+        public static int Insert(IUser model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -24,7 +24,7 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(model.Password));
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
                 cmd.Parameters.AddWithValue("@ACCESSLEVEL", 3);
-                cmd.ExecuteNonQuery();
+                return cmd.ExecuteNonQuery();
             }
         }
 
@@ -179,7 +179,7 @@ namespace Business.Repository.DAO
                     "WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(password));
-                cmd.Parameters.AddWithValue("@Id", LoggedUser.loggedUser.Id);
+                cmd.Parameters.AddWithValue("@Id", id);
 
 
                 cmd.ExecuteNonQuery();

@@ -23,8 +23,9 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(DenunciationModel model)
+        public IActionResult Add(DenunciationModel model, AddressModel address)
         {
+            model.IdAddress = AddressDAO.Insert(address);
             DenunciationDAO.Insert(model);
             return RedirectToAction("Index");
         }

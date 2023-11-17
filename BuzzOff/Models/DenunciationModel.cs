@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DenunciationModel: IDenunciation
+    public class DenunciationModel : IDenunciation
     {
         /// <summary>
         /// Insert
@@ -22,9 +22,9 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int idAddress, byte[] media)
+        public DenunciationModel(int idInformer, int idAddress, byte[] media)
         {            
-            this.IdInformer = LoggedUser.loggedUser.Id;            
+            this.IdInformer = idInformer;            
             this.IdAddress = idAddress;
             this.DataDenunciation = DateTime.Now;            
             this.media = media;
@@ -42,7 +42,7 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered, bool isFocus)
         {
             this.Id = id;
             this.IdInformer = idInformer;
@@ -50,6 +50,7 @@ namespace BuzzOff.Models
             this.DataDenunciation = dataDenunciation;            
             this.media = media;
             this.IsAnswered = isAnswered;
+            this.IsFocus = isFocus;
         }
 
         public int Id { get; set; }
@@ -58,5 +59,6 @@ namespace BuzzOff.Models
         public DateTime DataDenunciation { get; set; }        
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public bool IsFocus { get; set; }
     }
 }

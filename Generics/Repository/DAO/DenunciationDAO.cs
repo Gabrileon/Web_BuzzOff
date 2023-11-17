@@ -237,17 +237,17 @@ namespace Business.Repository
         }
         */
 
-        public void Delete2()
-        {
-            using (var conn = new SqlConnection(DBConnect.Connect()))
-            {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "DELETE FROM Denunciations WHERE IDInformer = @IDInformer";
-                cmd.Parameters.AddWithValue("@IDInformer", LoggedUser.loggedUser.Id);
+        //public void Delete2()
+        //{
+        //    using (var conn = new SqlConnection(DBConnect.Connect()))
+        //    {
+        //        conn.Open();
+        //        SqlCommand cmd = conn.CreateCommand();
+        //        cmd.CommandText = "DELETE FROM Denunciations WHERE IDInformer = @IDInformer";
+        //        cmd.Parameters.AddWithValue("@IDInformer", );
 
-                cmd.ExecuteNonQuery();
-            }
-        }
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //}
     }
 }
