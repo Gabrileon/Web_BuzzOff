@@ -94,7 +94,7 @@ namespace Business.Repository.DAO
                             reader.GetString(3),
                             (MyEnuns.Access)reader.GetInt32(4),
                             reader.GetInt32(0));
-                        return model;
+                        return (IUser) model;
                     }
                 }
                 return null;
