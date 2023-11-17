@@ -18,7 +18,7 @@ namespace BuzzOff.Controllers
                 "Use repelente",
                 "Não deixe água parada"
             };
-
+            
             var message = messages[new Random().Next(messages.Count)];
 
             ViewBag.Message = message;
