@@ -14,5 +14,6 @@ namespace Common.Interfaces
         public DateTime DataDenunciation { get; set; }
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public bool IsFocus { get; set; }
     }
 }

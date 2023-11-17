@@ -1,0 +1,18 @@
+﻿.equipe{
+    height: 30vh;
+}
+
+.contact {
+    text-align: center;
+    color: #2F3C33;
+    font-weight: bold;
+}
+
+.nome{
+    font-size: large;
+}
+
+.qr-code{
+    height: 15vh;
+    margin-top: 15px;
+}

@@ -12,6 +12,6 @@ namespace Common.Interfaces
         public int IdAgent { get; set; }
         public int IdDenunciation { get; set; }
         public DateTime DateVisit { get; set; }
-        public string Assement { get; set; }
+        public string Assessment { get; set; }
     }
 }
