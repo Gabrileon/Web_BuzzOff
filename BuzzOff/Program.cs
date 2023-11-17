@@ -37,7 +37,12 @@ builder.Services.AddAuthorization(options =>
     });
     options.AddPolicy("Common", policy =>
     {
-        policy
+        policy.RequireAuthenticatedUser();
+        policy.RequireAssertion(context =>
+        {
+            var user = context.User;
+            return user.Claims.Any(property => property.Type == "AccessLevel" && property.Value == "Common");
+        }); ;
     });
 }
     );
@@ -51,13 +56,15 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
+app.UseStaticFiles();
 app.UseRouting();
 
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

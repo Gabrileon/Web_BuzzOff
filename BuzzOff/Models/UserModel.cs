@@ -17,7 +17,7 @@ namespace BuzzOff.Models
         /// </summary>
         /// <param name="name"></param>
         /// <param name="email"></param>
-        /// <param name="cPF"></param>
+        /// <param name="CPF"></param>
         /// <param name="password"></param>
         /// <param name="accessLevel"></param>
         /// <param name="id"></param>

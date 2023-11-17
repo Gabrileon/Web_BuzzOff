@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DenunciationModel: IDenunciation
+    public class DenunciationModel : IDenunciation
     {
         /// <summary>
         /// Insert
@@ -22,10 +22,10 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int idAddress, byte[] media)
+        public DenunciationModel(int idInformer, IAddress address, byte[] media)
         {            
-            this.IdInformer = LoggedUser.loggedUser.Id;            
-            this.IdAddress = idAddress;
+            this.IdInformer = idInformer;            
+            this.Address = address;
             this.DataDenunciation = DateTime.Now;            
             this.media = media;
             this.IsAnswered = false;
@@ -42,21 +42,23 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public DenunciationModel(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, bool isAnswered, bool isFocus)
         {
             this.Id = id;
             this.IdInformer = idInformer;
-            this.IdAddress = idAddress;
+            this.Address = address;
             this.DataDenunciation = dataDenunciation;            
             this.media = media;
             this.IsAnswered = isAnswered;
+            this.IsFocus = isFocus;
         }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }        
-        public int IdAddress { get; set; }
+        public IAddress Address { get; set; }
         public DateTime DataDenunciation { get; set; }        
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public bool IsFocus { get; set; }
     }
 }

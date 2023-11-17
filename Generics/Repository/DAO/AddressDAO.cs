@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    internal class AddressDAO
+    public class AddressDAO
     {
 
-        public int Insert(IAddress model)
+        public static int Insert(IAddress model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -22,10 +22,10 @@ namespace Business.Repository.DAO
                 cmd.CommandText =
                     "INSERT INTO Addresses (Neighborhood, Street, Number, Reference, Latitude, Longitude) " +
                            "VALUES (@Neighborhood, @Street, @Number, @Reference, @Latitude, @Longitude)";
-                cmd.Parameters.AddWithValue("@Neighborhood", model.neighborhood);
-                cmd.Parameters.AddWithValue("@Street", model.street);
+                cmd.Parameters.AddWithValue("@Neighborhood", model.neighborhood.ToUpper());
+                cmd.Parameters.AddWithValue("@Street", model.street.ToUpper());
                 cmd.Parameters.AddWithValue("@Number", model.number);
-                cmd.Parameters.AddWithValue("@Reference", model.reference);
+                cmd.Parameters.AddWithValue("@Reference", model.reference.ToUpper());
                 cmd.Parameters.AddWithValue("@Latitude", model.latitude);
                 cmd.Parameters.AddWithValue("@Longitude", model.longitude);
 
@@ -33,7 +33,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public void Update(IAddress model)
+        public static void Update(IAddress model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -61,7 +61,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public IAddress GetOne(int id)
+        public static IAddress GetOne(int id)
         {
             IAddress address;
             using (var conn = new SqlConnection(DBConnect.Connect()))

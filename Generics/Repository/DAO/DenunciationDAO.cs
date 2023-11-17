@@ -1,4 +1,5 @@
 ﻿using Business.Generics;
+using Business.Repository.DAO;
 using Common.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
@@ -9,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Business.Repository
 {
-    internal class DenunciationDAO
+    public class DenunciationDAO
     {
         byte[] midia = new byte[10];
 
-        public void Insert(IDenunciation model)
+        public static void Insert(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -22,16 +23,16 @@ namespace Business.Repository
                 cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, Media, IsAnswered) " +
                                   "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @Media, @IsAnswered)";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
-                cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                //cmd.Parameters.AddWithValue("@Media", model.midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
 
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public void Update(IDenunciation model)
+        public static void Update(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -46,9 +47,9 @@ namespace Business.Repository
                     " WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
-                cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                //cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
                 cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
@@ -73,7 +74,7 @@ namespace Business.Repository
                         model = new Denunciation(
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
-                            (int)reader["IdAddress"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
                             (bool)reader["IsAnswered"]
@@ -84,7 +85,7 @@ namespace Business.Repository
             return model;
         }
 
-        public List<IDenunciation> GetByInformerId(int id)
+        public static List<IDenunciation> GetByInformerId(int id)
         {
             var list = new List<IDenunciation>();
 
@@ -102,7 +103,7 @@ namespace Business.Repository
                         IDenunciation model = new Denunciation(
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
-                            (int)reader["IdAddress"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
                             (bool)reader["IsAnswered"]
@@ -113,7 +114,7 @@ namespace Business.Repository
             }
             return list;
         }
-        public List<IDenunciation> GetByInformerIdAndIsAnswered(int id, bool b)
+        public static List<IDenunciation> GetByInformerIdAndIsAnswered(int id, bool b)
         {
             var list = new List<IDenunciation>();
 
@@ -121,9 +122,9 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @Bool";
                 cmd.Parameters.AddWithValue("@Id", id);
-                cmd.Parameters.AddWithValue("@B", b);
+                cmd.Parameters.AddWithValue("@Bool", b);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -132,7 +133,7 @@ namespace Business.Repository
                         IDenunciation model = new Denunciation(
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
-                            (int)reader["IdAddress"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
                             (bool)reader["IsAnswered"]
@@ -144,7 +145,7 @@ namespace Business.Repository
             return list;
         }
 
-        public List<IDenunciation> GetAll()
+        public static List<IDenunciation> GetAll()
         {
             var list = new List<IDenunciation>();
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -160,7 +161,7 @@ namespace Business.Repository
                         IDenunciation model = new Denunciation(
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
-                            (int)reader["IdAddress"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
                             (bool)reader["IsAnswered"]
@@ -173,7 +174,7 @@ namespace Business.Repository
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -237,17 +238,17 @@ namespace Business.Repository
         }
         */
 
-        public void Delete2()
-        {
-            using (var conn = new SqlConnection(DBConnect.Connect()))
-            {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "DELETE FROM Denunciations WHERE IDInformer = @IDInformer";
-                cmd.Parameters.AddWithValue("@IDInformer", LoggedUser.loggedUser.Id);
+        //public void Delete2()
+        //{
+        //    using (var conn = new SqlConnection(DBConnect.Connect()))
+        //    {
+        //        conn.Open();
+        //        SqlCommand cmd = conn.CreateCommand();
+        //        cmd.CommandText = "DELETE FROM Denunciations WHERE IDInformer = @IDInformer";
+        //        cmd.Parameters.AddWithValue("@IDInformer", );
 
-                cmd.ExecuteNonQuery();
-            }
-        }
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //}
     }
 }
