@@ -26,3 +26,21 @@ span {
     height: 80vh;
     padding: 50px;
 }
+
+.username{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.dropdown-item {
+    background-color: #2F3C33;
+    width: fit-content;
+}
+
+.dropdown {
+    padding-right: 50px;
+}
+
+.dropdown-menu {
+    background-color: #2F3C33;
+}
