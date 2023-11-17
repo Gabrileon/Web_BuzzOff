@@ -44,6 +44,12 @@ namespace BuzzOff.Controllers
             
             return View(user);
         }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
         public IActionResult Cadastro()
         {
             return View();
