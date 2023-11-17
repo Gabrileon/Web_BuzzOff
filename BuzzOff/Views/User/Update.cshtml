@@ -1,9 +1,25 @@
-﻿@*@model UserModel
-<h3>Atualizar user</h3>
-<form asp-controller="Pessoas" asp-action="Update" method="post">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" class="form-control" asp-for="" />
-    <br />
-    <button type="submit" class="btn btn-primary">Salvar</button>
-    <a class="btn btn-secondary" asp-controller="Pessoas" asp-action="Index">Voltar</a>
-</form>*@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Atualize suas informações";
+    Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
+
+}
+
+<div class="geral">
+    <div class="bloco-cadastro"></div>
+    <img class="bg-cadastro" src="/img/cadastro.svg">
+    <form class="form-cadastro" asp-controller="User" asp-action="Update" method="post">
+        <div class="cadastro-form">
+            <fieldset>
+                <h3 class="txtCadastro">ATUALIZE SUAS INFORMAÇÕES</h3>
+                <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" required />
+                <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
+                <input type="email" id="email" class="form-control" asp-for="Email" placeholder="Email" required />
+                <input type="text" id="CPF" class="form-control" asp-for="CPF" placeholder="CPF" required />
+                <br>
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </fieldset>
+        </div>
+
+    </form>
+</div>
