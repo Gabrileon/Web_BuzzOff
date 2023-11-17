@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authentication
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +10,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BuzzOff.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
 <body>
     <header>
@@ -21,17 +25,35 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end d-flex">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Denuncie</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Privacy">Denuncie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Campeonatos" asp-action="Index">Mapa de focos</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Campeonatos" asp-action="Index">Mapa de focos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
-                        </li>
+                        @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a style="font-size: 1rem; color: #2F3C33;" class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                    @HttpContextAccessor.HttpContext.User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li>
+                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Opções</a>
+                                    </li>
+                                    <li><a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" href="#"><i class="fa-solid fa-door-open"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
