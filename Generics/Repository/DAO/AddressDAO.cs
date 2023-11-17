@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    internal class AddressDAO
+    public class AddressDAO
     {
 
-        public int Insert(IAddress model)
+        public static int Insert(IAddress model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -20,20 +20,19 @@ namespace Business.Repository.DAO
                 var cmd = conn.CreateCommand();
 
                 cmd.CommandText =
-                    "INSERT INTO Addresses (Neighborhood, Street, Number, Reference, Latitude, Longitude) " +
-                           "VALUES (@Neighborhood, @Street, @Number, @Reference, @Latitude, @Longitude)";
+                    "INSERT INTO Addresses (Neighborhood, Street, Number, Reference, City) " +
+                           "VALUES (@Neighborhood, @Street, @Number, @Reference, @City)";
                 cmd.Parameters.AddWithValue("@Neighborhood", model.neighborhood);
                 cmd.Parameters.AddWithValue("@Street", model.street);
                 cmd.Parameters.AddWithValue("@Number", model.number);
                 cmd.Parameters.AddWithValue("@Reference", model.reference);
-                cmd.Parameters.AddWithValue("@Latitude", model.latitude);
-                cmd.Parameters.AddWithValue("@Longitude", model.longitude);
+                cmd.Parameters.AddWithValue("@city", model.city);
 
                 return cmd.ExecuteNonQuery();
             }
         }
 
-        public void Update(IAddress model)
+        public static void Update(IAddress model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -45,23 +44,21 @@ namespace Business.Repository.DAO
                     "Street = @Street, " +
                     "Number = @Number, " +
                     "Reference = @Reference, " +
-                    "Latitude = @Latitude, " +
-                    "Longitude = @Longitude " +
+                    "City = @City" + 
                     "WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@Neighborhood", model.neighborhood);
                 cmd.Parameters.AddWithValue("@Street", model.street);
                 cmd.Parameters.AddWithValue("@Number", model.number);
                 cmd.Parameters.AddWithValue("@Reference", model.reference);
-                cmd.Parameters.AddWithValue("@Latitude", model.latitude);
-                cmd.Parameters.AddWithValue("@Longitude", model.longitude);
+                cmd.Parameters.AddWithValue("@City", model.city);
                 cmd.Parameters.AddWithValue("@Id", model.id);
 
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public IAddress GetOne(int id)
+        public static IAddress GetOne(int id)
         {
             IAddress address;
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -69,7 +66,7 @@ namespace Business.Repository.DAO
                 conn.Open();
                 var cmd = conn.CreateCommand();
 
-                cmd.CommandText = "SELECT Id, Neighborhood, Street, Number, Reference, Latitude, Longitude FROM Addresses WHERE id = @id";
+                cmd.CommandText = "SELECT Id, Neighborhood, Street, Number, Reference, City FROM Addresses WHERE id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
 
                 using (var reader = cmd.ExecuteReader())
@@ -82,21 +79,19 @@ namespace Business.Repository.DAO
                             (string)reader["Street"],
                             (string)reader["Number"],
                             (string)reader["Reference"],
-                            (string)reader["Latitude"],
-                            (string)reader["Longitude"]
+                             (string)reader["City"]
                           );
 
                         return address;
 
                     }
                 }
-
             }
             return null;
 
         }
 
-        public List<IAddress> GetAll()
+        public static List<IAddress> GetAll()
         {
             var list = new List<IAddress>();
 
@@ -106,8 +101,7 @@ namespace Business.Repository.DAO
                 conn.Open();
                 var cmd = conn.CreateCommand();
 
-                cmd.CommandText = "SELECT Id, Neighborhood, Street, Number, Reference, Latitude, Longitude FROM Addresses";
-                ;
+                cmd.CommandText = "SELECT Id, Neighborhood, Street, Number, Reference, City FROM Addresses";
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -119,8 +113,7 @@ namespace Business.Repository.DAO
                              (string)reader["Street"],
                              (string)reader["Number"],
                              (string)reader["Reference"],
-                             (string)reader["Latitude"],
-                             (string)reader["Longitude"]
+                             (string)reader["City"]
                          );
 
                         list.Add(model);
@@ -131,7 +124,7 @@ namespace Business.Repository.DAO
             return list;
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
             var conn = new SqlConnection(DBConnect.Connect());
             conn.Open();
