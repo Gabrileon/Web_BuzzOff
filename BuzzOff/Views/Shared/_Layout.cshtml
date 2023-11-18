@@ -31,7 +31,7 @@
                             <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Privacy">Denuncie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Campeonatos" asp-action="Index">Mapa de focos</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Map" asp-action="Index">Mapa de focos</a>
                         </li>
                         @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                         {
@@ -50,7 +50,13 @@
                                     <li>
                                         <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Opções</a>
                                     </li>
-                                    <li><a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" href="#"><i class="fa-solid fa-door-open"></i> Logout</a></li>
+                                    <li><a style="font-size: 1rem; color: #84CC16;" class="dropdown-item"><i class="fa-solid fa-door-open"></i> Logout</a></li>
+                                    <li>
+                                        <form asp-controller="Login" asp-action="Logout" method="post" id="logoutForm">
+                                            @*<i class="fa-solid fa-door-open"></i>*@
+                                            <button type="submit" class="btn btn-link">Logout</button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
                         }
