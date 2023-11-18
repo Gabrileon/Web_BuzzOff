@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    internal class Denunciation: IDenunciation
+    public class Denunciation: IDenunciation
     {
         /// <summary>
         /// Insert
@@ -24,7 +24,6 @@ namespace Business.Generics
         public Denunciation(int idInformer, int idAddress, byte[] media)
         {
             IdInformer = idInformer;
-            IdAddress = idAddress;
             DataDenunciation = DateTime.Now;
             this.media = media;
             IsAnswered = false;
@@ -41,11 +40,11 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, bool isAnswered)
         {
             Id = id;
             IdInformer = idInformer;
-            IdAddress = idAddress;
+            Address = address;
             DataDenunciation = dataDenunciation;
             this.media = media;
             IsAnswered = isAnswered;
@@ -53,10 +52,10 @@ namespace Business.Generics
 
         public int Id { get; set; }
         public int IdInformer { get; set; }
-        public int IdAddress { get; set; }
         public DateTime DataDenunciation { get; set; }
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public IAddress Address { get; set; }
         public bool IsFocus { get; set; }
     }
 } 

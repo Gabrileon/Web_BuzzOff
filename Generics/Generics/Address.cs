@@ -18,14 +18,13 @@ namespace Business.Generics
         /// <param name="reference"></param>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
-        public Address(string neighborhood, string street, string number, string reference, string latitude, string longitude)
+        public Address(string neighborhood, string street, string number, string reference, string city)
         {
             this.neighborhood = neighborhood;
             this.street = street;
             this.number = number;
             this.reference = reference;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.city = city;
         }
 
         /// <summary>
@@ -38,15 +37,14 @@ namespace Business.Generics
         /// <param name="reference"></param>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
-        public Address(int id, string neighborhood, string street, string number, string reference, string latitude, string longitude)
+        public Address(int id, string neighborhood, string street, string number, string reference, string city)
         {
             this.id = id;
             this.neighborhood = neighborhood;
             this.street = street;
             this.number = number;
             this.reference = reference;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.city = city;
         }
 
         public int id { get; set; }
@@ -54,7 +52,6 @@ namespace Business.Generics
         public string street { get; set; }
         public string number { get; set; }
         public string reference { get; set; }
-        public string latitude { get; set; }
-        public string longitude { get; set; }
+        public string city { get; set; }
     }
 }
