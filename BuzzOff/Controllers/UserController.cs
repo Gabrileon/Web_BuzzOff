@@ -24,7 +24,6 @@ namespace BuzzOff.Controllers
         {
             return View(UserDAO.GetOne(id));
         }
-
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
