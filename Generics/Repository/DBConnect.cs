@@ -12,7 +12,7 @@ namespace Business.Repository
 
 
         public static string initialCatalog = "BuzzOffDB";
-        static string dataSource = @"localhost\SQLEXPRESS";
+        static string dataSource = @"BUE0001D020\SQLEXPRESS";
 
         static string userID = "sa";
         static string password = "Senac@2021";
@@ -29,7 +29,11 @@ namespace Business.Repository
                 dataSource = @"MACANEIRO\SQLEXPRESS";
                 userID = "sa";
                 password = "0505";
+            }  else if (Environment.MachineName == "TIAGO")
+            {
+                dataSource = @"TIAGO\SQLEXPRESS";
             }
+
 
             return
                 $"Data Source={dataSource};" +

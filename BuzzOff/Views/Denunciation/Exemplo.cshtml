@@ -1,14 +1,17 @@
-﻿@model DenouncementModel
-@{
-    ViewData["Title"] = "Cadastro denuncias";
-}
+﻿
+}@*
 <style>
-    .btn-type {
+    .btn-primary{
         background-color: #84CC16;
         width: 120px;
         height: 45px;
         margin-top: 20px;
         font-size: 1.2rem;
+        border-color: #84CC16;
+
+    } .bnt-primary:hover {
+        color: #2F3C33;
+
     }
 
 
@@ -28,11 +31,11 @@
             <div class="row g-3 align-items-center">
                 <div class="col-4 form-group">
                     <label for="cep" class="form-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" asp-for="cep">
+                    <input type="text" class="form-control" id="cep" @*asp-for="">
                 </div>
                 <div class="col-4 form-group">
                     <label for="number" class="form-label">Número</label>
-                    <input type="number" class="form-control" id="number" asp-for="number">
+                    <input type="number" class="form-control" id="number" asp-for="Address.neighborhood">
                 </div>
                 <div class="col-4 form-group">
                     <label for="UF" class="form-label">UF</label>
@@ -71,7 +74,7 @@
         </div>
         <div class="col-sm-12 col-md-4">
             <label for="media" class="form-label">Informe a imagem:</label>
-            @* <input class="form-control" type="file" id="media" asp-for="media"> *@
+            @* <input class="form-control" type="file" id="media" asp-for="media"> 
 
             <button type="submit" class="btn btn-primary">Adicionar imagem</button>
         </div>
@@ -80,3 +83,4 @@
 </form>
 
 
+ *@
