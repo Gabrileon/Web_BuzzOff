@@ -28,10 +28,11 @@ namespace BuzzOff.Controllers
                     new Claim(ClaimTypes.Name, user.Name.ToString()),
                     new Claim("AccessLevel", user.AccessLevel.ToString()),
                 };
-
+                
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-
+                var principal = new ClaimsPrincipal();
+                principal.AddIdentity(identity);
+                
                 var authProperties = new AuthenticationProperties()
                 {
                     IsPersistent = model.rememberMe
