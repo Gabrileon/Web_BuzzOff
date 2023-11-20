@@ -38,7 +38,7 @@ namespace Business.Generics
         /// <param name="cPF"></param>
         /// <param name="accessLevel"></param>
         /// <param name="id"></param>
-        public User(string name, string email, string cPF, MyEnuns.Access accessLevel, int id = 0)
+        public User(string name, string email, string cPF, MyEnuns.Access accessLevel, int id)
         {
             Id = id;
             Name = name;

@@ -39,12 +39,13 @@ namespace Business.Repository.DAO
                     "UPDATE Users SET " +
                     "NAME = @NAME," +
                     "EMAIL = @EMAIL," +
-                    "CPF = @CPF, " +
-                    "WHERE Id = @Id";
+                    "CPF = @CPF " +
+                    "WHERE Id = @ID";
 
                 cmd.Parameters.AddWithValue("@NAME", model.Name);
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
+                cmd.Parameters.AddWithValue("@ID", model.Id);
 
                 cmd.ExecuteNonQuery();
             }
