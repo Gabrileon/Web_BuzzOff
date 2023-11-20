@@ -45,12 +45,11 @@
                                 <a style="font-size: 1rem; color: #2F3C33;" class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
                                     @HttpContextAccessor.HttpContext.User.Identity.Name
-                                    @HttpContextAccessor.HttpContext.User.Claims.First().Value
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                     <li>
-                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="Update" asp-route-id="13"><i class="fa-solid fa-gear"></i> Opções</a>
+                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="Update" asp-route-id="@HttpContextAccessor.HttpContext.User.Claims.First().Value"><i class="fa-solid fa-gear"></i> Opções</a>
                                     </li>
                                     <li style="font-size: 1rem;">
                                         <form asp-controller="Login" asp-action="Logout" method="post" id="logoutForm">

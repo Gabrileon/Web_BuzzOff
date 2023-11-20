@@ -19,7 +19,7 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public async Task<IActionResult> TryVerification(LoggedUserModel model)
         {
-            var user = UserDAO.GetOne(model.Name, model.Password);
+            var user = UserDAO.GetOne(model.CPF, model.Password);
             if (user != null)
             {
                 var claims = new List<Claim>
