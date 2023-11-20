@@ -30,8 +30,7 @@ namespace BuzzOff.Controllers
                 };
                 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal();
-                principal.AddIdentity(identity);
+                var principal = new ClaimsPrincipal(identity);
                 
                 var authProperties = new AuthenticationProperties()
                 {
