@@ -11,26 +11,46 @@ namespace BuzzOff.Models
 {
     public class DenunciationModel : IDenunciation
     {
-        /// <summary>
-        /// Insert
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="idInformer"></param>
-        /// <param name="idAgent"></param>
-        /// <param name="idAddress"></param>
-        /// <param name="dataDenunciation"></param>
-        /// <param name="dataVisit"></param>
-        /// <param name="media"></param>
-        /// <param name="isAnswered"></param>
-        public DenunciationModel(int idInformer, int idAddress, byte[] media)
-        {            
-            this.IdInformer = idInformer;            
-            this.IdAddress = idAddress;
-            this.DataDenunciation = DateTime.Now;            
-            this.media = media;
-            this.IsAnswered = false;
-        }
+        ///// <summary>
+        ///// Insert
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <param name="idInformer"></param>
+        ///// <param name="idAgent"></param>
+        ///// <param name="idAddress"></param>
+        ///// <param name="dataDenunciation"></param>
+        ///// <param name="dataVisit"></param>
+        ///// <param name="media"></param>
+        ///// <param name="isAnswered"></param>
+        //public DenunciationModel(int idAddress, byte[] media)
+        //{            
+        //    this.IdInformer = LoggedUser.loggedUser.Id;            
+        //    this.IdAddress = idAddress;
+        //    this.DataDenunciation = DateTime.Now;            
+        //    this.media = media;
+        //    this.IsAnswered = false;
+        //}
 
+        ///// <summary>
+        ///// Get
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <param name="idInformer"></param>
+        ///// <param name="idAgent"></param>
+        ///// <param name="idAddress"></param>
+        ///// <param name="dataDenunciation"></param>
+        ///// <param name="dataVisit"></param>
+        ///// <param name="media"></param>
+        ///// <param name="isAnswered"></param>
+        //public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        //{
+        //    this.Id = id;
+        //    this.IdInformer = idInformer;
+        //    this.IdAddress = idAddress;
+        //    this.DataDenunciation = dataDenunciation;            
+        //    this.media = media;
+        //    this.IsAnswered = isAnswered;
+        //}
         /// <summary>
         /// Get
         /// </summary>
@@ -59,6 +79,7 @@ namespace BuzzOff.Models
         public DateTime DataDenunciation { get; set; }        
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public IAddress Address { get; set; }
         public bool IsFocus { get; set; }
     }
 }

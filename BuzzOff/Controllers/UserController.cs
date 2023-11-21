@@ -22,13 +22,22 @@ namespace BuzzOff.Controllers
         }
         public IActionResult Update(int id)
         {
-            return View(UserDAO.GetOne(id));
+            var user = UserDAO.GetOne(id);
+            var model = new UserModel()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                AccessLevel = user.AccessLevel,
+                CPF = user.CPF
+            };
+            return View(model);
         }
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
             UserDAO.Update(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

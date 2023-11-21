@@ -39,24 +39,25 @@ namespace Business.Repository.DAO
                     "UPDATE Users SET " +
                     "NAME = @NAME," +
                     "EMAIL = @EMAIL," +
-                    "CPF = @CPF, " +
-                    "WHERE Id = @Id";
+                    "CPF = @CPF " +
+                    "WHERE Id = @ID";
 
                 cmd.Parameters.AddWithValue("@NAME", model.Name);
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
+                cmd.Parameters.AddWithValue("@ID", model.Id);
 
                 cmd.ExecuteNonQuery();
             }
         }
-        public static IUser? GetOne(string User, string Password)
+        public static IUser? GetOne(string Cpf, string Password)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE NAME = @NAME AND PASSWORD = @PASSWORD";
-                cmd.Parameters.AddWithValue("@NAME", User);
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE CPF = @CPF AND PASSWORD = @PASSWORD";
+                cmd.Parameters.AddWithValue("@CPF", Cpf);
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(Password));
 
                 using (var reader = cmd.ExecuteReader())

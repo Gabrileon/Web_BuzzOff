@@ -1,8 +1,11 @@
-﻿using Business.Repository;
+﻿using Azure;
+using Business.Generics;
+using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace BuzzOff.Controllers
 {
@@ -14,31 +17,35 @@ namespace BuzzOff.Controllers
             {
                 Denunciations = DenunciationDAO.GetAll()
             };
-            return View();
+            //Redireciona para o arquivo Index.cshtml na pasta Users
+            return View(model);
         }
 
-        public IActionResult Add()
+        public IActionResult Insert()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(DenunciationModel model, AddressModel address)
+        public IActionResult Insert(DenunciationModel model)
         {
-            model.IdAddress = AddressDAO.Insert(address);
+            model.Address.id = AddressDAO.Insert(model.Address);
+
             DenunciationDAO.Insert(model);
             return RedirectToAction("Index");
         }
         [HttpPost]
         public IActionResult Update(DenunciationModel model)
         {
-            DenunciationDAO.Insert(model);
+
             return RedirectToAction("Index");
         }
+        [HttpPost]
         public IActionResult Delete(DenunciationModel model)
         {
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
         }
+
     }
 }

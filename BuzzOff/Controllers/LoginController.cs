@@ -19,7 +19,7 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public async Task<IActionResult> TryVerification(LoggedUserModel model)
         {
-            var user = UserDAO.GetOne(model.Name, model.Password);
+            var user = UserDAO.GetOne(model.CPF, model.Password);
             if (user != null)
             {
                 var claims = new List<Claim>
@@ -28,10 +28,10 @@ namespace BuzzOff.Controllers
                     new Claim(ClaimTypes.Name, user.Name.ToString()),
                     new Claim("AccessLevel", user.AccessLevel.ToString()),
                 };
-
+                
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
-
+                
                 var authProperties = new AuthenticationProperties()
                 {
                     IsPersistent = model.rememberMe
