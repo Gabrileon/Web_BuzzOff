@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,6 +60,7 @@ namespace Business.Repository
 
         public static IDenunciation GetOne(int id)
         {
+            IDenunciation model = null;
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
@@ -70,7 +72,7 @@ namespace Business.Repository
                 {
                     if (reader.Read())
                     {
-                        IDenunciation model = new Denunciation(
+                        model = new Denunciation(
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
