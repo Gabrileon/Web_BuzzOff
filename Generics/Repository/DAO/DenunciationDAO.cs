@@ -59,7 +59,6 @@ namespace Business.Repository
 
         public static IDenunciation GetOne(int id)
         {
-            IDenunciation model = null;
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
@@ -71,7 +70,7 @@ namespace Business.Repository
                 {
                     if (reader.Read())
                     {
-                        model = new Denunciation(
+                        IDenunciation model = new Denunciation(
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
