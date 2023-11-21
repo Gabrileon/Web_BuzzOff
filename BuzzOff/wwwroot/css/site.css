@@ -16,3 +16,73 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.navbar-nav {
+    text-align: left;
+    justify-content: end;
+}
+
+.message {
+    color: #2F3C33;
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.btn-success {
+    color: #84CC16;
+    background-color: #2F3C33;
+    border-color: #2F3C33;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-weight: bolder;
+}
+
+a {
+    color: #84CC16;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    font-size: 26px;
+    text-align: center;
+}
+
+.footer {
+    background-color: #2F3C33;
+}
+
+.footer-text{
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: medium;
+
+}
+
+.username {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #84CC16;
+}
+
+.dropdown-item {
+    background-color: #2F3C33;
+    color: #84CC16;
+    width: fit-content;
+}
+
+.dropdown {
+    padding-right: 50px;
+    color: #84CC16;
+}
+
+.dropdown-menu {
+    background-color: #2F3C33;
+    color: #84CC16;
+}
+

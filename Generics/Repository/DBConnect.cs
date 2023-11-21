@@ -24,6 +24,12 @@ namespace Business.Repository
             {
                 dataSource = @"localhost\SQLSERVER";
                 password = "sa";
+            } else if (Environment.MachineName == "MACANEIRO")
+            {
+                dataSource = @"MACANEIRO\SQLEXPRESS";
+                userID = "sa";
+                password = "0505";
+            }
             }   
             
             if (Environment.MachineName == "TIAGO")

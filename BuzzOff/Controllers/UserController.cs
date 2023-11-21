@@ -2,11 +2,13 @@
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 
 namespace BuzzOff.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         public IActionResult Index()
@@ -31,14 +33,12 @@ namespace BuzzOff.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Add(UserModel model)
         {
             UserDAO.Insert(model);
             return RedirectToAction("Index");
         }
-
         public IActionResult Update(int id)
         {
             return View(UserDAO.GetOne(id));

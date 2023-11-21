@@ -19,7 +19,7 @@ namespace BuzzOff.Controllers
             {
                 Denunciations = DenunciationDAO.GetAll()
             };
-            // Redireciona para o arquivo Index.cshtml na pasta Users
+            //Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
         }
 
@@ -29,23 +29,25 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public IActionResult Insert(IDenunciation model)
+        public IActionResult Insert(DenunciationModel model)
         {
             IUser? user = AuthenticadedUser();
+
+            model.Address.id = AddressDAO.Insert(model.Address);
 
             DenunciationDAO.Insert(model);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Update(UserModel model)
+        public IActionResult Update(DenunciationModel model)
         {
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Delete(IDenunciation model)
+        public IActionResult Delete(DenunciationModel model)
         {
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");

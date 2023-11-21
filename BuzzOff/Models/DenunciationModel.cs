@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DenunciationModel: IDenunciation
+    public class DenunciationModel : IDenunciation
     {
         ///// <summary>
         ///// Insert
@@ -51,6 +51,27 @@ namespace BuzzOff.Models
         //    this.media = media;
         //    this.IsAnswered = isAnswered;
         //}
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="idInformer"></param>
+        /// <param name="idAgent"></param>
+        /// <param name="idAddress"></param>
+        /// <param name="dataDenunciation"></param>
+        /// <param name="dataVisit"></param>
+        /// <param name="media"></param>
+        /// <param name="isAnswered"></param>
+        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered, bool isFocus)
+        {
+            this.Id = id;
+            this.IdInformer = idInformer;
+            this.IdAddress = idAddress;
+            this.DataDenunciation = dataDenunciation;            
+            this.media = media;
+            this.IsAnswered = isAnswered;
+            this.IsFocus = isFocus;
+        }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }        
@@ -58,5 +79,7 @@ namespace BuzzOff.Models
         public DateTime DataDenunciation { get; set; }        
         public byte[] media { get; set; }
         public bool IsAnswered { get; set; }
+        public IAddress Address { get; set; }
+        public bool IsFocus { get; set; }
     }
 }
