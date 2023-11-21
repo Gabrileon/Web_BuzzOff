@@ -4,13 +4,14 @@ using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace BuzzOff.Controllers
 {
-
+    [Authorize]
     public class DenunciationController : Controller
     {
         public IActionResult Index()
@@ -62,8 +63,7 @@ namespace BuzzOff.Controllers
                 return UserDAO.GetOneByName(UserName);
             }
 
-            return null;
-                
+            return null;     
         }
 
     }
