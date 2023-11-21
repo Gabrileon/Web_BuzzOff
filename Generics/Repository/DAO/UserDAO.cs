@@ -186,5 +186,29 @@ namespace Business.Repository.DAO
                 cmd.ExecuteNonQuery();
             }
         }
+        public static IUser GetOneCPF(string cpf)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Id, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE CPF = @CPF";
+                cmd.Parameters.AddWithValue("@CPF", cpf);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        return model;
+                    }
+                }
+                return null;
+            }
+        }
     }
 }
