@@ -31,16 +31,19 @@ namespace BuzzOff.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Add(UserModel model)
         {
             UserDAO.Insert(model);
             return RedirectToAction("Index");
         }
+
         public IActionResult Update(int id)
         {
             return View(UserDAO.GetOne(id));
         }
+
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
