@@ -6,7 +6,9 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Message = "Olá combatente!";
             return View();
         }
+       
     }
 }

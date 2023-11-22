@@ -1,0 +1,44 @@
+#table-map {
+    float: right;
+    width: 80%;
+    float: left;
+}
+
+.informations {
+    padding-right: 20%;
+    height: 100vh;
+    float: right;
+}
+
+.size-bar {
+    background-color: red;
+    width: 70px;
+    height: 25px;
+    float: right;
+}
+
+.page {
+    float: left;
+    height: 100vh;
+}
+
+td {
+    border: double black 2px;
+}
+
+.circle {
+    display: flex;
+    margin-top: 0.5%;
+    flex-direction: column;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: purple;
+}
+
+.circles {
+    margin-top: 3%;
+    margin-left: 2%;
+    justify-content: center;
+    align-items: center;
+}

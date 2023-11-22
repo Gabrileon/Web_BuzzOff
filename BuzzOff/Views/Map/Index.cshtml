@@ -1,58 +1,23 @@
 ﻿@model DenunciationModel
 @{
     ViewData["Title"] = "Mapa de focos";
+    Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
-<style>      
-    #table-map{
-        float: right;
-        width:80%;
-    }
-    .informations{                        
-        padding-right:20%;
-        height:100vh;
-        float:right;
-    }
-    .size-bar{
-        background-color: red;
-        width: 70px;
-        height:25px;
-        float: right;
-    }
-    .page{          
-        float: left;
-        height:100vh;    
-        padding-right:9%;
-    }
-    td{
-        border: double black 2px;
-    }
-    .circle {
-        display:flex;
-        flex-direction:column;
-        border-radius: 100%;       
-        width: 20px;
-        height: 20px;
-        background-color: purple;
-        float:right;        
-    }
-</style>
 
 <div class="page w-50">
     <img src="~/img/Campanha.svg" alt="Campanha" class="d-block w-30">    
-    <div class="circle"></div>
-    <br/>
-    <div class="circle"></div>
-    <br />
-    <div class="circle"></div>
-    <br />
-    <div class="circle"></div>
-    <br />
-    <div class="circle"></div>
+    <div class="d-flex justify-content-start m-2">Fonte: Ministério da Saúde</div>
+    <div class="circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+</div>
 </div>
 <div class="informations w-50">   
-    <table class="table table-striped" id="table-map">
-        <thead>
-
+    <table class="table" id="table-map">
+        <thead class="thead-dark">
             <tr>
                 <th>Bairros</th>
                 <th>Focos</th>

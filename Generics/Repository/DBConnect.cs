@@ -41,7 +41,13 @@ namespace Business.Repository
                 dataSource = @"VINILASO\SQLSERVER2022";
                 password = "281705le";
             }
-
+            else if (Environment.MachineName == "BUE0001D021")
+            {
+                dataSource = @"BUE0001D021\SQLEXPRESS";
+                userID = "sa";
+                password = "Senac@2021";
+            }
+            
 
             return
                 $"Data Source={dataSource};" +
