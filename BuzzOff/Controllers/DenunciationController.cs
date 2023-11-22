@@ -6,6 +6,10 @@ using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BuzzOff.Controllers
 {
@@ -29,6 +33,7 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Insert(DenunciationModel model)
         {
+            model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
             model.Address.id = AddressDAO.Insert(model.Address);
 
             DenunciationDAO.Insert(model);
