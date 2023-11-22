@@ -4,6 +4,8 @@ using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -13,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BuzzOff.Controllers
 {
+    [Authorize]
     public class DenunciationController : Controller
     {
         public IActionResult Index()
@@ -39,18 +42,32 @@ namespace BuzzOff.Controllers
             DenunciationDAO.Insert(model);
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public IActionResult Update(DenunciationModel model)
         {
 
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public IActionResult Delete(DenunciationModel model)
         {
+            model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            model.Address.id = AddressDAO.Insert(model.Address);
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
+
+
+
+    
 
     }
 }

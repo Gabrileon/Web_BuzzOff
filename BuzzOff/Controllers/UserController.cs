@@ -36,6 +36,7 @@ namespace BuzzOff.Controllers
             return View(model);
 
         }
+
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
