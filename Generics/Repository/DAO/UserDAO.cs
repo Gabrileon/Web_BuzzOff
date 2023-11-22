@@ -27,8 +27,6 @@ namespace Business.Repository.DAO
                 return cmd.ExecuteNonQuery();
             }
         }
-
-
         public static void Update(IUser model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -76,7 +74,6 @@ namespace Business.Repository.DAO
                 return null;
             }
         }
-
         public static IUser GetOne(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -168,7 +165,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public static void UpdatePassword(string password, int id)
+        public static void UpdatePassword(string cpf, string name, string newPassword)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -177,10 +174,11 @@ namespace Business.Repository.DAO
                 cmd.CommandText =
                     "UPDATE Users SET " +
                     "PASSWORD = @PASSWORD " +
-                    "WHERE Id = @Id";
+                    "WHERE CPF = @CPF AND NAME = @NAME";
 
-                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(password));
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(newPassword));
+                cmd.Parameters.AddWithValue("@CPF", cpf);
+                cmd.Parameters.AddWithValue("@NAME", name);
 
 
                 cmd.ExecuteNonQuery();
