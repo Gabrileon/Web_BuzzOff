@@ -12,7 +12,7 @@ namespace Business.Repository
 
 
         public static string initialCatalog = "BuzzOffDB";
-        static string dataSource = @"BUE0001D017\SQLEXPRESS";
+        static string dataSource = @"BUE0001D020\SQLEXPRESS";
 
         static string userID = "sa";
         static string password = "Senac@2021";

@@ -17,7 +17,7 @@
                 <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <div class="esqueceu">
-                    <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
+                    <a id="p-senha" asp-controller="User" asp-action="UpdatePassword">Esqueceu a senha?</a>
                     <div class="left-block">
                         <label asp-for="rememberMe">Lembre-me</label>
                         <input asp-for="rememberMe" type="checkbox"/>
