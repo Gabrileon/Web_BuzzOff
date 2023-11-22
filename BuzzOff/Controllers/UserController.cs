@@ -37,7 +37,7 @@ namespace BuzzOff.Controllers
 
         }
         [HttpPost]
-        public IActionResult Update(IUser model)
+        public IActionResult Update(UserModel model)
         {
             UserDAO.Update(model);
             return RedirectToAction("Index", "Home");
