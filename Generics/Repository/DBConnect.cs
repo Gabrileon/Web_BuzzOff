@@ -30,9 +30,7 @@ namespace Business.Repository
                 userID = "sa";
                 password = "0505";
             }
-            }   
-            
-            if (Environment.MachineName == "TIAGO")
+                else if (Environment.MachineName == "TIAGO")
             {
                 dataSource = @"TIAGO\SQLEXPRESS";
             }

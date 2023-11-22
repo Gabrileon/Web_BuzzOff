@@ -32,8 +32,7 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Insert(DenunciationModel model)
         {
-            IUser? user = AuthenticadedUser();
-
+            model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
             model.Address.id = AddressDAO.Insert(model.Address);
 
             DenunciationDAO.Insert(model);
@@ -50,21 +49,21 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Delete(DenunciationModel model)
         {
+            model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            model.Address.id = AddressDAO.Insert(model.Address);
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IUser? AuthenticadedUser()
-        {
-            string? UserName = HttpContext.User.Identity?.Name;
 
-            if (UserName != null) {
-                return UserDAO.GetOneByName(UserName);
-            }
 
-            return null;     
-        }
+
+
+
+
+
+
+    
 
     }
 }

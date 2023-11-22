@@ -62,11 +62,11 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public DenunciationModel(int id, int idInformer, int idAddress, DateTime dataDenunciation, byte[] media, bool isAnswered, bool isFocus)
+        public DenunciationModel(int id, int idInformer, AddressModel address, DateTime dataDenunciation, byte[] media, bool isAnswered, bool isFocus)
         {
             this.Id = id;
             this.IdInformer = idInformer;
-            this.IdAddress = idAddress;
+            this.Address = address;
             this.DataDenunciation = dataDenunciation;            
             this.media = media;
             this.IsAnswered = isAnswered;
