@@ -28,10 +28,10 @@ namespace BuzzOff.Controllers
                     new Claim(ClaimTypes.Name, user.Name.ToString()),
                     new Claim("AccessLevel", user.AccessLevel.ToString()),
                 };
-                
+
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
-                
+
                 var authProperties = new AuthenticationProperties()
                 {
                     IsPersistent = model.rememberMe
@@ -40,8 +40,8 @@ namespace BuzzOff.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError(string.Empty, "Credenciais inválidas");
-            
+            ModelState.AddModelError(string.Empty,"Credenciais inválidas");
+
             return View(user);
         }
         [HttpPost]
@@ -58,8 +58,17 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Add(UserModel model)
         {
-            UserDAO.Insert(model);
-            return RedirectToAction("Index");
+            if (UserDAO.GetOneCPF(model.CPF) == null)
+            {
+                UserDAO.Insert(model);
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return RedirectToAction("Cadastro");
+
+            }
         }
     }
 }

@@ -4,11 +4,12 @@ using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Reflection;
 using System.Reflection.Metadata;
 
 namespace BuzzOff.Controllers
 {
-    [Authorize]
     public class UserController : Controller
     {
         public IActionResult Index()
@@ -20,8 +21,9 @@ namespace BuzzOff.Controllers
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
         }
-        public IActionResult Update(int id)
+        public IActionResult Update()
         {
+            int id = Convert.ToInt32(HttpContext.User.Claims.First().Value);
             var user = UserDAO.GetOne(id);
             var model = new UserModel()
             {
@@ -32,12 +34,25 @@ namespace BuzzOff.Controllers
                 CPF = user.CPF
             };
             return View(model);
+
         }
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
             UserDAO.Update(model);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult UpdatePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePassword(string cpf, string name, string newPassword)
+        {
+            UserDAO.UpdatePassword(cpf, name, newPassword);
+            return RedirectToAction("Index", "Login");
         }
     }
 }

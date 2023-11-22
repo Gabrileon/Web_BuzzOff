@@ -2,31 +2,30 @@
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
-    }
+}
 
 <div class="geral">
     <img class="bg-login" src="/img/amico.svg">
     <form class="form-login" asp-controller="Login" asp-action="TryVerification" method="post">
         <div class="login-form">
             <fieldset>
-                <h3 class="txtLogin">LOGIN</h3>
-                
+                <h3 class="txtLogin">LOGIN</h3>                
                 <input type="text" id="nome" class="form-control" asp-for="CPF" placeholder="CPF" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
-                
+
                 <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <div class="esqueceu">
-                    <a id="p-senha" asp-controller="User" asp-action="UpdatePassword">Esqueceu a senha?</a>
+                    <a id="p-senha" href="pagina de esqueceu a senha">Esqueceu a senha?</a>
                     <div class="left-block">
                         <label asp-for="rememberMe">Lembre-me</label>
-                        <input asp-for="rememberMe" type="checkbox"/>
+                        <input asp-for="rememberMe" type="checkbox" />
                     </div>
                 </div>
-                
+
                 <br>
                 <div asp-validation-summary="All" class="text-danger"></div>
-            <button class="btn btn-success" type="submit">Entrar</button>
+                <button class="btn btn-success" type="submit">Entrar</button>
                 <div class="sem-conta">
                     <p class="semConta"> Não possui uma conta? <a id="p-semConta" asp-controller="Login" asp-action="Cadastro">Criar conta</a></p>
                 </div>
