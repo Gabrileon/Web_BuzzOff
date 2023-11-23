@@ -5,7 +5,8 @@
 }
 
 .informations {
-    padding-right: 20%;
+    padding-right: 15%;
+    padding-left:5%;
     height: 100vh;
     float: right;
 }
@@ -20,6 +21,7 @@
 .page {
     float: left;
     height: 100vh;
+    
 }
 
 td {
@@ -28,17 +30,20 @@ td {
 
 .circle {
     display: flex;
-    margin-top: 0.5%;
+    margin-top: 3%;
     flex-direction: column;
     border-radius: 100%;
     width: 20px;
     height: 20px;
-    background-color: purple;
+    background-color: purple;    
 }
 
 .circles {
+    display:flex;
     margin-top: 3%;
     margin-left: 2%;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left:2%
 }
