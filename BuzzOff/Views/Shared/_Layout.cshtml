@@ -33,6 +33,12 @@
                         <li class="nav-item">
                             <a class="btn btn-success" asp-area="" asp-controller="Map" asp-action="Index">Mapa de focos</a>
                         </li>
+                        @foreach(var access in HttpContextAccessor.HttpContext.User.Claims.ToList()){
+                            if (access.Value == "Agent")
+                            {
+                                <div>FALA DELE MLK</div>
+                            }
+                        }
                         @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
