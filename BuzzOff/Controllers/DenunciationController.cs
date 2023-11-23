@@ -35,7 +35,7 @@ namespace BuzzOff.Controllers
             model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
             model.Address.id = AddressDAO.Insert(model.Address);
 
-            DenunciationDAO.Insert(model);
+            DenunciationDAO.Add(model);
             return RedirectToAction("Index");
         }
 

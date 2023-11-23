@@ -14,19 +14,18 @@ namespace Business.Repository
     {
         byte[] midia = new byte[10];
 
-        public static int Insert(IDenunciation model)
+        public static int Add(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, Media, IsAnswered) " +
-                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @Media, @IsAnswered)";
+                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation IsAnswered) " +
+                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @IsAnswered)";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", null); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
-                cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
+                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
 
                 return cmd.ExecuteNonQuery();
             }
@@ -50,7 +49,7 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
                 //cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
-                cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
+                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
                 cmd.ExecuteNonQuery();
