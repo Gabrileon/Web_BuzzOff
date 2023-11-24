@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BuzzOff.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BuzzOff.Controllers
 {
@@ -9,6 +10,15 @@ namespace BuzzOff.Controllers
             ViewBag.Message = "Olá combatente!";
             return View();
         }
-       
+
+        public IActionResult ShowNeighborhood() 
+        {
+            ViewBag.Neighborhood = new List<CountFocusModel>(); 
+            foreach (var model in ViewBag.Neighborhood) 
+            { 
+                ViewBag.Neighborhood.Add()
+            }
+            return View();
+        }
     }
 }
