@@ -59,6 +59,15 @@ namespace BuzzOff.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult ShowAll()
+        {
+            var result = new List<IDenunciation>();
+            foreach(var denunciation in DenunciationDAO.GetAll())
+            {
+                result.Add(denunciation);
+            }
+            return View(result);
+        }
 
 
 
