@@ -1,4 +1,5 @@
-﻿using BuzzOff.Models;
+﻿using Business.Generics;
+using BuzzOff.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuzzOff.Controllers
@@ -13,7 +14,7 @@ namespace BuzzOff.Controllers
 
         public IActionResult ShowNeighborhood() 
         {
-            ViewBag.Neighborhood = new List<CountFocusModel>(); 
+            ViewBag.Neighborhood = new List<AmountFocus>(); 
             foreach (var model in ViewBag.Neighborhood) 
             { 
                 ViewBag.Neighborhood.Add()
