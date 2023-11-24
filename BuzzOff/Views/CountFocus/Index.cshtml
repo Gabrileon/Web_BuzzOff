@@ -19,7 +19,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>               
+            <tr>
+                @foreach (var focus in Model.CountFocus)
+                    {
+                            <td>@focus.Neighborhood</td>
+                            <td>@focus.Counts</td>
+                    }
                
                 <td>50
                     <progress class="w-50 float-end" value="56" max="100"></progress>
