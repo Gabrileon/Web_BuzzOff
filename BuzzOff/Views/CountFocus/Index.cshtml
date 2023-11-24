@@ -5,12 +5,12 @@
 }
 
 <div class="page w-30">
-    <img src="~/img/Campanha.svg" alt="Campanha" img-alig="left" class="d-flex, w-30 ">    
+    <img src="~/img/Campanha.svg" alt="Campanha" img-alig="left" class="d-flex, w-30 ">
     <div class="d-flex justify-content-start m-2 ">Fonte: Ministério da Saúde <div class="divisao"></div> <div>Atualizado 23/11/2023</div></div>
-    
+
 </div>
 
-<div class="informations w-50">   
+<div class="informations w-50">
     <table class="table" id="table-map">
         <thead>
             <tr>
@@ -19,32 +19,23 @@
             </tr>
         </thead>
         <tbody>
+
+            @foreach (var focus in Model.CountFocus)
+            {
+                <tr>
+                    <td>@focus.Neighborhood</td>
+                    <td>
+                        @focus.Counts<progress class="w-50 float-end" value="@focus.Counts" max="@foreach(var count in Model.TotalFocus){@count}"></progress>
+                    </td>
+                </tr>
+            }
+            @foreach(var count in Model.TotalFocus){
             <tr>
-                @foreach (var focus in Model.CountFocus)
-                    {
-                            <td>@focus.Neighborhood</td>
-                            <td>@focus.Counts</td>
-                    }
-               
-                <td>50
-                    <progress class="w-50 float-end" value="56" max="100"></progress>
-                </td>
-                                
+                <td>@count</td>
             </tr>
-            <tr>
-                <td>Velha</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Progresso</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Itoupava Central</td>
-                <td>50</td>
-            </tr>
+            }
         </tbody>
-    </table>    
+    </table>
 </div>
 @*<div class="circles">
     <ul>

@@ -8,10 +8,12 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
+            int countTotal = CountFocusDAO.AmountByErradicated(false);            
             var model = new CountFocusesModel();
+            model.TotalFocus.Add(countTotal);
             foreach (var focus in CountFocusDAO.CountByErraticatedAndNeighborhood(false))
             {
-                model.CountFocus.Add(focus);
+                model.CountFocus.Add(new CountFocusModel(focus));                
             }
             return View(model);
         }

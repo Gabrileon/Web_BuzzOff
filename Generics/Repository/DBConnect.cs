@@ -11,7 +11,7 @@ namespace Business.Repository
     {
 
 
-        public static string initialCatalog = "BuzzOffDB";
+        public static string initialCatalog = "BuzzOffDB_2";
         static string dataSource = @"localhost\SQLEXPRESS";
 
         static string userID = "sa";

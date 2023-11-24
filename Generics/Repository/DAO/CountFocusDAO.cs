@@ -27,17 +27,19 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = $"select COUNT(dbo.Addresses.Neighborhood) as Quantidade, Addresses.Neighborhood from Addresses " +
+                cmd.CommandText = $"select COUNT(dbo.Addresses.Neighborhood) as Counts, Addresses.Neighborhood from Addresses " +
                     $"left join dbo.DengueFocus on IDAddress = dbo.Addresses.ID " +
-                    $"where dbo.DengueFocus.IsEradicated = {b}" +
+                    $"where dbo.DengueFocus.IsEradicated = @b " +
                     $"group by Addresses.Neighborhood";
+
+                cmd.Parameters.AddWithValue("@b", b);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         model = new CountFocus(
-                           (int)reader["Amount"],
+                           (int)reader["Counts"],
                            (string)reader["Neighborhood"]
                        );
 
@@ -60,7 +62,8 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = $"SELECT COUNT(dbo.DengueFocus.IsEradicated) as result from DengueFocus where IsEradicated = {b}";
+                cmd.CommandText = $"SELECT COUNT(dbo.DengueFocus.IsEradicated) as result from DengueFocus where IsEradicated = @b";
+                cmd.Parameters.AddWithValue("@b", b);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
