@@ -36,7 +36,9 @@
                         @foreach(var access in HttpContextAccessor.HttpContext.User.Claims.ToList()){
                             if (access.Value == "Agent")
                             {
-                                <div>FALA DELE MLK</div>
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-area="" asp-controller="User" asp-action="CpfAccessLevelChange">Verificar Denuncias</a>
+                                </li>
                             }
                         }
                         @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
@@ -45,8 +47,17 @@
                                 <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
                             </li>
                         }
-                        else
+                        else{
+                        @foreach (var access in HttpContextAccessor.HttpContext.User.Claims.ToList())
                         {
+                            if (access.Value == "Administrator")
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-area="" asp-controller="User" asp-action="CpfAccessLevelChange">Alterar Nível de Acesso</a>
+                                </li>
+                            }
+                        }
+                       
                             <div class="nav-item modal" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">

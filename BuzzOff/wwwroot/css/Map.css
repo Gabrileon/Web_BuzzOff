@@ -40,10 +40,45 @@ td {
 
 .circles {
     display:flex;
-    margin-top: 3%;
+    margin-top: 17%;
     margin-left: 2%;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     padding-left:2%
+}
+
+.divisao{
+    width:49%;
+}
+
+li{
+    list-style:none;    
+}
+
+progress{
+    display:block;
+    -webkit-appearance:none;
+    margin-top:4.5%;
+}
+
+    progress::-webkit-progress-value {
+        background: #84CC16;
+        border-radius: 10px
+    }
+
+    progress::-webkit-progress-bar {
+        background: white;       
+        border-radius: 20px
+    }
+
+    progress::-moz-progress-bar {
+        background: black;
+        border-radius: 20px
+    }
+
+thead {
+    background-color: #2F3C33;
+    border: double black 2px;
+    color: white;
 }
