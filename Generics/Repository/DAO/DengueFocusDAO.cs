@@ -126,7 +126,7 @@ namespace Business.Repository.DAO
 
                                 (int)reader["dbo.Visits.ID"],
                                 (int)reader["IDAgent"],
-                                (int)reader["IDDenunciation"],
+                                DenunciationDAO.GetOne((int)reader["IDDenunciation"]),
                                 (DateTime)reader["DateVisit"],
                                 (string)reader["Assessment"]
                             );

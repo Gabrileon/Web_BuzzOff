@@ -9,20 +9,23 @@ namespace BuzzOff.Models
 {
     public class VisitModel: IVisit
     {
-        public VisitModel(int id, int idAgent, int idDenunciation, DateTime dateVisit, string assessment)
+        public VisitModel()
+        {
+
+        }
+        public VisitModel(int id, int idAgent, IDenunciation denunciation, DateTime dateVisit, string assessment)
         {
             Id = id;
             IdAgent = idAgent;
-            IdDenunciation = idDenunciation;
+            Denunciation = denunciation;
             DateVisit = dateVisit;
             Assessment = assessment;
         }
 
         public int Id { get; set; }
         public int IdAgent { get; set; }
-        public int IdDenunciation { get; set; }
+        public IDenunciation Denunciation { get; set; }
         public DateTime DateVisit { get; set; }
         public string Assessment { get; set; }
-
     }
 }

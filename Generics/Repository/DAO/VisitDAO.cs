@@ -30,7 +30,7 @@ namespace Business.Repository.DAO
                         IVisit model = new Visit(
                             reader.GetInt32(1),
                             reader.GetInt32(2),
-                            reader.GetInt32(3),
+                            DenunciationDAO.GetOne(reader.GetInt32(3)),
                             reader.GetDateTime(4),
                             reader.GetString(5)
                             );
@@ -58,7 +58,7 @@ namespace Business.Repository.DAO
                         return new Visit(
                             id: reader.GetInt32(0),
                             idAgent: reader.GetInt32(1),
-                            idDenunciation: reader.GetInt32(2),
+                            denunciation: DenunciationDAO.GetOne(reader.GetInt32(2)),
                             dateVisit: reader.GetDateTime(3),
                             assessment: reader.GetString(4)
                         );
