@@ -27,7 +27,8 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = $"select COUNT(dbo.Addresses.Neighborhood) as Quantidade, Addresses.Neighborhood from Addresses \r\nleft join dbo.DengueFocus on IDAddress = dbo.Addresses.ID " +
+                cmd.CommandText = $"select COUNT(dbo.Addresses.Neighborhood) as Quantidade, Addresses.Neighborhood from Addresses " +
+                    $"left join dbo.DengueFocus on IDAddress = dbo.Addresses.ID " +
                     $"where dbo.DengueFocus.IsEradicated = {b}" +
                     $"group by Addresses.Neighborhood";
 
