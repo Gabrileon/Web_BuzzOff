@@ -1,5 +1,7 @@
 ﻿using Business.Generics;
+using Business.Repository.DAO;
 using BuzzOff.Models;
+using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuzzOff.Controllers
@@ -9,17 +11,18 @@ namespace BuzzOff.Controllers
         public IActionResult Index()
         {
             ViewBag.Message = "Olá combatente!";
+                     
             return View();
         }
 
         public IActionResult ShowNeighborhood() 
         {
-            ViewBag.Neighborhood = new List<AmountFocus>(); 
-            foreach (var model in ViewBag.Neighborhood) 
-            { 
-                ViewBag.Neighborhood.Add()
+            var model = new List<CountFocusModel>();
+            foreach (var focus in CountFocusDAO.CountByErraticatedAndNeighborhood(false))
+            {
+                model.Add(new CountFocusModel(focus));
             }
-            return View();
+            return View(model);
         }
     }
 }

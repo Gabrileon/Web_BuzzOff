@@ -1,20 +1,21 @@
 ﻿using Common.Interfaces;
+using Business.Generics;
 
 namespace BuzzOff.Models
 {
-    public class CountFocusModel
+    public class CountFocusModel : ICountFocus
     {
         public CountFocusModel()
         {
 
         }
-        public CountFocusModel(int count, string neighborhood)
+        public CountFocusModel(ICountFocus focus)
         {
-            Count = count;
-            Neighborhood = neighborhood;
+            Counts = focus.Counts;
+            Neighborhood = focus.Neighborhood;
         }
 
-        public int Count { get; set; }
+        public int Counts { get; set; }
         public string Neighborhood { get; set; }
     }
 

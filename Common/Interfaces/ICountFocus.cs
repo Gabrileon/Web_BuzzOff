@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Common.Interfaces
 {
-    internal interface ICountFocus
+    public interface ICountFocus
     {
+        public int Counts { get; set; }
+        public string Neighborhood { get; set; }
+    }
+
+    public interface IAmountFocus
+    {
+        public int Value { get; set; }
     }
 }

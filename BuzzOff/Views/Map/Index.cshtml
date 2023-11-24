@@ -1,4 +1,4 @@
-﻿@model DenunciationModel
+﻿@model CountFocusesModel
 @{
     ViewData["Title"] = "Mapa de focos";
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
@@ -20,7 +20,12 @@
         </thead>
         <tbody>
             <tr>
-                <td>Garcia</td>
+                @foreach (var focus in Model)
+                    {
+                            <td>@focus.Neighborhood</td>
+                            <td>@focus.Counts</td>
+                    }
+               
                 <td>50
                     <progress class="w-50 float-end" value="56" max="100"></progress>
                 </td>
