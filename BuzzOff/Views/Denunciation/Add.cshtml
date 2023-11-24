@@ -1,12 +1,29 @@
-﻿ @model DenunciationModel
+﻿@* @model DenunciationModel
 @{
     ViewData["Title"] = "Cadastro denuncias";
    
 }
 <style>
+        background-color: #84CC16;
+        width: 120px;
+        height: 45px;
+        margin-top: 20px;
+        font-size: 1.2rem;
+        border-color: #84CC16;
+
+    } 
+
     .bnt-sucess:hover {
         background-color: #2F3C33;
     }
+
+
+
+
+
+
+
+
 
 </style>
 
@@ -16,9 +33,62 @@
 <button type="submit" class="btn btn-primary">Voltar</button>
 
 
-<form class="container" method="POST" asp-controller="Denunciation" asp-action="Add">
+<form class="container" method="POST" asp-controller="Denunciation" asp-action="Insert">
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <div class="row g-3 align-items-center">
+                <div class="col-4 form-group">
+                    <label for="cep" class="form-label">CEP</label>
+                    <input type="text" class="form-control" id="cep" asp-for="cep">
+                </div>
+                <div class="col-4 form-group">
+                    <label for="number" class="form-label">Número</label>
+                    <input type="number" class="form-control" id="number" asp-for="number">
+                </div>
+                <div class="col-4 form-group">
+                    <label for="UF" class="form-label">UF</label>
+                    <input type="text" class="form-control" id="UF" asp-for="uf">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center">
+                <div class="col-6 form-group">
+                    <label for="address" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="address" asp-for="address">
+                </div>
+                <div class="col-6 form-group">
+                    <label for="city" class="form-label">Cidade</label>
+                    <input type="text" class="form-control" id="city" asp-for="city">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center">
+                <div class="col-12 form-group">
+                    <label for="DENOUNCEMENT_ID" class="form-label">Tipo de denúncia</label>
+                    <select class="form-control" id="DENOUNCEMENT_ID">
+                        <option selected>Selecione uma opção</option>
+                        <option value="1" >Ovos</option>
+                        <option value="2">Larvas</option>
+                        <option value="3">Pupas</option>
+                        <option value="4">Adultas</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="row g-3 align-items-center">
+                <div class="col-12 form-group">
+                    <label for="comment" class="form-label">Comentário</label>
+                    <textarea class="form-control" id="comment" rows="4" cols="8" asp-for="comment"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <label for="media" class="form-label">Informe a imagem:</label>
+            @* <input class="form-control" type="file" id="media" asp-for="media"> 
+
+            <button type="submit" class="btn btn-primary">Adicionar imagem</button>
+        </div>
+    </div>
     <button type="submit" class="btn btn-sucess">Enviar</button>
 </form>
 
 
- 
+ *@

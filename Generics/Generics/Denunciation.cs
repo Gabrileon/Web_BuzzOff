@@ -1,5 +1,4 @@
 ﻿using Common.Interfaces;
-using Common.Others;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +8,8 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    public class Denunciation : IDenunciation
+    public class Denunciation: IDenunciation
     {
-        private int v1;
-        private int v2;
-        private DateTime dateTime;
-        private byte[] bytes;
-        private bool v3;
-
         /// <summary>
         /// Insert
         /// </summary>
@@ -28,23 +21,12 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-
-        public Denunciation()
+        public Denunciation(int idInformer, int idAddress, byte[] media)
         {
-            IdInformer = 1;
+            IdInformer = idInformer;
             DataDenunciation = DateTime.Now;
-            Stage = 0;
-            Address.id = 1;
-        }
-
-        public Denunciation(int v1, int v2, IAddress address, DateTime dateTime, byte[] bytes, bool v3)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-            Address = address;
-            this.dateTime = dateTime;
-            this.bytes = bytes;
-            this.v3 = v3;
+            this.media = media;
+            IsAnswered = false;
         }
 
         /// <summary>
@@ -58,12 +40,22 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            Address = address;
+            DataDenunciation = dataDenunciation;
+            this.media = media;
+            IsAnswered = isAnswered;
+        }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
-        public byte[]? media { get; set; }
+        public byte[] media { get; set; }
+        public bool IsAnswered { get; set; }
         public IAddress Address { get; set; }
-        public MyEnuns.DenunciationStage Stage { get; set; }
+        public bool IsFocus { get; set; }
     }
 } 

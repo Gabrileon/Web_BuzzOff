@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using static Common.Others.MyEnuns;
 
 namespace BuzzOff.Models
 {
@@ -70,6 +69,8 @@ namespace BuzzOff.Models
             this.Address = address;
             this.DataDenunciation = dataDenunciation;            
             this.media = media;
+            this.IsAnswered = isAnswered;
+            this.IsFocus = isFocus;
         }
 
         public int Id { get; set; }
@@ -77,7 +78,8 @@ namespace BuzzOff.Models
         public int IdAddress { get; set; }
         public DateTime DataDenunciation { get; set; }        
         public byte[] media { get; set; }
-        public DenunciationStage Stage { get; set; }
+        public bool IsAnswered { get; set; }
         public IAddress Address { get; set; }
+        public bool IsFocus { get; set; }
     }
 }
