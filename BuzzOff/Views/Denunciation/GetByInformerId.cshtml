@@ -1,0 +1,9 @@
+﻿@model DenunciationsModel
+@{
+    ViewData["Title"] = "Minhas denúncias";
+}
+
+@foreach(var denun in Model.Denunciations)
+{
+    <h3>@denun.Address.City</h3>
+}

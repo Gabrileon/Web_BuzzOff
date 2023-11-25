@@ -80,7 +80,7 @@ namespace Business.Repository
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
+                            (DenunciationStage)reader["IsAnswered"]
                         );
                     }
                 }
@@ -108,8 +108,8 @@ namespace Business.Repository
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
+                            null,
+                            (DenunciationStage)reader["IsAnswered"]
                         );
                         list.Add(model);
                     }
@@ -139,7 +139,7 @@ namespace Business.Repository
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
+                            (DenunciationStage)reader["IsAnswered"]
                         );
                         list.Add(model);
                     }

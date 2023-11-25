@@ -25,13 +25,6 @@ namespace Business.Generics
         
         public Denunciation()
         {
-            IdInformer = 1;
-            DataDenunciation = DateTime.Now;
-            Stage = (DenunciationStage) 1;
-            Address = new Address()
-            {
-                Id = 1,
-            };
         }
 
         /// <summary>
@@ -44,7 +37,7 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, DenunciationStage isAnswered)
         {
             Id = id;
             IdInformer = idInformer;

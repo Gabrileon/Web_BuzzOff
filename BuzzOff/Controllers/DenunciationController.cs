@@ -62,15 +62,16 @@ namespace BuzzOff.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-
-
-
-
-
-
-    
-
+        public IActionResult GetByInformerId()
+        {
+            ViewBag.Message = "Minhas denúncias";
+            var userId = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            var model = new DenunciationsModel();
+            foreach (var denunciation in DenunciationDAO.GetByInformerId(userId))
+            {
+                model.Denunciations.Add(denunciation);
+            }
+            return View(model);
+        }
     }
 }
