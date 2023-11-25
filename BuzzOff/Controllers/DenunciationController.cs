@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BuzzOff.Controllers
 {
@@ -44,7 +43,7 @@ namespace BuzzOff.Controllers
             denunciation.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
 
             DenunciationDAO.Insert(denunciation);
-            return RedirectToAction("Index");
+            return RedirectToAction("Home", "Index");
         }
 
         [HttpPost]
