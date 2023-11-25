@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Common.Others.MyEnuns;
 
 namespace Common.Interfaces
 {
@@ -12,8 +13,7 @@ namespace Common.Interfaces
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
         public byte[] media { get; set; }
-        public bool IsAnswered { get; set; }
-        public bool IsFocus { get; set; }
+        public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
     }
 }

@@ -27,5 +27,13 @@ namespace Common.Others
             Larvas = 2,
             Adultos = 3
         }
+
+        public enum DenunciationStage
+        {
+            teste = 0,
+            Pendent = 1,
+            InProgress = 2,
+            Completed = 3
+        }
     }
 }
