@@ -63,7 +63,7 @@ progress{
 }
 
     progress::-webkit-progress-value {
-        background: #84CC16;
+        background: #db0000;
         border-radius: 10px
     }
 
@@ -82,3 +82,4 @@ thead {
     border: double black 2px;
     color: white;
 }
+

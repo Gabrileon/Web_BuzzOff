@@ -8,6 +8,7 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Message = "Mapa de Focos";
             int countTotal = CountFocusDAO.AmountByErradicated(false);            
             var model = new CountFocusesModel();
             model.TotalFocus.Add(countTotal);
