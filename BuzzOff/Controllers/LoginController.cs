@@ -19,7 +19,7 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public async Task<IActionResult> TryVerification(LoggedUserModel model)
         {
-            var user = UserDAO.GetOne(model.Name, model.Password);
+            var user = UserDAO.GetOne(model.CPF, model.Password);
             if (user != null)
             {
                 var claims = new List<Claim>
@@ -40,8 +40,8 @@ namespace BuzzOff.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError(string.Empty, "Credenciais inválidas");
-            
+            ModelState.AddModelError(string.Empty,"Credenciais inválidas");
+
             return View(user);
         }
         [HttpPost]
@@ -58,8 +58,17 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Add(UserModel model)
         {
-            UserDAO.Insert(model);
-            return RedirectToAction("Index");
+            if (UserDAO.GetOneCPF(model.CPF) == null)
+            {
+                UserDAO.Insert(model);
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return RedirectToAction("Cadastro");
+
+            }
         }
     }
 }

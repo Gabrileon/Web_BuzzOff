@@ -1,10 +1,10 @@
-﻿@* @model DenunciationModel
+﻿ @model DenunciationAddressModel
 @{
     ViewData["Title"] = "Cadastro denuncias";
    
 }
 <style>
-        background-color: #84CC16;
+/*        background-color: #84CC16;
         width: 120px;
         height: 45px;
         margin-top: 20px;
@@ -15,16 +15,7 @@
 
     .bnt-sucess:hover {
         background-color: #2F3C33;
-    }
-
-
-
-
-
-
-
-
-
+    }*/
 </style>
 
 
@@ -33,31 +24,45 @@
 <button type="submit" class="btn btn-primary">Voltar</button>
 
 
-<form class="container" method="POST" asp-controller="Denunciation" asp-action="Insert">
-    <div class="row">
+<form class="container" method="POST" asp-controller="Denunciation" asp-action="Add">
+
+    <h3>Endereço</h3>
+    <input type="text" asp-for="Neighborhood" placeholder="neighborhood" />
+    <input type="text" asp-for="Street" placeholder="street" />
+    <input type="text" asp-for="Number" placeholder="number" />
+    <input type="text" asp-for="Reference" placeholder="reference" />
+    <input type="text" asp-for="City" placeholder="city" />
+
+    <h3>Denúncia</h3>
+    <input type="date" asp-for="DataDenunciation" />
+    <input type="number" asp-for="Stage" />
+
+    <button type="submit" class="btn btn-sucess">Enviar</button>
+</form>
+
+ @*   <div class="row">
         <div class="col-sm-12 col-md-8">
             <div class="row g-3 align-items-center">
-                <div class="col-4 form-group">
-                    <label for="cep" class="form-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" asp-for="cep">
-                </div>
+           
                 <div class="col-4 form-group">
                     <label for="number" class="form-label">Número</label>
-                    <input type="number" class="form-control" id="number" asp-for="number">
+                    <input type="number" class="form-control" id="number" asp-for="Address.number">
                 </div>
-                <div class="col-4 form-group">
-                    <label for="UF" class="form-label">UF</label>
-                    <input type="text" class="form-control" id="UF" asp-for="uf">
-                </div>
+               
             </div>
             <div class="row g-3 align-items-center">
                 <div class="col-6 form-group">
                     <label for="address" class="form-label">Endereço</label>
-                    <input type="text" class="form-control" id="address" asp-for="address">
+                    <input type="text" class="form-control" id="address" asp-for="Address.street">
                 </div>
                 <div class="col-6 form-group">
                     <label for="city" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="city" asp-for="city">
+                    <input type="text" class="form-control" id="city" asp-for="Address.city">
+                </div> 
+
+                <div class="col-6 form-group">
+                    <label for="bairro" class="form-label">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" asp-for="Address.neighborhood">
                 </div>
             </div>
             <div class="row g-3 align-items-center">
@@ -81,14 +86,10 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
-            <label for="media" class="form-label">Informe a imagem:</label>
-            @* <input class="form-control" type="file" id="media" asp-for="media"> 
+            <label for="media" class="form-label">Informe a imagem:</label>*@
 
-            <button type="submit" class="btn btn-primary">Adicionar imagem</button>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-sucess">Enviar</button>
-</form>
+            
 
 
- *@
+
+ 

@@ -4,11 +4,17 @@ using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BuzzOff.Controllers
 {
+    [Authorize]
     public class DenunciationController : Controller
     {
         public IActionResult Index()
@@ -21,31 +27,50 @@ namespace BuzzOff.Controllers
             return View(model);
         }
 
-        public IActionResult Insert()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Insert(DenunciationModel model)
+        public IActionResult Add(DenunciationAddressModel model)
         {
-            model.Address.id = AddressDAO.Insert(model.Address);
+            var address = model.GetAddressModel();
+            address.Id = AddressDAO.Insert(address);
 
-            DenunciationDAO.Insert(model);
-            return RedirectToAction("Index");
+            var denunciation = model.GetDenunciantionModel();
+            denunciation.Address = address;
+            denunciation.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+
+            DenunciationDAO.Insert(denunciation);
+            return RedirectToAction("Home", "Index");
         }
+
         [HttpPost]
         public IActionResult Update(DenunciationModel model)
         {
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Home", "Index");
         }
+
         [HttpPost]
         public IActionResult Delete(DenunciationModel model)
         {
+            model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            model.Address.Id = AddressDAO.Insert(model.Address);
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
+
+
+
+    
 
     }
 }

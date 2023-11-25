@@ -1,12 +1,15 @@
 ﻿using Business.Generics;
 using Business.Repository.DAO;
 using Common.Interfaces;
+using Common.Others;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Common.Others.MyEnuns;
 
 namespace Business.Repository
 {
@@ -20,13 +23,13 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, Media, IsAnswered) " +
-                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @Media, @IsAnswered)";
+                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, IsAnswered) " +
+                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @IsAnswered)";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
-                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", null); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
-                cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
+                //cmd.Parameters.AddWithValue("@Media", null); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
 
                 return cmd.ExecuteNonQuery();
             }
@@ -47,10 +50,10 @@ namespace Business.Repository
                     " WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
-                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
                 //cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
-                cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
+                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
                 cmd.ExecuteNonQuery();
@@ -158,15 +161,14 @@ namespace Business.Repository
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
-                        );
-
+                        IDenunciation model = new Denunciation()
+                        {
+                            Id = (int)reader["Id"],
+                            IdInformer = (int)reader["IdInformer"],
+                            Stage = (MyEnuns.DenunciationStage)reader["IsAnswered"],
+                            DataDenunciation = (DateTime)reader["DataDenunciation"],
+                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                        };
                         list.Add(model);
                     }
                 }
