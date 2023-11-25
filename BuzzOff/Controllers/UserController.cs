@@ -20,6 +20,25 @@ namespace BuzzOff.Controllers
             // Redireciona para o arquivo Index.cshtml na pasta Users
             return View(model);
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Cadastro()
+        {
+            return View();
+        }
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(UserModel model)
+        {
+            UserDAO.Insert(model);
+            return RedirectToAction("Index");
+        }
         public IActionResult Update(int id)
         {
             var user = UserDAO.GetOne(id);
@@ -33,6 +52,7 @@ namespace BuzzOff.Controllers
             };
             return View(model);
         }
+
         [HttpPost]
         public IActionResult Update(UserModel model)
         {
