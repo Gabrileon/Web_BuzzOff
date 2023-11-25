@@ -40,7 +40,6 @@ namespace Business.Generics
         /// <param name="id"></param>
         /// <param name="idInformer"></param>
         /// <param name="idAgent"></param>
-        /// <param name="idAddress"></param>
         /// <param name="dataDenunciation"></param>
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>

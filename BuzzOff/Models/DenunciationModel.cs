@@ -83,7 +83,6 @@ namespace BuzzOff.Models
         {
             this.Id = id;
             this.IdInformer = idInformer;
-            this.Address = address;
             this.DataDenunciation = dataDenunciation;            
             this.media = media;
         }

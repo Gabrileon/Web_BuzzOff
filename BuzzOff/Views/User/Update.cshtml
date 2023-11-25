@@ -4,25 +4,27 @@
     Layout = "~/Views/Shared/_LayoutCadastro.cshtml";
 }
 
-<div class="geral">
-    <div class="bloco-cadastro"></div>
-    <img class="bg-cadastro" src="/img/cadastro.svg">
-    <form class="form-cadastro" asp-controller="User" asp-action="Update" method="post">
-        <div class="cadastro-form">
-            <fieldset>
-                <h3 class="txtCadastro">ALTERE SEUS DADOS</h3>
-                <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" value="@Model.Name" required />
-                <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" value="00000000" readonly required />
-                <input type="email" id="email" class="form-control" asp-for="Email" placeholder="Email" value="@Model.Email" required />
-                <input type="text" id="CPF" class="form-control" asp-for="CPF" placeholder="CPF" value="@Model.CPF" required />
-                <input type="text" id="Id" class="form-control" asp-for="Id" value="@Model.Id" hidden required />
-                <br>
-                <div class="d-flex flex-row justify-content-between">
-                    <button class="btn btn-back" asp-controller="Home" asp-action="Index">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Salvar</button>
-                </div>
-            </fieldset>
-        </div>
+    <div class="geral">
+        <div class="bloco-cadastro"></div>
+        <img class="bg-cadastro" src="/img/cadastro.svg">
+        <form class="form-cadastro" asp-controller="User" asp-action="Update" method="post">
+            <div class="cadastro-form">
+                <fieldset>
+                    <h3 class="txtCadastro">ALTERE SEUS DADOS</h3>
+                    <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" value="@Model.Name" required />
+                    <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" value="00000000" readonly required />
+                    <input type="email" id="email" class="form-control" asp-for="Email" placeholder="Email" value="@Model.Email" required />
+                    <input type="text" id="CPF" class="form-control" asp-for="CPF" placeholder="CPF" maxlength="11" value="@Model.CPF" required />
+                    <input type="text" id="Id" class="form-control" asp-for="Id" value="@Model.Id" hidden required />
+                    <br>
+                    <div class="d-flex flex-row justify-content-between">
+                        <button class="btn btn-back" asp-controller="Home" asp-action="Index">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </fieldset>
+            </div>
 
-    </form>
-</div>
+        </form>
+    </div>
+
+
