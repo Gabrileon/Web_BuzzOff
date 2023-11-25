@@ -30,9 +30,11 @@
                         <li class="nav-item">
                             <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Privacy">Denuncie</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Campeonatos" asp-action="Index">Mapa de focos</a>
+                            <a class="btn btn-success" asp-area="" asp-controller="Denunciation" asp-action="Index">Teste</a>
                         </li>
+
                         @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">

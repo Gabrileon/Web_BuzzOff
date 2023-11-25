@@ -1,5 +1,6 @@
 ﻿using Business.Generics;
 using Common.Interfaces;
+using Common.Others;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,19 @@ namespace BuzzOff.Models
 {
     public class DenunciationModel : IDenunciation
     {
+        public DenunciationModel()
+        {
+        }
+
+        public DenunciationModel(int id, int idInformer, DateTime dataDenunciation, IAddress address, MyEnuns.DenunciationStage stage)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            DataDenunciation = dataDenunciation;            
+            Address = address;
+            Stage = stage;
+        }
+
         ///// <summary>
         ///// Insert
         ///// </summary>
@@ -62,6 +76,9 @@ namespace BuzzOff.Models
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
+
+
+
         public DenunciationModel(int id, int idInformer, AddressModel address, DateTime dataDenunciation, byte[] media, bool isAnswered, bool isFocus)
         {
             this.Id = id;
@@ -69,17 +86,13 @@ namespace BuzzOff.Models
             this.Address = address;
             this.DataDenunciation = dataDenunciation;            
             this.media = media;
-            this.IsAnswered = isAnswered;
-            this.IsFocus = isFocus;
         }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }        
-        public int IdAddress { get; set; }
         public DateTime DataDenunciation { get; set; }        
-        public byte[] media { get; set; }
-        public bool IsAnswered { get; set; }
+        public byte[]? media { get; set; }
         public IAddress Address { get; set; }
-        public bool IsFocus { get; set; }
+        public MyEnuns.DenunciationStage Stage { get; set; }
     }
 }

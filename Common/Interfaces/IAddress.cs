@@ -8,11 +8,11 @@ namespace Common.Interfaces
 {
     public interface IAddress
     {
-        public int id { get; set; }
-        public string neighborhood { get; set; }
-        public string street { get; set; }
-        public string number { get; set; }
-        public string reference { get; set; }
-        public string city { get; set; }
+        public int Id { get; set; }
+        public string Neighborhood { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public string Reference { get; set; }
+        public string City { get; set; }
     }
 }
