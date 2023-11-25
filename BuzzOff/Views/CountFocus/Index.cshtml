@@ -19,7 +19,6 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var focus in Model.CountFocus)
             {
                 <tr>
@@ -29,7 +28,8 @@
                     </td>
                 </tr>
             }
-            @foreach(var count in Model.TotalFocus){
+            @foreach(var count in Model.TotalFocus)
+            {
             <tr>
                 <td>@count</td>
             </tr>
