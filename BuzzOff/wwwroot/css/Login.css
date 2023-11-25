@@ -75,6 +75,27 @@ form-control:focus {
     height: 100vh;
 }
 
+.btn-success {
+    background-color: #84CC16;
+    width: 120px;
+    height: 45px;
+    font-weight: bolder;
+    margin: 20px;
+    font-size: 1.2rem;
+}
+
+.btn-back {
+    color: #84CC16;
+    background-color: #2F3C33;
+    border-color: #2F3C33;
+    width: 120px;
+    height: 45px;
+    font-weight: bolder;
+    margin: 20px;
+    font-size: 1.2rem;
+}
+
+
 .geral {
     display: flex;
     justify-content: space-between;
