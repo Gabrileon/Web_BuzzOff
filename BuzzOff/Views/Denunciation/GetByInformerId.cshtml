@@ -1,9 +1,32 @@
 ﻿@model DenunciationsModel
 @{
     ViewData["Title"] = "Minhas denúncias";
+    Layout = "~/Views/Shared/_LayoutDenunciation.cshtml";
 }
 
-@foreach(var denun in Model.Denunciations)
+
+@if (Model.Denunciations.Count < 1)
 {
-    <h3>@denun.Address.City</h3>
+    <div class="d-flex flex-column justify-content-center text-center">
+        <h3 class="denun-title">Parece que você ainda não realizou nenhuma denúncia...</h3>
+        <div class="denun-link">
+            <a asp-controller="Denunciation" asp-action="Add">Faça sua denúncia <span class="arrow">&#8594</span></a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="d-flex flex-row justify-content-between">
+        <div class="denunciation">
+            @foreach(var denunciation in Model.Denunciations)
+            {
+                <span>
+                    @denunciation.Address.GetAddressString();
+                </span>
+            }
+        </div>
+        <div class="side">
+            <img src="~/img/side-denunciation.svg" alt="side image" />
+        </div>
+    </div>
 }

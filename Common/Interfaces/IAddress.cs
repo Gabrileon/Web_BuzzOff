@@ -14,5 +14,7 @@ namespace Common.Interfaces
         public string Number { get; set; }
         public string Reference { get; set; }
         public string City { get; set; }
+
+        public string GetAddressString();
     }
 }

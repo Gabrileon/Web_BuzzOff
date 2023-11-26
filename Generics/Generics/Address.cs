@@ -57,5 +57,25 @@ namespace Business.Generics
         public string Number { get; set; }
         public string Reference { get; set; }
         public string City { get; set; }
+
+        public string GetAddressString()
+        {
+            var sb = new StringBuilder();
+            sb.Append(Street);
+            sb.Append(", ");
+            sb.Append(Number);
+            sb.Append(" - ");
+            sb.Append(Neighborhood);
+
+            if (Reference != null)
+            {
+                sb.AppendLine(Reference);
+            }
+
+            sb.AppendLine(City);
+            sb.Append("/SC");
+
+            return sb.ToString();
+        }
     }
 }

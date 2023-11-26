@@ -51,6 +51,10 @@ a {
     font-size: 26px;
     text-align: center;
 }
+.denun-title {
+    text-align: center;
+    color: #2F3C33;
+}
 
 .footer {
     background-color: #2F3C33;

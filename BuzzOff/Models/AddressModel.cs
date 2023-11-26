@@ -53,6 +53,27 @@ namespace BuzzOff.Models
             this.City = city;
         }
 
+        public string GetAddressString()
+        {
+            var sb = new StringBuilder();
+            sb.Append(Street);
+            sb.Append(", ");
+            sb.Append(Number);
+            sb.Append(" - ");
+            sb.Append(Neighborhood);
+
+            if(Reference != null)
+            {
+                sb.AppendLine(Reference);
+            }
+
+            sb.AppendLine(City);
+            sb.Append("/SC");
+
+            return sb.ToString();
+            
+        }
+
         public int Id { get; set; }
         public string Neighborhood { get; set; }
         public string Street { get; set; }
