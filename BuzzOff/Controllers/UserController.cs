@@ -55,5 +55,15 @@ namespace BuzzOff.Controllers
             UserDAO.UpdatePassword(cpf, name, newPassword);
             return RedirectToAction("Index", "Login");
         }
+        public IActionResult GiveAccessLevel()
+        {
+            var model = UserDAO.GetAllCommons();
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult GiveAccessLevel(UserModel model)
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
