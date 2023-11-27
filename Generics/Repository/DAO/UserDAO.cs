@@ -232,5 +232,22 @@ namespace Business.Repository.DAO
             }
             return list;
         }
+        public static void UpdateAccessLevel(int id, int accessLevel)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText =
+                    "UPDATE Users SET " +
+                    "ACCESSLEVEL = @ACCESSLEVEL " +
+                    "WHERE ID = @ID";
+
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@ACCESSLEVEL", accessLevel);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

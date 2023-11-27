@@ -1,0 +1,28 @@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Opções";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="geral">
+    <img class="bg-login" src="/img/imgCadastro.svg">
+    <form class="form-login" asp-controller="User" asp-action="Update" method="post">
+        <div class="login-form">
+            <fieldset>
+                <h3 class="txtLogin">ALTERE SEUS DADOS</h3>
+                <input type="text" id="nome" class="form-control" asp-for="Name" placeholder="Nome" value="@Model.Name" required />
+                <input type="email" id="email" class="form-control" asp-for="Email" placeholder="Email" value="@Model.Email" required />
+                <input type="text" id="CPF" class="form-control" asp-for="CPF" placeholder="CPF" maxlength="11" value="@Model.CPF" required />
+                <input type="text" id="Id" class="form-control" asp-for="Id" value="@Model.Id" hidden required />
+                <br>
+                <div class="d-flex flex-row justify-content-between">
+                    <button class="btn btn-back" asp-controller="Home" asp-action="Index">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </fieldset>
+        </div>
+
+    </form>
+</div>
+
+

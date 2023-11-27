@@ -11,6 +11,7 @@ namespace BuzzOff.Models
     {
         public AddressModel()
         {
+
         }
 
         /// <summary>
