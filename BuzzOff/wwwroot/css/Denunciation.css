@@ -44,3 +44,31 @@ form{
     all: unset !important;
 }
 
+.form-control {
+    border-radius: 10px;
+    border: solid lightgray;
+}
+
+label {
+    font-weight: bold;
+    color: #2F3C33;
+}
+
+.side-img{
+    height: 100vh;
+}
+
+.header{
+    margin-bottom: 5%;
+}
+
+.btn-success {
+    background-color: #84CC16;
+    color: #2F3C33;
+    width: 120px;
+    height: 45px;
+    font-weight: bolder;
+    margin: 20px;
+    font-size: 1.2rem;
+}
+

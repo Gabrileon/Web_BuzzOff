@@ -33,6 +33,6 @@ function previewFoto() {
     if (file) {
         reader.readAsDataURL(file);
     } else {
-        preview.src = "/img/userIcon.svg"; // Imagem padrão se nenhum arquivo for selecionado
+        preview.src = "/img/semFoto.svg"; // Imagem padrão se nenhum arquivo for selecionado
     }
 }
