@@ -77,7 +77,7 @@ namespace Business.Repository
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
+                            reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
                             (bool)reader["IsAnswered"]
                         );
                     }

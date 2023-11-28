@@ -1,5 +1,4 @@
-﻿
-.btn-sucess {
+﻿.btn-sucess {
     background-color: #84CC16;
     width: 120px;
     height: 45px;
@@ -11,8 +10,65 @@
     background-color: #2F3C33;
 }
 
-img:hover {
-    opacity: 0.5;
+.left-side{
+    margin: 1.5em;
+    width: 88%;
 }
 
+.right-side{
+    width: 12%;
+}
+
+.btn-back {
+    color: #84CC16;
+    background-color: #2F3C33;
+    border-color: #2F3C33;
+    width: 120px;
+    height: 45px;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.txtCadastro {
+    display: flex;
+    color: #84CC16;
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.w-33{
+    width: 33.3%;
+}
+
+form{
+    all: unset !important;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: solid lightgray;
+}
+
+label {
+    font-weight: bold;
+    color: #2F3C33;
+}
+
+.side-img{
+    height: 100vh;
+}
+
+.header{
+    margin-bottom: 5%;
+}
+
+.btn-success {
+    background-color: #84CC16;
+    color: #2F3C33;
+    width: 120px;
+    height: 45px;
+    font-weight: bolder;
+    margin: 20px;
+    font-size: 1.2rem;
+}
 

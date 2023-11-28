@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common.Others;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +17,6 @@ namespace Common.Interfaces
         public byte[] Media { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
+        public string Comment { get; set; }
     }
 }

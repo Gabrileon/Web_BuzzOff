@@ -1,4 +1,5 @@
 ﻿using Common.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,5 +69,7 @@ namespace Business.Generics
         public byte[] Media { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
+        public FocusType FocusType { get; set; }
+        public string Comment { get; set; }
     }
 } 
