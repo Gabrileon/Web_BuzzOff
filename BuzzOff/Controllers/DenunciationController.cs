@@ -64,6 +64,7 @@ namespace BuzzOff.Controllers
             denunciation.DataDenunciation = DateTime.Now;
 
             DenunciationDAO.Insert(denunciation);
+
             return RedirectToAction("Index", "Home");
         }
 
