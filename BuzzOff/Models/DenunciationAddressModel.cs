@@ -9,7 +9,7 @@ namespace BuzzOff.Models
         public int DenunciationId { get; set; }
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
-        public byte[]? media { get; set; }
+        public byte[]? Media { get; set; }
         public IAddress Address { get; set; }
         public MyEnuns.DenunciationStage Stage { get; set; }
 
@@ -30,6 +30,7 @@ namespace BuzzOff.Models
                 IdInformer = IdInformer,
                 DataDenunciation = DataDenunciation,
                 Address = Address,
+                Media = Media,
                 Stage = Stage
             };
         }

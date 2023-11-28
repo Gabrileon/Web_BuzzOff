@@ -50,7 +50,7 @@ namespace Business.Generics
             IdInformer = idInformer;
             Address = address;
             DataDenunciation = dataDenunciation;
-            this.media = media;
+            this.Media = media;
         }
 
         public Denunciation(int id, int idInformer, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
@@ -65,7 +65,7 @@ namespace Business.Generics
         public int Id { get; set; }
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
-        public byte[]? media { get; set; }
+        public byte[]? Media { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
     }

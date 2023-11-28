@@ -28,7 +28,7 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@Street", model.Street);
                 cmd.Parameters.AddWithValue("@Number", model.Number);
                 cmd.Parameters.AddWithValue("@Reference", model.Reference);
-                cmd.Parameters.AddWithValue("@city", model.City);
+                cmd.Parameters.AddWithValue("@City", model.City);
 
                 using (var reader = cmd.ExecuteReader())
                 {

@@ -24,18 +24,17 @@
 <button type="submit" class="btn btn-primary">Voltar</button>
 
 
-<form class="container" method="POST" asp-controller="Denunciation" asp-action="Add">
+<form class="container" method="POST" asp-controller="Denunciation" asp-action="Add" enctype="multipart/form-data">
 
     <h3>Endereço</h3>
-    <input type="text" asp-for="Neighborhood" placeholder="neighborhood" />
-    <input type="text" asp-for="Street" placeholder="street" />
-    <input type="text" asp-for="Number" placeholder="number" />
-    <input type="text" asp-for="Reference" placeholder="reference" />
-    <input type="text" asp-for="City" placeholder="city" />
+    <input type="text" asp-for="Neighborhood" placeholder="neighborhood" /><br /><br />
+    <input type="text" asp-for="Street" placeholder="street" /><br /><br />
+    <input type="text" asp-for="Number" placeholder="number" /><br /><br />
+    <input type="text" asp-for="Reference" placeholder="reference" /><br /><br />
+    <input type="text" asp-for="City" placeholder="city" /><br /><br />
+    <input type="file" name="image" accept="image/*" required />
 
     <h3>Denúncia</h3>
-    <input type="date" asp-for="DataDenunciation" />
-    <input type="number" asp-for="Stage" />
 
     <button type="submit" class="btn btn-sucess">Enviar</button>
 </form>

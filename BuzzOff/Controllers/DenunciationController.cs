@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BuzzOff.Controllers
 {
@@ -33,7 +34,7 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(DenunciationAddressModel model)
+        public IActionResult Add(DenunciationAddressModel model, IFormFile image)
         {
             var address = model.GetAddressModel();
             address.Id = AddressDAO.Insert(address);
@@ -42,8 +43,28 @@ namespace BuzzOff.Controllers
             denunciation.Address = address;
             denunciation.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
 
+            byte[] convertedMedia;
+            string nameImage;
+
+
+            if (image != null && image.Length > 0)
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    image.CopyTo(memoryStream);
+                    convertedMedia = memoryStream.ToArray();
+                    nameImage = image.FileName;
+
+                    denunciation.Media = convertedMedia;
+                }
+
+            }
+
+            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.Pendent;
+            denunciation.DataDenunciation = DateTime.Now;
+
             DenunciationDAO.Insert(denunciation);
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
