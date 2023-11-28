@@ -36,10 +36,10 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Add(DenunciationAddressModel model, IFormFile image)
         {
-            var address = model.GetAddressModel();
+            var address = model.Address;
             address.Id = AddressDAO.Insert(address);
 
-            var denunciation = model.GetDenunciantionModel();
+            var denunciation = model.Denunciation;
             denunciation.Address = address;
             denunciation.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
 

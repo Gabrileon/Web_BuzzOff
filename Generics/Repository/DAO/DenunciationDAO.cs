@@ -29,6 +29,11 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@Media", model.Media);
                 cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
 
+                if(model.Media != null)
+                {
+                    cmd.Parameters.AddWithValue("@Media", model.Media);
+                }
+
                 return cmd.ExecuteNonQuery();
             }
         }
@@ -77,7 +82,7 @@ namespace Business.Repository
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
+                            reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
                             (bool)reader["IsAnswered"]
                         );
                     }
