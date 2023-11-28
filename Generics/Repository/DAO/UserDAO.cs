@@ -242,9 +242,9 @@ namespace Business.Repository.DAO
                     "UPDATE Users SET " +
                     "ACCESSLEVEL = @ACCESSLEVEL " +
                     "WHERE ID = @ID";
-
+                var aaa = Convert.ToInt32 (accessLevel);
                 cmd.Parameters.AddWithValue("@ID", id);
-                cmd.Parameters.AddWithValue("@ACCESSLEVEL", accessLevel);
+                cmd.Parameters.AddWithValue("@ACCESSLEVEL", aaa);
 
                 cmd.ExecuteNonQuery();
             }
