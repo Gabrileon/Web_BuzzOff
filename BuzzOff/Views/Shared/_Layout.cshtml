@@ -39,7 +39,7 @@
                             @if(LoggedUser.HasClaim("AccessLevel", "Administrator"))
                             {
                                 <li class="nav-item">
-                                    <a class="btn btn-success" asp-controller="" asp-action="">Distribuir permissões</a>
+                                    <a class="btn btn-success" asp-controller="User" asp-action="CommonUsers">Distribuir permissões</a>
                                 </li>
                             }
 

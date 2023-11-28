@@ -218,7 +218,7 @@ namespace Business.Repository.DAO
                 cmd.CommandText = "SELECT Id, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE ACCESSLEVEL = 3";
                 using (var reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         IUser model = new User(
                             reader.GetString(1),
@@ -232,7 +232,7 @@ namespace Business.Repository.DAO
             }
             return list;
         }
-        public static void UpdateAccessLevel(int id, int accessLevel)
+        public static void UpdateAccessLevel(int id, MyEnuns.Access accessLevel)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
