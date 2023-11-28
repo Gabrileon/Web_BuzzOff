@@ -35,15 +35,15 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Add(DenunciationAddressModel model)
         {
-            var address = model.GetAddressModel();
+            var address = model.Address;
             address.Id = AddressDAO.Insert(address);
 
-            var denunciation = model.GetDenunciantionModel();
+            var denunciation = model.Denunciation;
             denunciation.Address = address;
             denunciation.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
 
             DenunciationDAO.Insert(denunciation);
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

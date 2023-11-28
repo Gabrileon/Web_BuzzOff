@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Others;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,9 @@ namespace Common.Interfaces
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
         public byte[] media { get; set; }
-        public DenunciationStage Stage { get; set; }
+        public MyEnuns.DenunciationStage Stage { get; set; }
+        public MyEnuns.FocusType FocusType { get; set; }
         public IAddress Address { get; set; }
+        public string Comment { get; set; }
     }
 }
