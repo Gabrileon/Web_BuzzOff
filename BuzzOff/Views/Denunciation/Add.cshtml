@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="form">
-            <form method="POST" asp-controller="Denunciation" asp-action="Add">
+            <form asp-controller="Denunciation" asp-action="Add" method="POST" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row">
                         <div class="col-9">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="col-3">
-                            <input asp-for="Denunciation.media" type="file" id="uploadFoto" style="display: none;" accept="image/*" onchange="previewFoto()" />
+                            <input asp-for="Denunciation.Media" type="file" id="uploadFoto" style="display: none;" accept="image/*" onchange="previewFoto()" />
                             <div class="form-group">
                                 <label for="uploadFoto" style="cursor: pointer;">
                                     <div id="fotoPreview" class="border bg-light" style="width: 15rem; height: 15rem;">
@@ -100,126 +100,3 @@
         <img src="~/img/sidebar.svg" alt="side bar" class="side-img" />
     </div>
 </div>
-
-
-
-@*<div class="row">
-        <div class="d-flex flex-column">
-            <div class="d-flex flex-row">
-                <div class="d-flex flex-column w-33 mx-3">
-                    <label for="street">Logradouro</label>
-                    <input type="text" id="street" asp-for="Address.Street" />
-                </div>
-                <div class="d-flex flex-column w-33 mx-3">
-                    <label for="number">Número</label>
-                    <input type="text" id="number" asp-for="Address.Number" />
-                </div>
-                <div class="d-flex flex-column w-33 mx-3">
-                    <label for="neighborhood">Bairro</label>
-                    <input type="text" id="neighborhood" asp-for="Address.Neighborhood" />
-                </div>
-            </div>
-            <div class="d-flex flex-row">
-                <div class="d-flex flex-column w-50 mx-3">
-                    <label for="reference">Referência (opcional)</label>
-                    <input type="text" id="reference" asp-for="Address.Reference" />
-                </div>
-                <div class="d-flex flex-column w-50 mx-3">
-                    <label for="city">Cidade</label>
-                    <input type="text" id="city" asp-for="Address.City" />
-                </div>
-            </div>
-            <div>
-                <div class="d-flex flex-column w-100 mx-3">
-                    <label for="comment">Comentário (opcional)</label>
-                    <input type="text" asp-for="Denunciation.Comment" id="comment" class="h-25" />
-                </div>
-            </div>
-            <div>
-                <div class="d-flex flex-column mx-3 w-33">
-                    <label for="focusType">Tipo da denúncia</label>
-                    <select asp-for="Denunciation.FocusType" id="focusType">
-                        <option value="1">Ovos</option>
-                        <option value="2">Larvas</option>
-                        <option value="3">Adultos</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="denunciation w-50">
-        <h3>Denúncia</h3>
-        <input type="date" asp-for="Denunciation.DataDenunciation" />
-        <input type="number" asp-for="Denunciation.Stage" />
-        <input asp-for="Denunciation.media" type="file" id="uploadFoto" style="display: none;" accept="image/*" onchange="previewFoto()" />
-        <div class="form-group">
-            <label for="uploadFoto" style="cursor: pointer;">
-                <div id="fotoPreview" class="border bg-light" style="width: 12%; height: 12%;">
-                    <img id="fotoDisplay" style="width: 12%; height: 12%;" src="/img/userIcon.svg" alt="Foto do usuário" class="img-fluid">
-                </div>
-            </label>
-        </div>
-    </div>*@
-
-
-
-
-
-
-
-
-
-@*   <div class="row">
-        <div class="col-sm-12 col-md-8">
-            <div class="row g-3 align-items-center">
-
-                <div class="col-4 form-group">
-                    <label for="number" class="form-label">Número</label>
-                    <input type="number" class="form-control" id="number" asp-for="Address.number">
-                </div>
-
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-6 form-group">
-                    <label for="address" class="form-label">Endereço</label>
-                    <input type="text" class="form-control" id="address" asp-for="Address.street">
-                </div>
-                <div class="col-6 form-group">
-                    <label for="city" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="city" asp-for="Address.city">
-                </div>
-
-                <div class="col-6 form-group">
-                    <label for="bairro" class="form-label">Bairro</label>
-                    <input type="text" class="form-control" id="bairro" asp-for="Address.neighborhood">
-                </div>
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-12 form-group">
-                    <label for="DENOUNCEMENT_ID" class="form-label">Tipo de denúncia</label>
-                    <select class="form-control" id="DENOUNCEMENT_ID">
-                        <option selected>Selecione uma opção</option>
-                        <option value="1" >Ovos</option>
-                        <option value="2">Larvas</option>
-                        <option value="3">Pupas</option>
-                        <option value="4">Adultas</option>
-
-                    </select>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-12 form-group">
-                    <label for="comment" class="form-label">Comentário</label>
-                    <textarea class="form-control" id="comment" rows="4" cols="8" asp-for="comment"></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <label for="media" class="form-label">Informe a imagem:</label>*@
-
-
-
-
-

@@ -23,13 +23,17 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, IsAnswered) " +
-                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @IsAnswered)";
+                cmd.CommandText = $"INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, IsAnswered {(model.Media != null ? ", Media" : string.Empty)}) " +
+                                  $"VALUES (@IdInformer, @IdAddress, @DataDenunciation, @IsAnswered {(model.Media != null ? ", @Media" : string.Empty)})";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
-                cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                //cmd.Parameters.AddWithValue("@Media", null); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
+                cmd.Parameters.AddWithValue("@DataDenunciation", DateTime.Now);
                 cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
+
+                if(model.Media != null)
+                {
+                    cmd.Parameters.AddWithValue("@Media", model.Media);
+                }
 
                 return cmd.ExecuteNonQuery();
             }
@@ -79,7 +83,7 @@ namespace Business.Repository
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
+                            reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
                             (bool)reader["IsAnswered"]
                         );
                     }

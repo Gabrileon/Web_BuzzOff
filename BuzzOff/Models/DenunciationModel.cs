@@ -84,13 +84,13 @@ namespace BuzzOff.Models
             this.Id = id;
             this.IdInformer = idInformer;
             this.DataDenunciation = dataDenunciation;            
-            this.media = media;
+            this.Media = media;
         }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }        
         public DateTime DataDenunciation { get; set; }        
-        public byte[]? media { get; set; }
+        public byte[] Media { get; set; }
         public IAddress Address { get; set; }
         public MyEnuns.DenunciationStage Stage { get; set; }
         public MyEnuns.FocusType FocusType { get; set; }
