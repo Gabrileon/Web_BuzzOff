@@ -1,23 +1,29 @@
-﻿@model dynamic
-@{
-    ViewBag.Title = "Mapa de Focos";
+﻿@{
+    ViewData["Title"] = "Mapa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
-
-<div id="map" style="height: 400px;">
-
+<html>
+<head>
+    <title>Focos no mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <div id="map" style="height: 50vh; width: 50%;"></div>
+
     <script>
-        var cityCoordinates = [-26.8727, -49.1052]; // Coordenadas da cidade (exemplo: Blumenau)
-        var map = L.map('map').setView(cityCoordinates, 11); // Ajuste o nível de zoom conforme necessário
+        var map = L.map('map').setView([-26.8727, -49.1052], 11);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Adicionando um marcador no centro do mapa
-        L.marker(cityCoordinates).addTo(map)
-            .bindPopup('Foco aqui!'); // Texto da popup, você pode personalizar isso conforme necessário
+        L.marker([-26.8727, -49.1052]).addTo(map)
+            .bindPopup('Marcador em -26.8727, -49.1052.')
+            .openPopup();
     </script>
-</div>
+
+</body>
+</html>
