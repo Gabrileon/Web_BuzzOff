@@ -1,11 +1,4 @@
-﻿using Common.Others;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Common.Others.MyEnuns;
+﻿using static Common.Others.MyEnuns;
 
 namespace Common.Interfaces
 {
