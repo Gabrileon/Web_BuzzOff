@@ -9,20 +9,20 @@
     <form class="form-login" asp-controller="User" asp-action="UpdateAccessLevel" method="post">
         <div class="login-form">
             <fieldset>
-                <h3 class="txtLogin">PERMISSÃO</h3>
+                <h3 class="txtLogin">ALTERAR PERMISSÃO</h3>
                 <input type="text" id="nome" class="form-control" asp-for="Name" value="@Model.Name" readonly />
                 <input type="email" id="email" class="form-control" asp-for="Email" value="@Model.Email" readonly />
                 <input type="text" id="CPF" class="form-control" asp-for="CPF" value="@Model.CPF" readonly />
                 <input type="text" id="Id" class="form-control" asp-for="Id" value="@Model.Id" hidden required />
-                    <select id="AccessLevel" class="form-select" asp-for="AccessLevel" value="@Model.AccessLevel.ToString()" required >
-                    @foreach (var access in ViewBag.Access)
-                    {
-                        <option value="@access">@access.ToString()</option>
-                    }
-                    </select>
-                <br>      
-                <div>
-                    <button class="btn btn-back" asp-controller="User" asp-action="CommonUsers">Cancelar</button>      
+                <select id="AccessLevel" class="form-select" asp-for="AccessLevel" value="@Model.AccessLevel.ToString()" required>
+                @foreach (var access in ViewBag.Access)
+                {
+                    <option value="@access">@access.ToString()</option>
+                }
+                </select>
+
+                <div class="d-flex flex-row">
+                    <button class="btn btn-back" asp-controller="User" asp-action="CommonUsers">Cancelar</button>
                     <button type="submit" class="btn btn-success">Salvar</button>
                 </div>
             </fieldset>
@@ -31,5 +31,3 @@
 
     </form>
 </div>
-
-
