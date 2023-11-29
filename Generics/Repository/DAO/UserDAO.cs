@@ -240,7 +240,7 @@ namespace Business.Repository.DAO
                 var cmd = conn.CreateCommand();
                 cmd.CommandText =
                     "UPDATE Users SET " +
-                    "ACCESSLEVEL = @ACCESSLEVEL " +
+                    "AccessLevel = @ACCESSLEVEL " +
                     "WHERE ID = @ID";
                 var aaa = Convert.ToInt32 (accessLevel);
                 cmd.Parameters.AddWithValue("@ID", id);
