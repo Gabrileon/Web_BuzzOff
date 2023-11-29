@@ -1,0 +1,53 @@
+﻿@model CountFocusesModel
+@{
+    ViewData["Title"] = "Mapa de focos";
+    Layout = "~/Views/Shared/_LayoutMap.cshtml";
+}
+
+<div class="page w-30">
+    <img src="~/img/Campanha.svg" alt="Campanha" img-alig="left" class="d-flex, w-30 ">    
+    <div class="d-flex justify-content-start m-2 ">Fonte: Ministério da Saúde <div class="divisao"></div> <div>Atualizado 23/11/2023</div></div>
+    
+</div>
+
+<div class="informations w-50">   
+    <table class="table" id="table-map">
+        <thead>
+            <tr>
+                <th>Bairros</th>
+                <th>Focos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>               
+               
+                <td>50
+                    <progress class="w-50 float-end" value="56" max="100"></progress>
+                </td>
+                                
+            </tr>
+            <tr>
+                <td>Velha</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Progresso</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Itoupava Central</td>
+                <td>50</td>
+            </tr>
+        </tbody>
+    </table>    
+</div>
+@*<div class="circles">
+    <ul>
+
+        <li><div class="circle">Teste</div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    </ul>
+</div>*@

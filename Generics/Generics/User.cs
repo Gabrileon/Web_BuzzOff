@@ -48,6 +48,11 @@ namespace Business.Generics
             AccessLevel = accessLevel;
         }
 
+        //public static string ValidateAccessLevel()
+        //{
+            
+        //}
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

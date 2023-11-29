@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Generics\Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Denunciation\" />
+  </ItemGroup>
+
 </Project>
