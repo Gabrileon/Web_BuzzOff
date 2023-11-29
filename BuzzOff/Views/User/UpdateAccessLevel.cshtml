@@ -14,17 +14,19 @@
                 <input type="email" id="email" class="form-control" asp-for="Email" value="@Model.Email" readonly />
                 <input type="text" id="CPF" class="form-control" asp-for="CPF" value="@Model.CPF" readonly />
                 <input type="text" id="Id" class="form-control" asp-for="Id" value="@Model.Id" hidden required />
-                    <select id="AccessLevel" class="form-control" asp-for="AccessLevel" value="@Model.AccessLevel.ToString()" required />
+                    <select id="AccessLevel" class="form-select" asp-for="AccessLevel" value="@Model.AccessLevel.ToString()" required >
                     @foreach (var access in ViewBag.Access)
                     {
-                        <option value="@access.GetType()">@access.ToString()</option>
+                        <option value="@access">@access.ToString()</option>
                     }
-                <br>
-                <div class="d-flex flex-row">
-                    <button class="btn btn-back" asp-controller="User" asp-action="CommonUsers">Cancelar</button>
+                    </select>
+                <br>      
+                <div>
+                    <button class="btn btn-back" asp-controller="User" asp-action="CommonUsers">Cancelar</button>      
                     <button type="submit" class="btn btn-success">Salvar</button>
                 </div>
             </fieldset>
+            
         </div>
 
     </form>
