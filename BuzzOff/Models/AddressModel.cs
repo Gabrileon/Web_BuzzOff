@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 namespace BuzzOff.Models
 {
     public class AddressModel: IAddress
-    {        
+    {
+        public AddressModel()
+        {
+        }
+
         /// <summary>
         /// Insert
         /// </summary>
@@ -18,14 +22,15 @@ namespace BuzzOff.Models
         /// <param name="reference"></param>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
-        public AddressModel(string neighborhood, string street, string number, string reference, string latitude, string longitude)
+        /// 
+
+        public AddressModel(string neighborhood, string street, string number, string reference, string city)
         {            
-            this.neighborhood = neighborhood;
-            this.street = street;
-            this.number = number;
-            this.reference = reference;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.Neighborhood = neighborhood;
+            this.Street = street;
+            this.Number = number;
+            this.Reference = reference;
+            this.City = city;
         }
 
         /// <summary>
@@ -38,23 +43,21 @@ namespace BuzzOff.Models
         /// <param name="reference"></param>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
-        public AddressModel(int id, string neighborhood, string street, string number, string reference, string latitude, string longitude)
+        public AddressModel(int id, string neighborhood, string street, string number, string reference, string city)
         {
-            this.id = id;
-            this.neighborhood = neighborhood;
-            this.street = street;
-            this.number = number;
-            this.reference = reference;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.Id = id;
+            this.Neighborhood = neighborhood;
+            this.Street = street;
+            this.Number = number;
+            this.Reference = reference;
+            this.City = city;
         }
 
-        public int id { get; set; }
-        public string neighborhood { get; set; }
-        public string street { get; set; }
-        public string number { get; set; }
-        public string reference { get; set; }
-        public string latitude { get; set; }
-        public string longitude { get; set; }
+        public int Id { get; set; }
+        public string Neighborhood { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public string Reference { get; set; }
+        public string City { get; set; }
     }
 }

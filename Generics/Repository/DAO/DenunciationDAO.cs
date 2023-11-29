@@ -1,20 +1,21 @@
 ﻿using Business.Generics;
 using Business.Repository.DAO;
 using Common.Interfaces;
+using Common.Others;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Common.Others.MyEnuns;
 
 namespace Business.Repository
 {
     public class DenunciationDAO
     {
-        byte[] midia = new byte[10];
-
-        public static void Insert(IDenunciation model)
+        public static int Insert(IDenunciation model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -23,12 +24,12 @@ namespace Business.Repository
                 cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, Media, IsAnswered) " +
                                   "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @Media, @IsAnswered)";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
-                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                //cmd.Parameters.AddWithValue("@Media", model.midia); //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
-                cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
+                cmd.Parameters.AddWithValue("@Media", model.Media);
+                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
 
-                cmd.ExecuteNonQuery();
+                return cmd.ExecuteNonQuery();
             }
         }
 
@@ -47,10 +48,10 @@ namespace Business.Repository
                     " WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
-                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                //cmd.Parameters.AddWithValue("@Media", model.midia);  //Alterado de byte[] para null em virtude erro envolventdo o Banco. Falar com o professor para usar o Blob.
-                cmd.Parameters.AddWithValue("@IsAnswered", model.IsAnswered);
+                cmd.Parameters.AddWithValue("@Media", model.Media);
+                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
                 cmd.ExecuteNonQuery();
@@ -76,7 +77,7 @@ namespace Business.Repository
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
+                            reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
                             (bool)reader["IsAnswered"]
                         );
                     }
@@ -122,9 +123,9 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @Bool";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
                 cmd.Parameters.AddWithValue("@Id", id);
-                cmd.Parameters.AddWithValue("@Bool", b);
+                cmd.Parameters.AddWithValue("@B", b);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -158,15 +159,14 @@ namespace Business.Repository
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
-                        );
-
+                        IDenunciation model = new Denunciation()
+                        {
+                            Id = (int)reader["Id"],
+                            IdInformer = (int)reader["IdInformer"],
+                            Stage = (MyEnuns.DenunciationStage)reader["IsAnswered"],
+                            DataDenunciation = (DateTime)reader["DataDenunciation"],
+                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                        };
                         list.Add(model);
                     }
                 }
@@ -245,7 +245,7 @@ namespace Business.Repository
         //        conn.Open();
         //        SqlCommand cmd = conn.CreateCommand();
         //        cmd.CommandText = "DELETE FROM Denunciations WHERE IDInformer = @IDInformer";
-        //        cmd.Parameters.AddWithValue("@IDInformer", );
+        //        cmd.Parameters.AddWithValue("@IDInformer", LoggedUser.loggedUser.Id);
 
         //        cmd.ExecuteNonQuery();
         //    }

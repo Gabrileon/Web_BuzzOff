@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authentication
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var LoggedUser = HttpContextAccessor.HttpContext.User;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +14,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BuzzOff.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
 <body>
     <header>
@@ -21,28 +29,76 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end d-flex">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="btn btn-success" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Denuncie</a>
+                            <a class="btn btn-success" asp-controller="" asp-action="">Mapa de focos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Campeonatos" asp-action="Index">Mapa de focos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-success text-dark" asp-area="" asp-controller="Map" asp-action="Index">Visualizar Mapa</a>
-                        </li>
+                       
+                        @if (LoggedUser.Identity.IsAuthenticated)
+                        {
+                            @if(LoggedUser.HasClaim("AccessLevel", "Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="" asp-action="">Distribuir permissões</a>
+                                </li>
+                            }
+
+                            else if (LoggedUser.HasClaim("AccessLevel", "Agent"))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="Add">Denunúncias</a>
+                                </li>
+                            }
+
+                            else if (LoggedUser.HasClaim("AccessLevel", "Common"))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="Add">Denunciar</a>
+                                </li>
+                            }
+
+                            <li class="nav-item dropdown">
+                                <a style="font-size: 1rem; color: #2F3C33;" class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                    @LoggedUser.Identity.Name
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li>
+                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="Update"><i class="fa-solid fa-gear"></i> Opções</a>
+                                    </li>
+                                    <li>
+                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="UpdatePassword"><i class="fa-solid fa-key"></i> Alterar senha</a>
+                                    </li>
+                                    <li style="font-size: 1rem;">
+                                        <form asp-controller="Login" asp-action="Logout" method="post" id="logoutForm">
+                                            <a style="font-size: 1rem;color: #84CC16; cursor: pointer;" class="dropdown-item" onclick="document.getElementById('logoutForm').submit();"><i class="fa-solid fa-door-open"></i> Logout</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-success" asp-controller="Denunciation" asp-action="Add">Denununciar</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-success" asp-controller="Map" asp-action="">Map</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-
-    <main role="main" class="pb-3">
+    <main>
         @RenderBody()
     </main>
 

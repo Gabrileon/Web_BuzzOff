@@ -22,7 +22,7 @@ namespace Business.Repository.DAO
                                   "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated)";
 
                 cmd.Parameters.AddWithValue("@IdVisit", model.Visit.Id);
-                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
                 cmd.Parameters.AddWithValue("@IsEradicated", 0);
 
@@ -44,7 +44,7 @@ namespace Business.Repository.DAO
                     "WHERE Id = @Id";
 
 
-                cmd.Parameters.AddWithValue("@IdAddress", model.Address.id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@IdVisit", model.Visit.Id);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
                 cmd.Parameters.AddWithValue("@IsEradicated", (bool)model.IsEradicated);
@@ -118,8 +118,7 @@ namespace Business.Repository.DAO
                                 (string)reader["Street"],
                                 (string)reader["Number"],
                                 (string)reader["Reference"],
-                                (string)reader["Latitude"],
-                                (string)reader["Longitude"]
+                                (string)reader["City"]
                             );
 
                             focus.Visit = new Visit(

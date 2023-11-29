@@ -15,11 +15,11 @@ namespace Business.Generics
         }
         public CountFocus(int count, string neighborhood)
         {
-            Count = count;
+            Counts = count;
             Neighborhood = neighborhood;
         }
 
-        public int Count { get; set; }
+        public int Counts { get; set; }
         public string Neighborhood { get; set; }
     }
 

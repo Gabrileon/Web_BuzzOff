@@ -8,7 +8,7 @@ namespace Common.Interfaces
 {
     public interface ICountFocus
     {
-        public int Count { get; set;}
+        public int Counts { get; set;}
         public string Neighborhood { get; set;}
     }
 

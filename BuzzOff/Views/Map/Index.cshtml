@@ -14,15 +14,67 @@
     <div id="map" style="height: 50vh; width: 50%;"></div>
 
     <script>
-        var map = L.map('map').setView([-26.8727, -49.1052], 11);
+        // Define os limites para Blumenau
+        var bounds = L.latLngBounds([-26.918333, -49.066111], [-26.919444, -49.066111]);
+
+        var map = L.map('map', {
+            center: [-26.8982, -49.0759], // Centraliza o mapa na coordenada desejada
+            zoom: 13,
+            maxBounds: bounds,  // Limita a navegação aos limites definidos
+            maxBoundsViscosity: 0.8  // Torna a aplicação dos limites "elástica"
+        });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        L.marker([-26.8727, -49.1052]).addTo(map)
-            .bindPopup('Marcador em -26.8727, -49.1052.')
+        L.marker([-26.8982, -49.0759]).addTo(map)
+            .bindPopup('Marcador em -26.8982, -49.0759.')
             .openPopup();
+
+
+        // Seu código anterior...
+
+        // Adiciona o GeoJSON com informações sobre os bairros
+        var neighborhoodsGeoJSON = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Bairro1",
+                        "focusCount": 5 // Substitua pelo número real de focos para este bairro
+                    },
+                    "geometry": {
+                        "type": "Polygon",
+                        // As coordenadas do polígono do bairro vão aqui
+                    }
+                },
+                // Adicione mais features para outros bairros
+            ]
+        };
+
+        // Função para definir o estilo do GeoJSON
+        function style(feature) {
+            var focusCount = feature.properties.focusCount;
+
+            // Escolha de cores com base na quantidade de focos
+            if (focusCount < 5) {
+                return { fillColor: 'green', weight: 1, opacity: 1, color: 'white', fillOpacity: 0.7 };
+            } else if (focusCount < 10) {
+                return { fillColor: 'yellow', weight: 1, opacity: 1, color: 'white', fillOpacity: 0.7 };
+            } else {
+                return { fillColor: 'red', weight: 1, opacity: 1, color: 'white', fillOpacity: 0.7 };
+            }
+        }
+
+        // Adiciona a camada GeoJSON ao mapa com o estilo definido
+        L.geoJSON(neighborhoodsGeoJSON, {
+            style: style
+        }).addTo(map);
+
+               // Seu código posterior...
+
     </script>
 
 </body>

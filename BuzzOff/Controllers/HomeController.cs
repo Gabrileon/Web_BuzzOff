@@ -1,6 +1,9 @@
 ﻿using BuzzOff.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Diagnostics;
+using System.Security.Claims;
+using System.Security.Permissions;
 
 namespace BuzzOff.Controllers
 {
@@ -18,8 +21,9 @@ namespace BuzzOff.Controllers
                 "Use repelente",
                 "Não deixe água parada"
             };
-
+            
             var message = messages[new Random().Next(messages.Count)];
+            
 
             ViewBag.Message = message;
             return View();

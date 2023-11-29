@@ -1,1 +1,102 @@
-﻿@model DenunciationModel
+﻿@model DenunciationAddressModel
+@{
+    ViewData["Title"] = "Cadastro denuncias";
+    Layout = "~/Views/Shared/_LayoutDenunciation.cshtml";
+}
+
+<div class="d-flex flex-row">
+    <div class="left-side">
+        <div class="header container">
+            <div class="row">
+                <div class="col-4">
+                    <a class="btn btn-back" asp-controller="Home" asp-action="Index">Voltar</a>
+                </div>
+                <div class="col-8">
+                    <span class="txtCadastro">Faça sua denúncia</span>
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <form asp-controller="Denunciation" asp-action="Add" method="POST" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3">
+                                            <label for="street">Logradouro</label>
+                                            <input type="text" class="form-control" id="street" asp-for="Address.Street" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3">
+                                            <label for="number">Número</label>
+                                            <input type="text" class="form-control" id="number" asp-for="Address.Number" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3">
+                                            <label for="neighborhood">Bairro</label>
+                                            <input type="text" class="form-control" id="neighborhood" asp-for="Address.Neighborhood" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3">
+                                            <label for="reference">Referência (opcional)</label>
+                                            <input type="text" class="form-control" id="reference" asp-for="Address.Reference" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3">
+                                            <label for="city">Cidade</label>
+                                            <input type="text" class="form-control" id="city" asp-for="Address.City" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3">
+                                            <label for="comment">Comentário (opcional)</label>
+                                            <input type="text" class="form-control" asp-for="Denunciation.Comment" id="comment" />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex flex-column mx-3 ">
+                                            <label for="focusType">Tipo da denúncia</label>
+                                            <select asp-for="Denunciation.FocusType" id="focusType" class="form-control">
+                                                <option value="1">Ovos</option>
+                                                <option value="2">Larvas</option>
+                                                <option value="3">Adultos</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <input name="image" type="file" id="uploadFoto" style="display: none;" accept="image/*" onchange="previewFoto()" />
+                            <div class="form-group">
+                                <label for="uploadFoto" style="cursor: pointer;">
+                                    <div id="fotoPreview" class="border bg-light" style="width: 15rem; height: 15rem;">
+                                        <img id="fotoDisplay" style="width: 15rem; height: 15rem;" src="/img/semFoto.svg" alt="Imagem da denúncia" class="img-fluid">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 offset-md-6 mt-2">
+                            <button type="submit" class="btn btn-success">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="right-side">
+        <img src="~/img/sidebar.svg" alt="side bar" class="side-img" />
+    </div>
+</div>

@@ -1,12 +1,21 @@
-﻿using Business.Repository;
+﻿using Azure;
+using Business.Generics;
+using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BuzzOff.Controllers
 {
-    
+    [Authorize]
     public class DenunciationController : Controller
     {
         public IActionResult Index()
@@ -15,7 +24,8 @@ namespace BuzzOff.Controllers
             {
                 Denunciations = DenunciationDAO.GetAll()
             };
-            return View();
+            //Redireciona para o arquivo Index.cshtml na pasta Users
+            return View(model);
         }
 
         public IActionResult Add()
@@ -24,23 +34,52 @@ namespace BuzzOff.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(DenunciationModel model, AddressModel address)
+        public IActionResult Add(DenunciationAddressModel model, IFormFile image)
         {
-            var idAddress = AddressDAO.Insert(address);
-            model.Address = AddressDAO.GetOne(idAddress);
-            DenunciationDAO.Insert(model);
-            return RedirectToAction("Index");
+            var address = model.Address;
+            address.Id = AddressDAO.Insert(address);
+
+            var denunciation = model.Denunciation;
+            denunciation.Address = address;
+            denunciation.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+
+            byte[] convertedMedia;
+            string nameImage;
+
+
+            if (image != null && image.Length > 0)
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    image.CopyTo(memoryStream);
+                    convertedMedia = memoryStream.ToArray();
+                    nameImage = image.FileName;
+
+                    denunciation.Media = convertedMedia;
+                }
+
+            }
+
+            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.Pendent;
+            denunciation.DataDenunciation = DateTime.Now;
+
+            DenunciationDAO.Insert(denunciation);
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public IActionResult Update(DenunciationModel model)
         {
-            DenunciationDAO.Insert(model);
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Home", "Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(DenunciationModel model)
         {
+            model.IdInformer = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            model.Address.Id = AddressDAO.Insert(model.Address);
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
         }

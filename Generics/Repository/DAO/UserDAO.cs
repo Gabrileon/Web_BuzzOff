@@ -27,8 +27,6 @@ namespace Business.Repository.DAO
                 return cmd.ExecuteNonQuery();
             }
         }
-
-
         public static void Update(IUser model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -39,24 +37,25 @@ namespace Business.Repository.DAO
                     "UPDATE Users SET " +
                     "NAME = @NAME," +
                     "EMAIL = @EMAIL," +
-                    "CPF = @CPF, " +
-                    "WHERE Id = @Id";
+                    "CPF = @CPF " +
+                    "WHERE Id = @ID";
 
                 cmd.Parameters.AddWithValue("@NAME", model.Name);
                 cmd.Parameters.AddWithValue("@EMAIL", model.Email);
                 cmd.Parameters.AddWithValue("@CPF", model.CPF);
+                cmd.Parameters.AddWithValue("@ID", model.Id);
 
                 cmd.ExecuteNonQuery();
             }
         }
-        public static IUser? GetOne(string User, string Password)
+        public static IUser? GetOne(string Cpf, string Password)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE NAME = @NAME AND PASSWORD = @PASSWORD";
-                cmd.Parameters.AddWithValue("@NAME", User);
+                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE CPF = @CPF AND PASSWORD = @PASSWORD";
+                cmd.Parameters.AddWithValue("@CPF", Cpf);
                 cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(Password));
 
                 using (var reader = cmd.ExecuteReader())
@@ -75,7 +74,6 @@ namespace Business.Repository.DAO
                 return null;
             }
         }
-
         public static IUser GetOne(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -167,7 +165,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public static void UpdatePassword(string password, int id)
+        public static void UpdatePassword(string cpf, string name, string newPassword)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -176,13 +174,38 @@ namespace Business.Repository.DAO
                 cmd.CommandText =
                     "UPDATE Users SET " +
                     "PASSWORD = @PASSWORD " +
-                    "WHERE Id = @Id";
+                    "WHERE CPF = @CPF AND NAME = @NAME";
 
-                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(password));
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@PASSWORD", HashGenerator.GenerateHash(newPassword));
+                cmd.Parameters.AddWithValue("@CPF", cpf);
+                cmd.Parameters.AddWithValue("@NAME", name);
 
 
                 cmd.ExecuteNonQuery();
+            }
+        }
+        public static IUser GetOneCPF(string cpf)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Id, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE CPF = @CPF";
+                cmd.Parameters.AddWithValue("@CPF", cpf);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        return model;
+                    }
+                }
+                return null;
             }
         }
     }
