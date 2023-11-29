@@ -1,4 +1,6 @@
-﻿function getPictureData(table, field, id) {
+﻿// Write your JavaScript code.
+
+function getPictureData(table, field, id) {
     var fileModel = {
         Table: table,
         Column: field,
@@ -25,4 +27,9 @@ function previewFoto() {
         preview.src = reader.result;
     };
 
-// Write your JavaScript code
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "/img/semFoto.svg"; // Imagem padrão se nenhum arquivo for selecionado
+    }
+}
