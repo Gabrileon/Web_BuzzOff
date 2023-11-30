@@ -1,0 +1,68 @@
+﻿.side-bar{
+    height:100vh;
+}
+
+.right-side{
+    width:88%;
+}
+
+.left-side{
+    width: 12%;
+}
+
+
+.txt-header {
+    color: #84CC16;
+    font-size: 64px;
+    font-style: italic;
+    font-weight: 500;
+    text-align:center;
+}
+
+.btn-back {
+    color: #84CC16;
+    background-color: #2F3C33;
+    border-color: #2F3C33;
+    width: fit-content;
+    height: 45px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.denunciation {
+    border: solid black 2px;
+    border-radius: 15px;
+    height: 200px;
+}
+
+.header{
+    margin-bottom: 5rem;
+}
+
+.stage{
+    font-size: 1.6rem;
+    font-weight: bolder;
+    border: black 1px solid;
+    text-align: center;
+}
+
+.nao-respondida{
+    color: darkred;
+}
+
+.pendente{
+    color:darkgoldenrod;
+}
+
+.resolvida{
+    color: forestgreen;
+}
+
+.denun-col{
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.denun-stage{
+    text-align:center;
+}

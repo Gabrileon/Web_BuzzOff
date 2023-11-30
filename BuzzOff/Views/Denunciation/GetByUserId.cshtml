@@ -1,0 +1,50 @@
+﻿<link rel="stylesheet" href="~/css/ListDenunciation.css" asp-append-version="true" />
+@model DenunciationsModel
+@{
+    ViewData["Title"] = "Minhas denúncias";
+}
+
+
+<div class="denunciations">
+    <div class="container">
+        <div class="row">
+            <div class="col denun-col denun-stage">
+                <span class="stage nao-respondida">Não respondidas</span>
+            </div>
+            <div class="col denun-col denun-stage">
+                <span class="stage pendente">Pendentes</span>
+            </div>
+            <div class="col denun-col denun-stage">
+                <span class="stage resolvida">Resolvidas</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col denun-col">
+                <div class="denunciation"></div>
+            </div>
+            <div class="col denun-col">
+                <div class="denunciation"></div>
+            </div>
+            <div class="col denun-col">
+                <div class="denunciation"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@*@if(Model.Denunciations.Count < 1)
+{
+    <h3>Parece que você ainda não realizou nenhuma denúncia...</h3>
+    <a asp-controller="Denunciation" asp-action="Add">Realizar denúncia</a>
+}
+else
+{
+    @foreach(var denunciation in Model.Denunciations)
+    {
+        <span>@denunciation.DataDenunciation</span>
+    }
+}*@
