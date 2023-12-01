@@ -93,5 +93,7 @@ namespace BuzzOff.Models
         public byte[]? media { get; set; }
         public IAddress Address { get; set; }
         public MyEnuns.DenunciationStage Stage { get; set; }
+        public string Comment { get; set; }
+        public MyEnuns.FocusType FocusType { get; set; }
     }
 }
