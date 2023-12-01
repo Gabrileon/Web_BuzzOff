@@ -30,9 +30,15 @@
 }
 
 .denunciation {
-    border: solid black 2px;
-    border-radius: 15px;
+    border: solid #2F3C33 2px;
+    border-radius: 10px;
     height: 200px;
+    padding: 3%;
+    margin: 5%;
+}
+
+.stage-icon {
+    padding-left: 5%;
 }
 
 .header{
@@ -65,4 +71,8 @@
 
 .denun-stage{
     text-align:center;
+}
+
+span{
+    font-weight: bold;
 }

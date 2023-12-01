@@ -37,16 +37,29 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, FocusType focusType)
         {
             Id = id;
             IdInformer = idInformer;
             Address = address;
             DataDenunciation = dataDenunciation;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = focusType;
             this.Media = media;
         }
 
-        public Denunciation(int id, int idInformer, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, int focusType)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            Address = address;
+            DataDenunciation = dataDenunciation;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = (FocusType)focusType;
+            this.Media = media;
+        }
+
+        public Denunciation(int id, int idInformer, IAddress address1, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
         {
             Id = id;
             IdInformer = idInformer;
