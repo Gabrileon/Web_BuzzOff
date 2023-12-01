@@ -84,27 +84,27 @@ namespace Business.Repository.DAO
                 
             }
         }
-        public static List<IVisit> GetAllVisitsAgent()
+        public static List<IVisit> GetAllVisitsAgent(int id)
         {
             var list = new List<IVisit>();
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Visit";
-
+                cmd.CommandText = "SELECT ID, IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT FROM VISITS WHERE IDAGENT = @IDAGENT";
+                cmd.Parameters.Add(new SqlParameter("@IDAGENT", id));
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        //IVisit model = new Visit(
-                        //    reader.GetString(1),
-                        //    reader.GetString(2),
-                        //    reader.GetString(3),
-                        //    (MyEnuns.Access)reader.GetInt32(4),
-                        //    reader.GetInt32(0));
+                        IVisit model = new Visit(
+                            reader.GetInt32(0),
+                            reader.GetInt32(1),
+                            reader.GetInt32(2),
+                            reader.GetDateTime(3),
+                            reader.GetString(4));
 
-                        //list.Add(model);
+                        list.Add(model);
                     }
 
                     return list;
