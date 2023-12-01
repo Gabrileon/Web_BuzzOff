@@ -8,8 +8,8 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            VisitDAO.GetAllVisitsAgent(Convert.ToInt32(HttpContext.User.Claims.First().Value));
-            return View();
+            var model = VisitDAO.GetAllVisitsAgent(Convert.ToInt32(HttpContext.User.Claims.First().Value));
+            return View(model);
         }
         public IActionResult Add()
         {
