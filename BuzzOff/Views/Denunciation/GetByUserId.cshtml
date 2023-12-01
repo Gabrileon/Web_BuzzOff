@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="~/css/ListDenunciation.css" asp-append-version="true" />
 @model DenunciationsModel
 
-@functions {
+@functions{
     public string GetFocusIcon(MyEnuns.FocusType type)
     {
         switch (type)
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col denun-col">
 
-                @foreach (var denunciation in notAnswered)
+                @foreach(var denunciation in notAnswered)
                 {
                     <div class="denunciation">
                         <div class="d-flex flex-column align-items-start h-100 w-100">

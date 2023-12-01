@@ -25,13 +25,6 @@ namespace Business.Generics
         
         public Denunciation()
         {
-            IdInformer = 1;
-            DataDenunciation = DateTime.Now;
-            Stage = (DenunciationStage) 1;
-            Address = new Address()
-            {
-                Id = 1,
-            };
         }
 
         /// <summary>
@@ -44,16 +37,29 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, FocusType focusType)
         {
             Id = id;
             IdInformer = idInformer;
             Address = address;
             DataDenunciation = dataDenunciation;
-            this.media = media;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = focusType;
+            this.Media = media;
         }
 
-        public Denunciation(int id, int idInformer, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, int focusType)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            Address = address;
+            DataDenunciation = dataDenunciation;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = (FocusType)focusType;
+            this.Media = media;
+        }
+
+        public Denunciation(int id, int idInformer, IAddress address1, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
         {
             Id = id;
             IdInformer = idInformer;
@@ -65,10 +71,10 @@ namespace Business.Generics
         public int Id { get; set; }
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
-        public byte[]? media { get; set; }
+        public byte[] Media { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
-        public string Comment { get; set; }
         public FocusType FocusType { get; set; }
+        public string Comment { get; set; }
     }
 } 

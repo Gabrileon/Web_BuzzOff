@@ -13,6 +13,7 @@
     <title>@ViewData["Title"] - BuzzOff</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ListDenunciation.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BuzzOff.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
@@ -36,10 +37,10 @@
                         </li>
                         @if (LoggedUser.Identity.IsAuthenticated)
                         {
-                            @if(LoggedUser.HasClaim("AccessLevel", "Administrator"))
+                            @if (LoggedUser.HasClaim("AccessLevel", "Administrator"))
                             {
                                 <li class="nav-item">
-                                    <a class="btn btn-success" asp-controller="User" asp-action="CommonUsers">Distribuir permissões</a>
+                                    <a class="btn btn-success" asp-controller="" asp-action="">Distribuir permissões</a>
                                 </li>
                             }
 
@@ -53,7 +54,7 @@
                             else if (LoggedUser.HasClaim("AccessLevel", "Common"))
                             {
                                 <li class="nav-item">
-                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="GetByUserId">Denunciar</a>
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="Add">Nova denúncia</a>
                                 </li>
                             }
 

@@ -1,12 +1,12 @@
-﻿.side-bar {
-    height: 100vh;
+﻿.side-bar{
+    height:100vh;
 }
 
-.right-side {
-    width: 88%;
+.right-side{
+    width:88%;
 }
 
-.left-side {
+.left-side{
     width: 12%;
 }
 
@@ -16,7 +16,7 @@
     font-size: 64px;
     font-style: italic;
     font-weight: 500;
-    text-align: center;
+    text-align:center;
 }
 
 .btn-back {
@@ -41,38 +41,38 @@
     padding-left: 5%;
 }
 
-.header {
+.header{
     margin-bottom: 5rem;
 }
 
-.stage {
+.stage{
     font-size: 1.6rem;
     font-weight: bolder;
     border: black 1px solid;
     text-align: center;
 }
 
-.nao-respondida {
+.nao-respondida{
     color: darkred;
 }
 
-.pendente {
-    color: darkgoldenrod;
+.pendente{
+    color:darkgoldenrod;
 }
 
-.resolvida {
+.resolvida{
     color: forestgreen;
 }
 
-.denun-col {
+.denun-col{
     margin-left: 1%;
     margin-right: 1%;
 }
 
-.denun-stage {
-    text-align: center;
+.denun-stage{
+    text-align:center;
 }
 
-span {
+span{
     font-weight: bold;
 }
