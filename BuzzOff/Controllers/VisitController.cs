@@ -8,6 +8,7 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
+            VisitDAO.GetAllVisitsAgent(Convert.ToInt32(HttpContext.User.Claims.First().Value));
             return View();
         }
         public IActionResult Add()
@@ -30,5 +31,6 @@ namespace BuzzOff.Controllers
                 return RedirectToAction("Visit","Index");
             }
         }
+
     }
 }
