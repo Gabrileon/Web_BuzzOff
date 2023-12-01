@@ -1,4 +1,5 @@
-﻿using Business.Repository.DAO;
+﻿using Business.Repository;
+using Business.Repository.DAO;
 using BuzzOff.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,10 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            var model = VisitDAO.GetAllVisitsAgent(Convert.ToInt32(HttpContext.User.Claims.First().Value));
+            DenunciationsModel model = new()
+            {
+                Denunciations = DenunciationDAO.GetAllPendent()
+            };
             return View(model);
         }
         public IActionResult Add()
@@ -22,7 +26,7 @@ namespace BuzzOff.Controllers
             if (isFocus)
             {
                 // Retorna ao método de adição na tabela DengueFocus
-                return RedirectToAction("Home","Index");
+                return RedirectToAction("DengueFocus","Index");
 
             }
             else

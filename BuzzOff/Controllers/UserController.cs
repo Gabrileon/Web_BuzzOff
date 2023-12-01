@@ -84,7 +84,8 @@ namespace BuzzOff.Controllers
                 Name = user.Name,
                 Email = user.Email,
                 AccessLevel = user.AccessLevel,
-                CPF = user.CPF
+                CPF = user.CPF,
+                Id = user.Id
             };
             return View(model);
         }
