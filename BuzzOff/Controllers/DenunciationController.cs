@@ -62,6 +62,20 @@ namespace BuzzOff.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult GetByUserId()
+        {
+            var userId = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            var denunciations = DenunciationDAO.GetByInformerId(userId);
+
+            var model = new DenunciationsModel()
+            {
+                Denunciations = denunciations
+            };
+
+            ViewBag.Message = "Minhas denúncias";
+
+            return View(model);
+        }
 
 
 
@@ -70,7 +84,6 @@ namespace BuzzOff.Controllers
 
 
 
-    
 
     }
 }
