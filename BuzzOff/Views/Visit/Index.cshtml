@@ -27,8 +27,6 @@
 @{
     ViewData["Title"] = "Minhas denúncias";
 
-    var notAnswered = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Pendent);
-    var pendent = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.InProgress);
 }
 
 <div class="denunciations">
@@ -48,7 +46,7 @@
         <div class="row">
             <div class="col denun-col">
 
-                @foreach (var denunciation in notAnswered)
+                @foreach (var denunciation in Model.Denunciations)
                 {
                     <div class="denunciation">
                         <div class="d-flex flex-column align-items-start h-100 w-100">

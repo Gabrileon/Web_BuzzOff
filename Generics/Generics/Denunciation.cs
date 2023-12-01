@@ -63,8 +63,15 @@ namespace Business.Generics
         {
             Id = id;
             IdInformer = idInformer;
-            DataDenunciation = dataDenunciation;            
+            DataDenunciation = dataDenunciation;
             Stage = stage;
+            Address = address;
+        }
+        public Denunciation(int id, int idInformer, DateTime dataDenunciation, IAddress address, byte[] media)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            DataDenunciation = dataDenunciation;
             Address = address;
         }
 

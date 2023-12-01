@@ -163,21 +163,46 @@ namespace Business.Repository
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation()
-                        {
-                            Id = (int)reader["Id"],
-                            IdInformer = (int)reader["IdInformer"],
-                            Stage = (MyEnuns.DenunciationStage)reader["IsAnswered"],
-                            DataDenunciation = (DateTime)reader["DataDenunciation"],
-                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
-                        };
+                        IDenunciation model = new Denunciation(
+                            (int)reader["Id"],
+                            (int)reader["IdInformer"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
+                            (DateTime)reader["DataDenunciation"],
+                            (byte[])reader["Media"],
+                            (bool)reader["IsAnswered"]
+                        );
                         list.Add(model);
                     }
                 }
             }
             return list;
         }
+        public static List<IDenunciation> GetAllPendent()
+        {
+            var list = new List<IDenunciation>();
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IsAnswered = 1";
 
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        IDenunciation model = new Denunciation(
+                            (int)reader["Id"],
+                            (int)reader["IdInformer"],
+                            (DateTime)reader["DataDenunciation"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
+                            (byte[])reader["Media"]
+                        );
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
         public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
