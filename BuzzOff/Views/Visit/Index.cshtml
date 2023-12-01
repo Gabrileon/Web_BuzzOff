@@ -28,6 +28,7 @@
     ViewData["Title"] = "Minhas denúncias";
 
     var notAnswered = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Pendent);
+    var pendent = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.InProgress);
 }
 
 <div class="denunciations">
