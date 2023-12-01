@@ -66,5 +66,26 @@
                         </div>
                     </div>
                 }
+            </div>
+            <div class="col denun-col">
+
+                @foreach (var denunciation in pendent)
+                {
+                    <div class="denunciation">
+                        <div class="d-flex flex-column align-items-start h-100 w-100">
+                            <div class="mb-auto w-100">
+                                <span>@denunciation.Address.Street, @denunciation.Address.Number</span>
+                                <br />
+                                <span>@denunciation.Comment</span>
+                                <br />
+                                <span>Data: @denunciation.DataDenunciation.Date</span>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between w-100">
+                                <div style="color: darkgoldenrod;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
+                                <div><a class="btn btn-success">Ver denúncia</a></div>
+                            </div>
+                        </div>
+                    </div>
+                }
 
             </div>
