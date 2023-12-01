@@ -15,5 +15,7 @@ namespace Common.Interfaces
         public byte[] media { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
+        public string Comment { get; set; }
+        public FocusType FocusType { get; set; }
     }
 }
