@@ -96,7 +96,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
