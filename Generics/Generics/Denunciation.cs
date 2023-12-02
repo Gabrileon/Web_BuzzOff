@@ -1,37 +1,19 @@
-﻿using Business.Generics;
-using Business.Repository.DAO;
+﻿using Business.Repository.DAO;
 using Business.Repository;
 using Common.Interfaces;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using static Common.Others.MyEnuns;
+using Common.Others;
 
 namespace Business.Generics
 {
     public class Denunciation : IDenunciation
     {
-        /// <summary>
-        /// Insert
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="idInformer"></param>
-        /// <param name="idAgent"></param>
-        /// <param name="idAddress"></param>
-        /// <param name="dataDenunciation"></param>
-        /// <param name="dataVisit"></param>
-        /// <param name="media"></param>
-        /// <param name="isAnswered"></param>
-        
         public Denunciation()
         {
             IdInformer = 1;
             DataDenunciation = DateTime.Now;
-            Stage = (DenunciationStage) 1;
+            Stage = (DenunciationStage)1;
             Address = new Address()
             {
                 Id = 1,
@@ -43,64 +25,65 @@ namespace Business.Generics
         /// </summary>
         /// <param name="id"></param>
         /// <param name="idInformer"></param>
-        /// <param name="idAgent"></param>
-        /// <param name="dataDenunciation"></param>
-        /// <param name="dataVisit"></param>
+        /// <param name="address"></param>
+        /// <param name="comment"></param>
+        /// <param name="focusType"></param>
         /// <param name="media"></param>
+        /// <param name="stage"></param>
         /// <param name="isAnswered"></param>
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, bool isAnswered)
+        /// <param name="dataDenunciation"></param>
+        public Denunciation(int id, int idInformer, IAddress address, string comment, MyEnuns.FocusType focusType, byte[] media, MyEnuns.DenunciationStage stage, bool isAnswered, DateTime dataDenunciation)
         {
             Id = id;
             IdInformer = idInformer;
             Address = address;
-            DataDenunciation = dataDenunciation;
-            this.Media = media;
-        }
-
-        public Denunciation(int id, int idInformer, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
-        {
-            Id = id;
-            IdInformer = idInformer;
-            DataDenunciation = dataDenunciation;            
+            Comment = comment;
+            FocusType = focusType;
+            Media = media;
             Stage = stage;
-            Address = address;
+            IsAnswered = isAnswered;
+            DataDenunciation = dataDenunciation;
         }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }
-        public DateTime DataDenunciation { get; set; }
-        public byte[] Media { get; set; }
-        public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
-        public FocusType FocusType { get; set; }
         public string Comment { get; set; }
-    }
-}
+        public MyEnuns.FocusType FocusType { get; set; }
+        public byte[]? Media { get; set; }
+        public MyEnuns.DenunciationStage Stage { get; set; }
+        public bool IsAnswered { get; set; }
+        public DateTime DataDenunciation { get; set; }
 
-public static IDenunciation GetOne(int id)
-{
-    IDenunciation model = null;
-    using (var conn = new SqlConnection(DBConnect.Connect()))
-    {
-        conn.Open();
-        SqlCommand cmd = conn.CreateCommand();
-        cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE Id = @Id";
-        cmd.Parameters.AddWithValue("@Id", id);
-
-        using (SqlDataReader reader = cmd.ExecuteReader())
+        public static IDenunciation GetOne(int id)
         {
-            if (reader.Read())
+            IDenunciation model = null;
+            using (var conn = new SqlConnection(DBConnect.Connect()))
             {
-                model = new Denunciation(
-                    (int)reader["Id"],
-                    (int)reader["IdInformer"],
-                    AddressDAO.GetOne((int)reader["IdAddress"]),
-                    (DateTime)reader["DataDenunciation"],
-                    reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
-                    (bool)reader["IsAnswered"]
-                );
+                conn.Open();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, Comment, FocusType, Media, Stage, IsAnswered, DataDenunciation FROM Denunciations WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@Id", id);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        model = new Denunciation(
+                            (int)reader["Id"],
+                            (int)reader["IdInformer"],
+                            AddressDAO.GetOne((int)reader["IdAddress"]),
+                            (string)reader["Comment"],
+                            (FocusType)reader["FocusType"],
+                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            (DenunciationStage)reader["Stage"],
+                            (bool)reader["IsAnswered"],
+                            (DateTime)reader["DataDenunciation"]
+                        );
+                    }
+                }
             }
+            return model;
         }
     }
-    return model;
 }

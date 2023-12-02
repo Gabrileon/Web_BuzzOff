@@ -1,14 +1,7 @@
 ﻿using Business.Generics;
 using Business.Repository.DAO;
 using Common.Interfaces;
-using Common.Others;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using static Common.Others.MyEnuns;
 
 namespace Business.Repository
@@ -21,13 +14,16 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, Media, IsAnswered) " +
-                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @Media, @IsAnswered)";
+                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, Comment, FocusType, Media, Stage, DataDenunciation, IsAnswered) " +
+                                  "VALUES (@IdInformer, @IdAddress, @Comment, @FocusType, @Media, @Stage, @DataDenunciation, @IsAnswered)";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
-                cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
+                cmd.Parameters.AddWithValue("@Comment", model.Comment);
+                cmd.Parameters.AddWithValue("@FocusType", model.FocusType);
                 cmd.Parameters.AddWithValue("@Media", model.Media);
-                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
+                cmd.Parameters.AddWithValue("@Stage", model.Stage);
+                cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
+                cmd.Parameters.AddWithValue("@IsAnswered", 1);
 
                 return cmd.ExecuteNonQuery();
             }
@@ -65,7 +61,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, Comment, FocusType, Media, Stage, IsAnswered, DataDenunciation FROM Denunciations WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -76,9 +72,12 @@ namespace Business.Repository
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
-                            (bool)reader["IsAnswered"]
+                            (string)reader["Comment"],
+                            (FocusType)reader["FocusType"],
+                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            (DenunciationStage)reader["Stage"],
+                            (bool)reader["IsAnswered"],
+                            (DateTime)reader["DataDenunciation"]
                         );
                     }
                 }
@@ -94,7 +93,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IdInformer = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, Comment, FocusType, Media, Stage, IsAnswered, DataDenunciation FROM Denunciations WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -105,9 +104,12 @@ namespace Business.Repository
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
+                            (string)reader["Comment"],
+                            (FocusType)reader["FocusType"],
+                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            (DenunciationStage)reader["Stage"],
+                            (bool)reader["IsAnswered"],
+                            (DateTime)reader["DataDenunciation"]
                         );
                         list.Add(model);
                     }
@@ -123,7 +125,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, Comment, FocusType, Media, Stage, IsAnswered, DataDenunciation FROM Denunciations WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.Parameters.AddWithValue("@B", b);
 
@@ -135,9 +137,12 @@ namespace Business.Repository
                             (int)reader["Id"],
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
-                            (bool)reader["IsAnswered"]
+                            (string)reader["Comment"],
+                            (FocusType)reader["FocusType"],
+                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            (DenunciationStage)reader["Stage"],
+                            (bool)reader["IsAnswered"],
+                            (DateTime)reader["DataDenunciation"]
                         );
                         list.Add(model);
                     }
@@ -153,7 +158,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, Comment, FocusType, Media, Stage, IsAnswered, DataDenunciation FROM Denunciations WHERE Id = @Id";
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -163,10 +168,15 @@ namespace Business.Repository
                         {
                             Id = (int)reader["Id"],
                             IdInformer = (int)reader["IdInformer"],
-                            Stage = (MyEnuns.DenunciationStage)reader["IsAnswered"],
-                            DataDenunciation = (DateTime)reader["DataDenunciation"],
                             Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                            Comment = (string)reader["Comment"],
+                            FocusType = (FocusType)reader["FocusType"],
+                            Media = reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            Stage = (DenunciationStage)reader["Stage"],
+                            IsAnswered = (bool)reader["IsAnswered"],
+                            DataDenunciation = (DateTime)reader["DataDenunciation"]
                         };
+
                         list.Add(model);
                     }
                 }
