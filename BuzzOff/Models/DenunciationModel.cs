@@ -109,6 +109,7 @@ namespace BuzzOff.Models
                     };
 
                     FormFile = formFile;
+                    MediaName = formFile.Name;
                 }
             }
         }
