@@ -1,4 +1,8 @@
-﻿using Common.Interfaces;
+﻿using Business.Generics;
+using Business.Repository.DAO;
+using Business.Repository;
+using Common.Interfaces;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,4 +75,32 @@ namespace Business.Generics
         public FocusType FocusType { get; set; }
         public string Comment { get; set; }
     }
-} 
+}
+
+public static IDenunciation GetOne(int id)
+{
+    IDenunciation model = null;
+    using (var conn = new SqlConnection(DBConnect.Connect()))
+    {
+        conn.Open();
+        SqlCommand cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE Id = @Id";
+        cmd.Parameters.AddWithValue("@Id", id);
+
+        using (SqlDataReader reader = cmd.ExecuteReader())
+        {
+            if (reader.Read())
+            {
+                model = new Denunciation(
+                    (int)reader["Id"],
+                    (int)reader["IdInformer"],
+                    AddressDAO.GetOne((int)reader["IdAddress"]),
+                    (DateTime)reader["DataDenunciation"],
+                    reader["PIC"] != DBNull.Value ? (byte[])reader["PIC"] : null,
+                    (bool)reader["IsAnswered"]
+                );
+            }
+        }
+    }
+    return model;
+}

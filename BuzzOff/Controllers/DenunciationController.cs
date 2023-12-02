@@ -83,5 +83,10 @@ namespace BuzzOff.Controllers
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Teste(long id)
+        {
+            return View(new DenunciationModel(Business.Generics.Denunciation.GetOne(id)));
+        }
     }
 }
