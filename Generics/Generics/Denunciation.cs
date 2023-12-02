@@ -11,13 +11,6 @@ namespace Business.Generics
     {
         public Denunciation()
         {
-            IdInformer = 1;
-            DataDenunciation = DateTime.Now;
-            Stage = (DenunciationStage)1;
-            Address = new Address()
-            {
-                Id = 1,
-            };
         }
 
         /// <summary>

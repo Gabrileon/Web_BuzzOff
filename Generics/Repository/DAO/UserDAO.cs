@@ -208,5 +208,46 @@ namespace Business.Repository.DAO
                 return null;
             }
         }
+        public static List<IUser> GetAllCommons()
+        {
+            List<IUser> list = new();
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Id, NAME, EMAIL, CPF, ACCESSLEVEL FROM Users WHERE ACCESSLEVEL = 3";
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        IUser model = new User(
+                            reader.GetString(1),
+                            reader.GetString(2),
+                            reader.GetString(3),
+                            (MyEnuns.Access)reader.GetInt32(4),
+                            reader.GetInt32(0));
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+        public static void UpdateAccessLevel(int id, MyEnuns.Access accessLevel)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText =
+                    "UPDATE Users SET " +
+                    "AccessLevel = @ACCESSLEVEL " +
+                    "WHERE ID = @ID";
+                var aaa = Convert.ToInt32 (accessLevel);
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@ACCESSLEVEL", aaa);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

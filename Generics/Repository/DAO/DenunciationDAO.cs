@@ -40,7 +40,7 @@ namespace Business.Repository
                     "IdAddress = @IdAddress," +
                     "DataDenunciation = @DataDenunciation, " +
                     "Media = @Media, " +
-                    "IsAnswered = @IsAnswered" +
+                    "Stage = @IsAnswered" +
                     " WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);

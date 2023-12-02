@@ -1,4 +1,5 @@
-﻿using Common.Interfaces;
+﻿using Business.Generics;
+using Common.Interfaces;
 using Common.Others;
 
 namespace BuzzOff.Models
