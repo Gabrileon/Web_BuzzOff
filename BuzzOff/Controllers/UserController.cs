@@ -2,11 +2,13 @@
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
+using Common.Others;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Reflection;
 using System.Reflection.Metadata;
+using static Common.Others.MyEnuns;
 
 namespace BuzzOff.Controllers
 {
@@ -54,6 +56,44 @@ namespace BuzzOff.Controllers
         {
             UserDAO.UpdatePassword(cpf, name, newPassword);
             return RedirectToAction("Index", "Login");
+        }
+        [Authorize("Administrator")]
+        public IActionResult CommonUsers()
+        {
+            UsersModel commonUsers = new()
+            {
+                Users = UserDAO.GetAllCommons()
+            };
+
+            return View(commonUsers);
+        }
+        [Authorize("Administrator")]
+        public IActionResult UpdateAccessLevel(int id)
+        {
+            List<MyEnuns.Access> access = new()
+            {
+                MyEnuns.Access.Common,
+                MyEnuns.Access.Agent,
+                MyEnuns.Access.Administrator
+            };
+            ViewBag.Access = access;
+
+            var user = UserDAO.GetOne(id);
+            UserModel model = new()
+            {
+                Id = id,
+                Name = user.Name,
+                Email = user.Email,
+                AccessLevel = user.AccessLevel,
+                CPF = user.CPF
+            };
+            return View(model);
+        }
+        [HttpPost, Authorize("Administrator")]
+        public IActionResult UpdateAccessLevel(UserModel model)
+        {
+            UserDAO.UpdateAccessLevel(model.Id, model.AccessLevel);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

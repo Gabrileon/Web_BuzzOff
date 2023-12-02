@@ -11,6 +11,7 @@ namespace BuzzOff.Models
     {
         public AddressModel()
         {
+
         }
 
         /// <summary>
@@ -51,6 +52,16 @@ namespace BuzzOff.Models
             this.Number = number;
             this.Reference = reference;
             this.City = city;
+        }
+
+        public AddressModel(IAddress address)
+        {
+            Id = address.Id;
+            Neighborhood = address.Neighborhood;
+            Street = address.Street;
+            Number = address.Number;
+            Reference = address.Reference;
+            City = address.City;
         }
 
         public int Id { get; set; }

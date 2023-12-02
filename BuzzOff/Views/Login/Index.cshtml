@@ -11,8 +11,8 @@
             <fieldset>
                 <h3 class="txtLogin">LOGIN</h3>
                 
-                <input type="text" id="nome" class="form-control" asp-for="CPF" placeholder="CPF" maxlength="11" required />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input type="text" id="nome" class="form-control" asp-for="CPF" placeholder="CPF" required />
+                <span asp-validation-for="CPF" class="text-danger"></span>
                 
                 <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Senha" required />
                 <span asp-validation-for="Password" class="text-danger"></span>

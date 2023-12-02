@@ -31,8 +31,8 @@ namespace Common.Others
         public enum DenunciationStage
         {
             teste = 0,
-            Pendent = 1,
-            InProgress = 2,
+            NotAnswered = 1,
+            Pendent = 2,
             Completed = 3
         }
     }

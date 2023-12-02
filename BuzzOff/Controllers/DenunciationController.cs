@@ -56,11 +56,12 @@ namespace BuzzOff.Controllers
                     nameImage = image.FileName;
 
                     denunciation.Media = convertedMedia;
+                    denunciation.MediaName = nameImage;
                 }
 
             }
 
-            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.Pendent;
+            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.NotAnswered;
             denunciation.DataDenunciation = DateTime.Now;
 
             DenunciationDAO.Insert(denunciation);
@@ -82,6 +83,28 @@ namespace BuzzOff.Controllers
             model.Address.Id = AddressDAO.Insert(model.Address);
             DenunciationDAO.Delete(model.Id);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult GetByUserId()
+        {
+            var userId = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            var denunciations = DenunciationDAO.GetByInformerId(userId);
+
+            var model = new DenunciationsModel()
+            {
+                Denunciations = denunciations
+            };
+
+            ViewBag.Message = "Minhas denúncias";
+
+            return View(model);
+        }
+
+        public IActionResult SeeDenunciation(int id)
+        {
+            ViewBag.Message = "Acompanhar denúncia";
+            var model = new DenunciationAddressModel(DenunciationDAO.GetOne(id));
+            return View(model);
         }
     }
 }

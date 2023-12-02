@@ -1,0 +1,128 @@
+﻿@using Common.Interfaces;
+@using Common.Others;
+<link rel="stylesheet" href="~/css/ListDenunciation.css" asp-append-version="true" />
+@model DenunciationsModel
+
+@functions {
+    public string GetFocusIcon(MyEnuns.FocusType type)
+    {
+        switch (type)
+        {
+            case MyEnuns.FocusType.Ovos:
+                return "fa-egg";
+                break;
+            case MyEnuns.FocusType.Larvas:
+                return "fa-worm";
+                break;
+            case MyEnuns.FocusType.Adultos:
+                return "fa-mosquito";
+                break;
+            default:
+                return "fa-question";
+                break;
+        }
+    }
+}
+
+@{
+    ViewData["Title"] = "Minhas denúncias";
+    Layout = "~/Views/Shared/_LayoutListDenunciations.cshtml";
+
+    var notAnswered = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.NotAnswered);
+    var pendent = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Pendent);
+    var completed = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Completed);
+}
+
+@if (Model.Denunciations.Count < 1)
+{
+    <div style="text-align:center" class="w-100">
+        <h3>Parece que você ainda não realizou nenhuma denúncia...</h3>
+        <a asp-controller="Denunciation" asp-action="Add">Realizar denúncia <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+}
+else
+{
+    <div class="denunciations">
+        <div class="container">
+            <div class="row">
+                <div class="col denun-col denun-stage">
+                    <span class="stage nao-respondida">Não respondidas</span>
+                </div>
+                <div class="col denun-col denun-stage">
+                    <span class="stage pendente">Pendentes</span>
+                </div>
+                <div class="col denun-col denun-stage">
+                    <span class="stage resolvida">Resolvidas</span>
+                </div>
+            </div>
+            <hr style="color: #2F3C33" />
+            <div class="row">
+                <div class="col denun-col">
+
+                    @foreach (var denunciation in notAnswered)
+                    {
+                        <div class="denunciation">
+                            <div class="d-flex flex-column align-items-start h-100 w-100">
+                                <div class="mb-auto w-100">
+                                    <span>@denunciation.Address.Street, @denunciation.Address.Number</span>
+                                    <br />
+                                    <span>@denunciation.Comment</span>
+                                    <br />
+                                    <span>Data: @denunciation.DataDenunciation.Date.ToString("dd/MM/yyyy")</span>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between w-100">
+                                    <div style="color: darkred;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
+                                    <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col denun-col">
+
+                    @foreach (var denunciation in pendent)
+                    {
+                        <div class="denunciation">
+                            <div class="d-flex flex-column align-items-start h-100 w-100">
+                                <div class="mb-auto w-100">
+                                    <span>@denunciation.Address.Street, @denunciation.Address.Number</span>
+                                    <br />
+                                    <span>@denunciation.Comment</span>
+                                    <br />
+                                    <span>Data: @denunciation.DataDenunciation.Date.ToString("dd/MM/yyyy")</span>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between w-100">
+                                    <div style="color: darkgoldenrod;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
+                                    <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col denun-col">
+
+                    @foreach (var denunciation in completed)
+                    {
+                        <div class="denunciation">
+                            <div class="d-flex flex-column align-items-start h-100 w-100">
+                                <div class="mb-auto w-100">
+                                    <span>@denunciation.Address.Street, @denunciation.Address.Number</span>
+                                    <br />
+                                    <span>@denunciation.Comment</span>
+                                    <br />
+                                    <span>Data: @denunciation.DataDenunciation.Date.ToString("dd/MM/yyyy")</span>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between w-100">
+                                    <div style="color: forestgreen;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
+                                    <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
