@@ -48,7 +48,7 @@ namespace Business.Generics
             this.Media = media;
         }
 
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, int focusType)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] ?media, int isAnswered, int focusType)
         {
             Id = id;
             IdInformer = idInformer;
