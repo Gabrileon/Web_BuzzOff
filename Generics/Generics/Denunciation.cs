@@ -48,7 +48,7 @@ namespace Business.Generics
             this.Media = media;
         }
 
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, int focusType)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] ?media, int isAnswered, int focusType)
         {
             Id = id;
             IdInformer = idInformer;
@@ -58,7 +58,15 @@ namespace Business.Generics
             FocusType = (FocusType)focusType;
             this.Media = media;
         }
-
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, int isAnswered, int focusType)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            Address = address;
+            DataDenunciation = dataDenunciation;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = (FocusType)focusType;
+        }
         public Denunciation(int id, int idInformer, IAddress address1, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
         {
             Id = id;
