@@ -60,7 +60,7 @@ namespace BuzzOff.Controllers
 
             }
 
-            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.Pendent;
+            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.NotAnswered;
             denunciation.DataDenunciation = DateTime.Now;
 
             DenunciationDAO.Insert(denunciation);
@@ -96,6 +96,15 @@ namespace BuzzOff.Controllers
 
             ViewBag.Message = "Minhas denúncias";
 
+            return View(model);
+        }
+
+        public IActionResult SeeDenunciation(int id)
+        {
+            ViewBag.Message = "Acompanhar denúncia";
+            var model = new DenunciationAddressModel();
+            model.Denunciation = DenunciationDAO.GetOne(id);
+            model.Address = model.Denunciation.Address;
             return View(model);
         }
     }

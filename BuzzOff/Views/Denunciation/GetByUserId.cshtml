@@ -26,9 +26,10 @@
 
 @{
     ViewData["Title"] = "Minhas denúncias";
+    Layout = "~/Views/Shared/_LayoutListDenunciations.cshtml";
 
-    var notAnswered = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Pendent);
-    var pendent = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.InProgress);
+    var notAnswered = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.NotAnswered);
+    var pendent = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Pendent);
     var completed = Model.Denunciations.Where(x => x.Stage == Common.Others.MyEnuns.DenunciationStage.Completed);
 }
 
@@ -63,7 +64,7 @@
                             </div>
                             <div class="d-flex flex-row justify-content-between w-100">
                                 <div style="color: darkred;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
-                                <div><a class="btn btn-success">Ver denúncia</a></div>
+                                <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
                             </div>
                         </div>
                     </div>
@@ -85,7 +86,7 @@
                             </div>
                             <div class="d-flex flex-row justify-content-between w-100">
                                 <div style="color: darkgoldenrod;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
-                                <div><a class="btn btn-success">Ver denúncia</a></div>
+                                <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                             </div>
                             <div class="d-flex flex-row justify-content-between w-100">
                                 <div style="color: forestgreen;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
-                                <div><a class="btn btn-success">Ver denúncia</a></div>
+                                <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
                             </div>
                         </div>
                     </div>
