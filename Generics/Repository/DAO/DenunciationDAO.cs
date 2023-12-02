@@ -96,7 +96,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -108,7 +108,7 @@ namespace Business.Repository
                             (int)reader["IdInformer"],
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
-                            
+                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
                             (int)reader["IsAnswered"],
                             (int)reader["FocusType"]
                         );
