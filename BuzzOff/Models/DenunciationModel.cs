@@ -88,13 +88,40 @@ namespace BuzzOff.Models
             this.Media = media;
         }
 
+        public DenunciationModel(IDenunciation denunciation)
+        {
+            Id = denunciation.Id;
+            IdInformer = denunciation.IdInformer;
+            DataDenunciation = denunciation.DataDenunciation;
+            Address = denunciation.Address;
+            Stage = denunciation.Stage;
+            FocusType = denunciation.FocusType;
+            Comment = denunciation.Comment;
+
+            if (denunciation.Media != null)
+            {
+                using (var stream = new MemoryStream(denunciation.Media))
+                {
+                    var formFile = new FormFile(stream, 0, denunciation.Media.Length, Path.GetFileNameWithoutExtension(denunciation.MediaName), Path.GetExtension(denunciation.MediaName))
+                    {
+                        Headers = new HeaderDictionary(),
+                        ContentType = "application/octet-stream"
+                    };
+
+                    FormFile = formFile;
+                }
+            }
+        }
+
         public int Id { get; set; }
         public int IdInformer { get; set; }        
         public DateTime DataDenunciation { get; set; }        
         public byte[]? Media { get; set; }
+        public string MediaName { get; set; }
         public IAddress Address { get; set; }
         public MyEnuns.DenunciationStage Stage { get; set; }
         public MyEnuns.FocusType FocusType { get; set; }
         public string Comment { get; set; }
+        public IFormFile FormFile { get; set; }
     }
 }

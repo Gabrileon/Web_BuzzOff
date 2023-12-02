@@ -56,6 +56,7 @@ namespace BuzzOff.Controllers
                     nameImage = image.FileName;
 
                     denunciation.Media = convertedMedia;
+                    denunciation.MediaName = nameImage;
                 }
 
             }
@@ -102,9 +103,7 @@ namespace BuzzOff.Controllers
         public IActionResult SeeDenunciation(int id)
         {
             ViewBag.Message = "Acompanhar denúncia";
-            var model = new DenunciationAddressModel();
-            model.Denunciation = DenunciationDAO.GetOne(id);
-            model.Address = model.Denunciation.Address;
+            var model = new DenunciationAddressModel(DenunciationDAO.GetOne(id));
             return View(model);
         }
     }

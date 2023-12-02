@@ -84,6 +84,7 @@ namespace Business.Generics
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
         public byte[] Media { get; set; }
+        public string MediaName { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
         public FocusType FocusType { get; set; }

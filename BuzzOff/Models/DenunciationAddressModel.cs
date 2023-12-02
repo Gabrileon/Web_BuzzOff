@@ -6,9 +6,17 @@ namespace BuzzOff.Models
     public class DenunciationAddressModel
     {
         // Denunciation
-        public IDenunciation Denunciation { get; set; }
+        public DenunciationModel Denunciation { get; set; }
 
         // Adress
-        public IAddress Address { get; set; }
+        public AddressModel Address { get; set; }
+
+        public DenunciationAddressModel() { }
+
+        public DenunciationAddressModel(IDenunciation denunciation) 
+        {
+            Denunciation = new DenunciationModel(denunciation);
+            Address = new AddressModel(Denunciation.Address);
+        }
     }
 }

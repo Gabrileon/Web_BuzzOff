@@ -1,7 +1,7 @@
 ﻿@using static Common.Others.MyEnuns;
 <link rel="stylesheet" href="~/css/Denunciation.css" asp-append-version="true" />
 @model DenunciationAddressModel
-@functions{
+@functions {
     public string TranslateStage(DenunciationStage stage)
     {
         switch (stage)
@@ -100,11 +100,11 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <input name="image" type="file" id="uploadFoto" style="display: none;" accept="image/*" onchange="previewFoto()" />
+
                         <div class="form-group">
                             <label for="uploadFoto" style="cursor: pointer;">
                                 <div id="fotoPreview" class="border bg-light" style="width: 15rem; height: 15rem;">
-                                    <img id="fotoDisplay" style="width: 15rem; height: 15rem;" src="/img/semFoto.svg" alt="Imagem da denúncia" class="img-fluid">
+                                    <img id="fotoDisplay" style="width: 15rem; height: 15rem;" src="/img/semFoto.svg" alt="Imagem da denúncia" class="img-fluid" />
                                 </div>
                             </label>
                         </div>
@@ -114,3 +114,13 @@
         </div>
     </div>
 </div>
+
+@if (Model.Denunciation.Media != null)
+{
+    <script>
+        window.addEventListener('load', function () {
+            console.log('Página carregada');
+            getPictureData('Denunciations', 'Media', '@Model.Denunciation.Id');
+        });
+    </script>
+}
