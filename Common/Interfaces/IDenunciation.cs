@@ -1,5 +1,4 @@
-﻿using Common.Others;
-using static Common.Others.MyEnuns;
+﻿using static Common.Others.MyEnuns;
 
 namespace Common.Interfaces
 {
