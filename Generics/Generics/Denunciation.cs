@@ -1,14 +1,28 @@
-﻿using Business.Repository.DAO;
-using Business.Repository;
-using Common.Interfaces;
-using Microsoft.Data.SqlClient;
+﻿using Common.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using System.Text;
+using System.Threading.Tasks;
 using static Common.Others.MyEnuns;
-using Common.Others;
 
 namespace Business.Generics
 {
     public class Denunciation : IDenunciation
     {
+        /// <summary>
+        /// Insert
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="idInformer"></param>
+        /// <param name="idAgent"></param>
+        /// <param name="idAddress"></param>
+        /// <param name="dataDenunciation"></param>
+        /// <param name="dataVisit"></param>
+        /// <param name="media"></param>
+        /// <param name="isAnswered"></param>
+
         public Denunciation()
         {
         }
@@ -18,65 +32,62 @@ namespace Business.Generics
         /// </summary>
         /// <param name="id"></param>
         /// <param name="idInformer"></param>
-        /// <param name="address"></param>
-        /// <param name="comment"></param>
-        /// <param name="focusType"></param>
-        /// <param name="media"></param>
-        /// <param name="stage"></param>
-        /// <param name="isAnswered"></param>
+        /// <param name="idAgent"></param>
         /// <param name="dataDenunciation"></param>
-        public Denunciation(int id, int idInformer, IAddress address, string comment, MyEnuns.FocusType focusType, byte[] media, MyEnuns.DenunciationStage stage, bool isAnswered, DateTime dataDenunciation)
+        /// <param name="dataVisit"></param>
+        /// <param name="media"></param>
+        /// <param name="isAnswered"></param>
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, FocusType focusType)
         {
             Id = id;
             IdInformer = idInformer;
             Address = address;
-            Comment = comment;
-            FocusType = focusType;
-            Media = media;
-            Stage = stage;
-            IsAnswered = isAnswered;
             DataDenunciation = dataDenunciation;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = focusType;
+            this.Media = media;
+        }
+
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, int focusType)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            Address = address;
+            DataDenunciation = dataDenunciation;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = (FocusType)focusType;
+            this.Media = media;
+        }
+
+        public Denunciation(int id, int idInformer, IAddress address1, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            DataDenunciation = dataDenunciation;
+            Stage = stage;
+            Address = address;
+        }
+
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, FocusType focusType, string comment)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            DataDenunciation = dataDenunciation;
+            Address = address;
+            Media = media;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = (FocusType)focusType;
+            Comment = comment;
         }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }
-        public IAddress Address { get; set; }
-        public string Comment { get; set; }
-        public MyEnuns.FocusType FocusType { get; set; }
-        public byte[]? Media { get; set; }
-        public MyEnuns.DenunciationStage Stage { get; set; }
-        public bool IsAnswered { get; set; }
         public DateTime DataDenunciation { get; set; }
-
-        public static IDenunciation GetOne(int id)
-        {
-            IDenunciation model = null;
-            using (var conn = new SqlConnection(DBConnect.Connect()))
-            {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, Comment, FocusType, Media, Stage, IsAnswered, DataDenunciation FROM Denunciations WHERE Id = @Id";
-                cmd.Parameters.AddWithValue("@Id", id);
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (string)reader["Comment"],
-                            (FocusType)reader["FocusType"],
-                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
-                            (DenunciationStage)reader["Stage"],
-                            (bool)reader["IsAnswered"],
-                            (DateTime)reader["DataDenunciation"]
-                        );
-                    }
-                }
-            }
-            return model;
-        }
+        public byte[] Media { get; set; }
+        public string MediaName { get; set; }
+        public DenunciationStage Stage { get; set; }
+        public IAddress Address { get; set; }
+        public FocusType FocusType { get; set; }
+        public string Comment { get; set; }
     }
 }
