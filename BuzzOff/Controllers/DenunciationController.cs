@@ -1,17 +1,9 @@
-﻿using Azure;
-using Business.Generics;
-using Business.Repository;
+﻿using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace BuzzOff.Controllers
 {
@@ -56,7 +48,6 @@ namespace BuzzOff.Controllers
                     nameImage = image.FileName;
 
                     denunciation.Media = convertedMedia;
-                    denunciation.MediaName = nameImage;
                 }
 
             }
@@ -105,6 +96,21 @@ namespace BuzzOff.Controllers
             ViewBag.Message = "Acompanhar denúncia";
             var model = new DenunciationAddressModel(DenunciationDAO.GetOne(id));
             return View(model);
+        }
+
+        public IActionResult Media(int id)
+        {
+            IDenunciation model = Business.Generics.Denunciation.GetOne(id);
+
+            return View(new DenunciationModel()
+            {
+                Id = model.Id,
+                IdInformer = model.IdInformer,
+                Comment = model.Comment,
+                Address = model.Address,
+                DataDenunciation = model.DataDenunciation,
+                Media = model.Media,
+            });
         }
     }
 }

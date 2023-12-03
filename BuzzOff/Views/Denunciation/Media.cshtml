@@ -1,0 +1,21 @@
+﻿@model DenunciationModel
+@{
+    ViewData["Title"] = "Media";
+}
+
+<div class="col-md-3 d-flex align-items-center justify-content-center">
+    <div class="form-group">
+        <label for="uploadFoto" style="cursor: pointer;">
+            <div id="fotoPreview" class="rounded-circle border bg-light" style="width: 12rem; height: 12rem;">
+                <img id="fotoDisplay" style="width: 12rem; height: 12rem;" alt="Media da denúncia" class="img-fluid rounded-circle">
+            </div>
+        </label>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', function () {
+        console.log('Página carregada');
+        getPictureData('Denunciations', 'Media', '@Model.Id');
+    });
+</script>

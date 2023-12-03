@@ -11,7 +11,7 @@ namespace BuzzOff.Controllers
         [HttpGet]
         public IActionResult GetPictureData([FromQuery] FileModel fileModel)
         {
-            Business.Repository.MidiaConverter.FileAccess fileAccess = new(fileModel.Table, fileModel.Column, fileModel.Id);
+            Business.Utils.FileAccess fileAccess = new(fileModel.Table, fileModel.Column, fileModel.Id);
             var file = fileAccess.GetFile();
 
             if (file.Data != null)
