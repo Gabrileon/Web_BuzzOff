@@ -5,7 +5,7 @@ namespace BuzzOff.Models
     public class CountFocusesModel
     {
         public List<ICountFocus> CountFocus { get; set; } = new List<ICountFocus>();    
-        public List<int> TotalFocus { get; set; } = new List<int>();
+        int TotalFocus { get; set; }
         public List<ICoordinate> Coordenate { get; set; } = new List<ICoordinate>();
     }
 }
