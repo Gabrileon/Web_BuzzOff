@@ -21,14 +21,20 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType) " +
-                                  "VALUES (@IdInformer, @IdAddress, @DataDenunciation, @Media, @IsAnswered, @FocusType)";
+                cmd.CommandText = $"INSERT INTO Denunciations (IdInformer, IdAddress, DataDenunciation{(model.Media != null ? ", Media, MediaName" : string.Empty)}, Comment, Stage, FocusType) " +
+                                  $"VALUES (@IdInformer, @IdAddress, @DataDenunciation{(model.Media != null ? ", @Media, @MediaName" : string.Empty)}, @Comment, @Stage, @FocusType)";
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
-                cmd.Parameters.AddWithValue("@Media", model.Media);
                 cmd.Parameters.AddWithValue("@FocusType", (int)model.FocusType);
-                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
+                cmd.Parameters.AddWithValue("@Stage", model.Stage);
+                cmd.Parameters.AddWithValue("@Comment", model.Comment);
+
+                if(model.Media != null)
+                {
+                    cmd.Parameters.AddWithValue("@Media", model.Media);
+                    cmd.Parameters.AddWithValue("@MediaName", model.MediaName);
+                }
 
                 return cmd.ExecuteNonQuery();
             }
@@ -45,14 +51,14 @@ namespace Business.Repository
                     "IdAddress = @IdAddress," +
                     "DataDenunciation = @DataDenunciation, " +
                     "Media = @Media, " +
-                    "IsAnswered = @IsAnswered" +
+                    "Stage = @IsAnswered" +
                     " WHERE Id = @Id";
 
                 cmd.Parameters.AddWithValue("@IdInformer", model.IdInformer);
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
                 cmd.Parameters.AddWithValue("@Media", model.Media);
-                cmd.Parameters.AddWithValue("@IsAnswered", model.Stage);
+                cmd.Parameters.AddWithValue("@Stage", model.Stage);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
                 cmd.ExecuteNonQuery();
@@ -66,22 +72,25 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType FROM Denunciations WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, MediaName, Stage, FocusType, Comment FROM Denunciations WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
-                            (int)reader["IsAnswered"],
-                            (FocusType)reader["FocusType"]
-                        );
+                        model = new Denunciation()
+                        {
+                            Id = (int)reader["Id"],
+                            IdInformer = (int)reader["IdInformer"],
+                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                            DataDenunciation = (DateTime)reader["DataDenunciation"],
+                            Media = reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            MediaName = reader["MediaName"] != DBNull.Value ? (string)reader["MediaName"] : null,
+                            Stage = (DenunciationStage)reader["Stage"],
+                            FocusType = (FocusType)reader["FocusType"],
+                            Comment = reader["Comment"] != DBNull.Value ? (string)reader["Comment"] : null
+                        };
                     }
                 }
             }
@@ -96,22 +105,26 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, MediaName, Stage, FocusType, Comment FROM Denunciations WHERE IdInformer = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
-                            (int)reader["IsAnswered"],
-                            (int)reader["FocusType"]
-                        );
+                        IDenunciation model = new Denunciation()
+                        {
+                            Id = (int)reader["Id"],
+                            IdInformer = (int)reader["IdInformer"],
+                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                            DataDenunciation = (DateTime)reader["DataDenunciation"],
+                            Media = reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            MediaName = reader["MediaName"] != DBNull.Value ? (string)reader["MediaName"] : null,
+                            Stage = (DenunciationStage)reader["Stage"],
+                            FocusType = (FocusType)reader["FocusType"],
+                            Comment = reader["Comment"] != DBNull.Value ? (string)reader["Comment"] : null
+                        };
+
                         list.Add(model);
                     }
                 }
@@ -126,7 +139,7 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, Stage, FocusType FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.Parameters.AddWithValue("@B", b);
 
@@ -140,7 +153,7 @@ namespace Business.Repository
                             AddressDAO.GetOne((int)reader["IdAddress"]),
                             (DateTime)reader["DataDenunciation"],
                             (byte[])reader["Media"],
-                            (int)reader["IsAnswered"],
+                            (int)reader["Stage"],
                             (FocusType)reader["FocusType"]
                         );
                         list.Add(model);
@@ -157,47 +170,20 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType FROM Denunciations";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, Stage FROM Denunciations";
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            (byte[])reader["Media"],
-                            (int)reader["IsAnswered"],
-                            (MyEnuns.FocusType)reader["FocusType"]
-                        );
-                        list.Add(model);
-                    }
-                }
-            }
-            return list;
-        }
-        public static List<IDenunciation> GetAllPendent()
-        {
-            var list = new List<IDenunciation>();
-            using (var conn = new SqlConnection(DBConnect.Connect()))
-            {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered FROM Denunciations WHERE IsAnswered = 1";
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        IDenunciation model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            (DateTime)reader["DataDenunciation"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (byte[])reader["Media"]
-                        );
+                        IDenunciation model = new Denunciation()
+                        {
+                            Id = (int)reader["Id"],
+                            IdInformer = (int)reader["IdInformer"],
+                            Stage = (MyEnuns.DenunciationStage)reader["Stage"],
+                            DataDenunciation = (DateTime)reader["DataDenunciation"],
+                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                        };
                         list.Add(model);
                     }
                 }

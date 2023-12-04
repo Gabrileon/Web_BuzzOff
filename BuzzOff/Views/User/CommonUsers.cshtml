@@ -3,7 +3,7 @@
     ViewData["Title"] = "Opções";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
+<div class="table-permissions">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -21,7 +21,7 @@
                     <td>@user.CPF</td>
                     <td>@user.Email</td>
                     <td>
-                        <a type="button" class="btn btn-danger" asp-controller="User" asp-action="UpdateAccessLevel" asp-route-id="@user.Id">Dar Permissão</a>
+                        <a type="button" class="btn btn-danger" asp-controller="User" asp-action="UpdateAccessLevel" asp-route-id="@user.Id">Alterar permissão</a>
                     </td>
                 </tr>
             }

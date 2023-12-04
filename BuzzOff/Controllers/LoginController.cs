@@ -40,7 +40,7 @@ namespace BuzzOff.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError(string.Empty,"Credenciais inválidas");
+            ModelState.AddModelError(string.Empty,"CPF ou senha incorretos");
 
             return View(user);
         }
