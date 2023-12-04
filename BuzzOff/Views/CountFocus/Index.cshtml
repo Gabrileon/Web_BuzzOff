@@ -24,17 +24,14 @@
                 <tr>
                     <td>@focus.Neighborhood</td>
                     <td>
-                        @focus.Counts<progress class="w-50 float-end" value="@focus.Counts" max="@foreach(var count in Model.TotalFocus){@count}"></progress>
+                        @focus.Counts<progress class="w-50 float-end" value="@focus.Counts" max="@Model.TotalFocus"></progress>
                     </td>
                 </tr>
-            }
-            @foreach(var count in Model.TotalFocus)
-            {
+            }                      
             <tr>
                     <td><strong>Total de Focos</strong></td>
-                    <td>@count</td>
-            </tr>
-            }
+                    <td>@Model.TotalFocus</td>
+            </tr>           
         </tbody>
     </table>
 </div>

@@ -23,6 +23,8 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Add(VisitModel model, bool isFocus)
         {
+            var id = Convert.ToInt32(HttpContext.User.Claims.First().Value);           
+            model.Id = id;
             model.DateVisit = DateTime.Now;
             VisitDAO.Insert(model);
             if (isFocus)
