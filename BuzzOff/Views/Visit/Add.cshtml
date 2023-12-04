@@ -8,7 +8,7 @@
     <form style="margin-left:25px" class="form-control w-50 d-flex flex-column"asp-action="Add" asp-controller="Visit" method="post" class="form-visit w-50 d-flex">
         <legend>Informe o relatório sobre a visita</legend>
         <textarea class="form-control" placeholder="Obrigatório" rows="7" cols="35" asp-for="Assessment"></textarea>
-        <label><input type="checkbox" name="isFocus" required/>É um foco</label>
+        <label><input type="checkbox" name="isFocus" value="true" />É um foco</label>
         <button type="submit" class="btn btn-success">Enviar</button>
     </form>
 
