@@ -3,7 +3,6 @@ using Business.Repository.DAO;
 using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Business.Repository.DAO;
 namespace BuzzOff.Controllers
 {
     public class CountFocusController : Controller
@@ -12,7 +11,12 @@ namespace BuzzOff.Controllers
         {
             ViewBag.Message = "Mapa de Focos";
             int countTotal = CountFocusDAO.AmountByErradicated(false);
-            var model = new CountFocusesModel();
+            var model = new CountFocusesModel();            
+            model.TotalFocus = countTotal;
+            foreach (var focus in CountFocusDAO.CountAllErraticated(false))
+            {
+                model.CountFocus.Add(new CountFocusModel(focus));
+            }
             // Popule o modelo com dados, como você já está fazendo
 
             // Criar lista de features GeoJSON para cada bairro
