@@ -96,23 +96,25 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
+                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, IsAnswered, FocusType FROM Denunciations WHERE IdInformer = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation(
-                            (int)reader["Id"],
-                            (int)reader["IdInformer"],
-                            AddressDAO.GetOne((int)reader["IdAddress"]),
-                            (DateTime)reader["DataDenunciation"],
-                            reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
-                            (int)reader["IsAnswered"],
-                            (int)reader["FocusType"]
-                        );
-                        list.Add(model);
+                        IDenunciation model = new Denunciation()
+                        {
+                            Id = (int)reader["Id"],
+                            IdInformer = (int)reader["IdInformer"],
+                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+                            DataDenunciation = (DateTime)reader["DataDenunciation"],
+                            Media = reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+                            Stage = (DenunciationStage)reader["IsAnswered"],
+                            FocusType = (FocusType)reader["FocusType"],
+                            Comment = (string)reader["Comment"]
+                        };
+                    list.Add(model);
                     }
                 }
             }
