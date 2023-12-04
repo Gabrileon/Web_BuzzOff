@@ -31,13 +31,14 @@ namespace Business.Generics
         /// <param name="idAddress"></param>
         /// <param name="type"></param>
         /// <param name="isEradicated"></param>
-        public DengueFocus(int id, int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
+        public DengueFocus(int id, int idAddress, int IdVisit, bool isEradicated, MyEnuns.FocusType type, MyEnuns.Priority priority)
         {
             this.Id = id;
             this.IdAddress = idAddress;
             this.IdVisit = IdVisit;
             this.Type = type;
             this.IsEradicated = isEradicated;
+            this.Priority = priority;
         }
 
         public int Id { get; set; }

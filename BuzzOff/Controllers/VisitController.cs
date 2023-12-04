@@ -28,7 +28,7 @@ namespace BuzzOff.Controllers
             if (isFocus)
             {
                 // Retorna ao método de adição na tabela DengueFocus
-                return RedirectToAction("DengueFocus","Index");
+                return RedirectToAction("Solicitation");
 
             }
             else
@@ -37,6 +37,14 @@ namespace BuzzOff.Controllers
                 return RedirectToAction("Visit","Index");
             }
         }
-
+        public IActionResult Solicitation()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddFocusDengue(int Id)
+        {
+            return RedirectToAction("Visit", "Index");
+        }
     }
 }

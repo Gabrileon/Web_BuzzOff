@@ -18,13 +18,14 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO DengueFocus (IdAddress, IdVisit, Type, IsEradicated) " +
-                                  "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated)";
+                cmd.CommandText = "INSERT INTO DengueFocus (IdAddress, IdVisit, Type, IsEradicated, Priority) " +
+                                  "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated, @Priority)";
 
                 cmd.Parameters.AddWithValue("@IdVisit", model.IdVisit);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
+                cmd.Parameters.AddWithValue("@IsEradicated", model.IsEradicated);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
-                cmd.Parameters.AddWithValue("@IsEradicated", 0);
+                cmd.Parameters.AddWithValue("@Priority", (int)model.Priority);
 
                 cmd.ExecuteNonQuery();
             }
@@ -41,6 +42,7 @@ namespace Business.Repository.DAO
                     "IdVisit =  @Idvisit" +
                     "Type = @Type, " +
                     "IsEradicated = @IsEradicated " +
+                    "Priority = @Priority " +
                     "WHERE Id = @Id";
 
 
@@ -49,6 +51,7 @@ namespace Business.Repository.DAO
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
                 cmd.Parameters.AddWithValue("@IsEradicated", (bool)model.IsEradicated);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
+                cmd.Parameters.AddWithValue("@Priority", (int)model.Priority);
 
                 cmd.ExecuteNonQuery();
             }
@@ -61,7 +64,7 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, IdVisit, Type, IsEradicated  FROM DengueFocus WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, Type, IsEradicated, Priority  FROM DengueFocus WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -72,8 +75,9 @@ namespace Business.Repository.DAO
                             (int)reader["Id"],
                             (int)reader["IdAddress"],
                             (int)reader["IdVisit"],
+                            (bool)reader["IsEradicated"],
                             (MyEnuns.FocusType)reader["Type"],
-                            (bool)reader["IsEradicated"]
+                            (MyEnuns.Priority)reader["Priority"]
                         );
                     }
                 }
@@ -88,7 +92,7 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, IdVisit, Type, IsEradicated  FROM DengueFocus";
+                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, Type, IsEradicated, Priority  FROM DengueFocus WHERE ID";
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -98,8 +102,9 @@ namespace Business.Repository.DAO
                             (int)reader["Id"],
                             (int)reader["IdAddress"],
                             (int)reader["IdVisit"],
+                            (bool)reader["IsEradicated"],
                             (MyEnuns.FocusType)reader["Type"],
-                            (bool)reader["IsEradicated"]
+                            (MyEnuns.Priority)reader["Priority"]
                         );
 
                         list.Add(model);
