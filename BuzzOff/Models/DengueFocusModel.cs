@@ -16,10 +16,10 @@ namespace BuzzOff.Models
         /// <param name="idAddress"></param>
         /// <param name="type"></param>
         /// <param name="isEradicated"></param>
-        public DengueFocusModel(int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
+        public DengueFocusModel(IAddress idAddress, IVisit IdVisit, MyEnuns.FocusType type, bool isEradicated)
         {            
-            this.IdAddress = idAddress;
-            this.IdVisit = IdVisit;
+            this.Address = idAddress;
+            this.Visit = IdVisit;
             this.Type = type;
             this.IsEradicated = false;
         }
@@ -30,18 +30,18 @@ namespace BuzzOff.Models
         /// <param name="idAddress"></param>
         /// <param name="type"></param>
         /// <param name="isEradicated"></param>
-        public DengueFocusModel(int id, int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
+        public DengueFocusModel(int id, IAddress idAddress, IVisit IdVisit, MyEnuns.FocusType type, bool isEradicated)
         {
             this.Id = id;
-            this.IdAddress = idAddress;
-            this.IdVisit = IdVisit;
+            this.Address = idAddress;
+            this.Visit = IdVisit;
             this.Type = type;
             this.IsEradicated = isEradicated;
         }
 
         public int Id { get; set; }
-        public int IdAddress { get; set; }
-        public int IdVisit { get; set; }
+        public IAddress Address { get; set; }
+        public IVisit Visit { get; set; }
         public MyEnuns.FocusType Type { get; set; }
         public MyEnuns.Priority Priority { get; set; }
         public bool IsEradicated { get; set; }

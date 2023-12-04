@@ -1,19 +1,14 @@
 ﻿using Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Business.Generics
+namespace BuzzOff.Models
 {
-    internal class Coordinate: ICoordinate
+    public class CoordinateModel: ICoordinate
     {
-        public Coordinate()
+        public CoordinateModel()
         {
-
+            
         }
-        public Coordinate(int id, string neighborhood, decimal latitude, decimal longitude)
+        public CoordinateModel(int id, string neighborhood, decimal latitude, decimal longitude)
         {
             Id = id;
             Neighborhood = neighborhood;

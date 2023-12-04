@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    public class CountFocusDAO
+     public class CountFocusDAO
     {
         /// <summary>
         /// true para focos erradicados.
@@ -157,6 +157,7 @@ namespace Business.Repository.DAO
             }
         }
 
-
+        
     }
 }
+
