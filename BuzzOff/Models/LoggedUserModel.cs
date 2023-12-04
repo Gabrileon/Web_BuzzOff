@@ -7,9 +7,9 @@ namespace BuzzOff.Models
     public class LoggedUserModel : ILoggedUser
     {
         
-        public string Name { get; set; }
-        //[Required(ErrorMessage = "O campo email é obrigatório")]
-        public string Email { get; set; }
+        //public string Name { get; set; }
+        ////[Required(ErrorMessage = "O campo email é obrigatório")]
+        //public string Email { get; set; }
         [Required(ErrorMessage = "O campo senha é obrigatório.")]
         public string Password { get; set; }
         

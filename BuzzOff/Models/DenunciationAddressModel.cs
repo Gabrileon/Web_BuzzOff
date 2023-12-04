@@ -10,5 +10,13 @@ namespace BuzzOff.Models
 
         // Adress
         public AddressModel Address { get; set; }
+
+        public DenunciationAddressModel() { }
+
+        public DenunciationAddressModel(IDenunciation denunciation) 
+        {
+            Denunciation = new DenunciationModel(denunciation);
+            Address = new AddressModel(Denunciation.Address);
+        }
     }
 }

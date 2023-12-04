@@ -56,11 +56,12 @@ namespace BuzzOff.Controllers
                     nameImage = image.FileName;
 
                     denunciation.Media = convertedMedia;
+                    denunciation.MediaName = nameImage;
                 }
 
             }
 
-            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.Pendent;
+            denunciation.Stage = Common.Others.MyEnuns.DenunciationStage.NotAnswered;
             denunciation.DataDenunciation = DateTime.Now;
 
             DenunciationDAO.Insert(denunciation);
@@ -96,6 +97,13 @@ namespace BuzzOff.Controllers
 
             ViewBag.Message = "Minhas denúncias";
 
+            return View(model);
+        }
+
+        public IActionResult SeeDenunciation(int id)
+        {
+            ViewBag.Message = "Acompanhar denúncia";
+            var model = new DenunciationAddressModel(DenunciationDAO.GetOne(id));
             return View(model);
         }
     }

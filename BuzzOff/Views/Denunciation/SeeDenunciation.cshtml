@@ -1,0 +1,126 @@
+﻿@using static Common.Others.MyEnuns;
+<link rel="stylesheet" href="~/css/Denunciation.css" asp-append-version="true" />
+@model DenunciationAddressModel
+@functions {
+    public string TranslateStage(DenunciationStage stage)
+    {
+        switch (stage)
+        {
+            case DenunciationStage.NotAnswered:
+                return "Não respondida";
+            case DenunciationStage.Pendent:
+                return "Pendente";
+            case DenunciationStage.Completed:
+                return "Completa";
+            default:
+                return "Undefined";
+        }
+    }
+}
+@{
+    ViewData["Title"] = "Ver minha denúncia";
+}
+
+<div class="d-flex flex-row">
+    <div class="left-side">
+        <div class="header container">
+            <div class="row">
+                <div class="col">
+                    <span class="txtCadastro">Minha denúncia</span>
+                </div>
+            </div>
+        </div>
+        <div class="form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="street">Logradouro</label>
+                                        <input type="text" class="form-control" id="street" value="@Model.Address.Street" readonly />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="number">Número</label>
+                                        <input type="text" class="form-control" id="number" value="@Model.Address.Number" readonly />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="neighborhood">Bairro</label>
+                                        <input type="text" class="form-control" id="neighborhood" value="@Model.Address.Neighborhood" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="reference">Referência (opcional)</label>
+                                        <input type="text" class="form-control" id="reference" value="@Model.Address.Reference" readonly />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="city">Cidade</label>
+                                        <input type="text" class="form-control" id="city" value="@Model.Address.City" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="comment">Comentário (opcional)</label>
+                                        <input type="text" class="form-control" id="comment" value="@Model.Denunciation.Comment" readonly />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3 ">
+                                        <label for="focusType">Tipo da denúncia</label>
+                                        <input type="text" class="form-control" id="comment" value="@Model.Denunciation.FocusType" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3">
+                                        <label for="comment">Data da denúncia</label>
+                                        <input type="text" class="form-control" id="comment" value="@Model.Denunciation.DataDenunciation" readonly />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex flex-column mx-3 ">
+                                        <label for="focusType">Estágio da denúncia</label>
+                                        <input type="text" class="form-control" id="comment" value="@TranslateStage(Model.Denunciation.Stage)" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+
+                        <div class="form-group">
+                            <label for="uploadFoto" style="cursor: pointer;">
+                                <div id="fotoPreview" class="border bg-light" style="width: 15rem; height: 15rem;">
+                                    <img id="fotoDisplay" style="width: 15rem; height: 15rem;" src="/img/semFoto.svg" alt="Imagem da denúncia" class="img-fluid" />
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.Denunciation.FormFile != null)
+{
+    <script>
+        window.addEventListener('load', function () {
+            console.log('Página carregada');
+            getPictureData('Denunciations', 'Media', '@Model.Denunciation.Id');
+        });
+    </script>
+}

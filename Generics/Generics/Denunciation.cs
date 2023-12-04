@@ -83,10 +83,23 @@ namespace Business.Generics
             Address = address;
         }
 
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, FocusType focusType, string comment) 
+        {
+            Id = id;
+            IdInformer = idInformer;
+            DataDenunciation = dataDenunciation;
+            Address = address;
+            Media = media;
+            Stage = (DenunciationStage)isAnswered;
+            FocusType = (FocusType)focusType;
+            Comment = comment;
+        }
+
         public int Id { get; set; }
         public int IdInformer { get; set; }
         public DateTime DataDenunciation { get; set; }
         public byte[] Media { get; set; }
+        public string MediaName { get; set; }
         public DenunciationStage Stage { get; set; }
         public IAddress Address { get; set; }
         public FocusType FocusType { get; set; }

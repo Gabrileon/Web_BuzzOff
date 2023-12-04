@@ -80,7 +80,7 @@ namespace BuzzOff.Controllers
 
             var user = UserDAO.GetOne(id);
             UserModel model = new()
-            {
+            {               
                 Name = user.Name,
                 Email = user.Email,
                 AccessLevel = user.AccessLevel,
