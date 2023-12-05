@@ -9,12 +9,12 @@ namespace BuzzOff.Controllers
         public IActionResult Index()
         {
             ViewBag.Message = "Mapa de Focos";
-            int countTotal = CountFocusDAO.AmountByErradicated(false);            
+            int countTotal = CountFocusDAO.AmountByErradicated(false);
             var model = new CountFocusesModel();
-            model.TotalFocus.Add(countTotal);
+            model.TotalFocus = countTotal;
             foreach (var focus in CountFocusDAO.CountByErraticatedAndNeighborhood(false))
             {
-                model.CountFocus.Add(new CountFocusModel(focus));                
+                model.CountFocus.Add(new CountFocusModel(focus));
             }
             return View(model);
         }

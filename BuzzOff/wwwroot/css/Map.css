@@ -57,29 +57,48 @@ li{
 }
 
 progress{
-    display:block;
     -webkit-appearance:none;
     margin-top:4.5%;
 }
 
     progress::-webkit-progress-value {
-        background: #db0000;
-        border-radius: 10px
+        background: #84CC16;
+        border-radius: 10px;
+        width: 105%;
     }
 
-    progress::-webkit-progress-bar {
-        background: white;       
+   progress::-webkit-progress-bar {
         border-radius: 20px
     }
 
-    progress::-moz-progress-bar {
-        background: black;
+   progress::-moz-progress-bar {
+        background: unset;
         border-radius: 20px
     }
 
-thead {
+.thead {
     background-color: #2F3C33;
-    border: double black 2px;
-    color: white;
+    color: #84CC16;
+    font-weight: bolder;
 }
 
+.neighborhood {
+    font-weight: bolder;
+}
+
+.col {
+    text-align: center;
+}
+
+.inside {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+progress{
+    background-color: white;
+}
+
+.container{
+    font-size: larger;
+}

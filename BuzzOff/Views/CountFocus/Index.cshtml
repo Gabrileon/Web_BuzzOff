@@ -4,39 +4,71 @@
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
 
-<div class="page w-30">
-    <img src="~/img/Campanha.svg" alt="Campanha" img-alig="left" class="d-flex, w-30 ">
-    <div class="d-flex justify-content-start m-2 ">Fonte: Ministério da Saúde <div class="divisao"></div> <div>Atualizado 23/11/2023</div></div>
 
-</div>
+<div class="d-flex flex-row justify-content-between" style="width: 98vw">
+    <div class="page">
+        <img src="~/img/Campanha.svg" alt="Campanha" img-alig="left" class="d-flex, w-30 ">
+        <div class="d-flex justify-content-start m-2 ">Fonte: Ministério da Saúde <div class="divisao"></div> <div>Atualizado 23/11/2023</div></div>
+    </div>
 
-<div class="informations w-50">
-    <table class="table" id="table-map">
-        <thead>
-            <tr>
-                <th>Bairros</th>
-                <th>Focos</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="informations w-75">
+        <div class="container" style="border: 2px black solid; width: 100%">
+            <div class="row thead">
+                <div class="col">
+                    <div class="title">BAIRROS</div>
+                </div>
+                <div class="col">
+                    <div class="title">FOCOS</div>
+                </div>
+                <div class="col">
+                </div>
+            </div>
             @foreach (var focus in Model.CountFocus)
             {
-                <tr>
-                    <td>@focus.Neighborhood</td>
-                    <td>
-                        @focus.Counts<progress class="w-50 float-end" value="@focus.Counts" max="@foreach(var count in Model.TotalFocus){@count}"></progress>
-                    </td>
-                </tr>
+                <div class="row">
+                    <div class="col inside neighborhood">@focus.Neighborhood</div>
+                    <div class="col inside focos">@focus.Counts</div>
+                    <div class="col inside"><progress style="background-color: white" class="progress-bar" value="@focus.Counts" max="@Model.TotalFocus"></progress></div>
+                </div>
             }
-            @foreach(var count in Model.TotalFocus)
-            {
-            <tr>
-                    <td><strong>Total de Focos</strong></td>
-                    <td>@count</td>
-            </tr>
-            }
+            <div class="row thead">
+                <div class="col">
+                    <div class="title">TOTAL DE FOCOS</div>
+                </div>
+                <div class="col">
+                    <div class="title">@Model.TotalFocus</div>
+                </div>
+                <div class="col">
+                    <div class="col"><progress style="background-color: #2F3C33" class="progress-bar" value="@Model.TotalFocus" max="@Model.TotalFocus"></progress></div>
+                </div>
+            </div>
+        </div>
+
+        @*<table class="table" id="table-map">
+        <thead>
+        <tr>
+        <th>Bairros</th>
+        <th>Focos</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var focus in Model.CountFocus)
+        {
+        <tr>
+        <td>@focus.Neighborhood</td>
+        <td>
+        @focus.Counts
+        <progress class="w-50 float-end" value="@focus.Counts" max="@Model.TotalFocus"></progress>
+        </td>
+        </tr>
+        }
+        <tr>
+        <td><strong>Total de Focos</strong></td>
+        <td>@Model.TotalFocus</td>
+        </tr>
         </tbody>
-    </table>
+        </table>*@
+    </div>
 </div>
 @*<div class="circles">
     <ul>
