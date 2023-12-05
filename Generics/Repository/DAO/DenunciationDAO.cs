@@ -52,7 +52,7 @@ namespace Business.Repository
                     "DataDenunciation = @DataDenunciation, " +
                     "Media = @Media, " +
                     "MediaName = @MediaName, " +
-                    "Stage = @IsAnswered" +
+                    "Stage = @Stage, " +
                     "Comment = @Comment" +
                     " WHERE Id = @Id";
 
@@ -60,10 +60,11 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@DataDenunciation", model.DataDenunciation);
                 cmd.Parameters.AddWithValue("@FocusType", (int)model.FocusType);
-                cmd.Parameters.AddWithValue("@Stage", model.Stage);
+                cmd.Parameters.AddWithValue("@Stage", (int)model.Stage);
                 cmd.Parameters.AddWithValue("@Comment", model.Comment);
                 cmd.Parameters.AddWithValue("@Media", model.Media);
                 cmd.Parameters.AddWithValue("@MediaName", model.MediaName);
+                cmd.Parameters.AddWithValue("@Id", model.Id);
 
                 cmd.ExecuteNonQuery();
             }

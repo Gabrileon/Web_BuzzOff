@@ -77,7 +77,7 @@ namespace Business.Repository.DAO
                 cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
 
                 cmd.Parameters.Add(new SqlParameter("@IDAGENT", visit.IdAgent));
-                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", visit.Denunciation));
+                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", visit.Denunciation.Id));
                 cmd.Parameters.Add(new SqlParameter("@DATAVISIT", visit.DateVisit));
                 cmd.Parameters.Add(new SqlParameter("@ASSESMENT", visit.Assessment));
                 return cmd.ExecuteNonQuery();

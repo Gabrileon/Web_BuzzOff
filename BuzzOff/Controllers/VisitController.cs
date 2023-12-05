@@ -18,29 +18,27 @@ namespace BuzzOff.Controllers
             };
             return View(model);
         }
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
             ViewBag.Message = "Informe sobre a visita";
             return View();
         }
         [HttpPost]
-        public IActionResult Add(VisitModel model, bool isFocus)
-        {            
+        public IActionResult Add(VisitModel model, bool isFocus, int id)
+        {
             model.IdAgent = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            model.Denunciation = DenunciationDAO.GetOne(id);
             model.DateVisit = DateTime.Now;
+            model.Denunciation.Stage = MyEnuns.DenunciationStage.Pendent;
+            DenunciationDAO.Update(model.Denunciation);
+            VisitDAO.Insert(model);
             if (isFocus)
             {
-                model.Denunciation.Stage = MyEnuns.DenunciationStage.Pendent;
-                VisitDAO.Insert(model);
+
                 // Retorna ao método de adição na tabela DengueFocus
-                return RedirectToAction("Solicitation");
 
             }
-            else
-            {
-                //Retorna a listagem de visitas feitas pelo agente
-                return RedirectToAction("Visit","Index");
-            }
+                return RedirectToAction("Visit", "Index");
         }
         public IActionResult Solicitation()
         {
