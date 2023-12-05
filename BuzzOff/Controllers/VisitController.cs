@@ -4,6 +4,7 @@ using BuzzOff.Models;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Common.Others;
 
 namespace BuzzOff.Controllers
 {
@@ -26,8 +27,8 @@ namespace BuzzOff.Controllers
         }
         [HttpPost]
         public IActionResult Add(VisitModel model, bool isFocus)
-        {
-            model.Id = Convert.ToInt32(HttpContext.User.Claims.First().Value); 
+        {            
+            model.IdAgent = Convert.ToInt32(HttpContext.User.Claims.First().Value);
             model.DateVisit = DateTime.Now;
             VisitDAO.Insert(model);
             if (isFocus)
