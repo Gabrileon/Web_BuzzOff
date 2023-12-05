@@ -121,8 +121,8 @@ namespace BuzzOff.Models
         public string MediaName { get; set; }
         public IAddress Address { get; set; }
         public MyEnuns.DenunciationStage Stage { get; set; }
-        public MyEnuns.FocusType FocusType { get; set; }
         public string Comment { get; set; }
+        public MyEnuns.FocusType FocusType { get; set; }        
         public IFormFile FormFile { get; set; }
     }
 }

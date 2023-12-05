@@ -190,7 +190,6 @@ namespace Business.Repository
             }
             return list;
         }
-
         public static void Delete(int id)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))

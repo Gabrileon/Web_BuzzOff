@@ -17,6 +17,10 @@ namespace BuzzOff.Models
             DateVisit = dateVisit;
             Assessment = assessment;
         }
+        public VisitModel()
+        {
+
+        }
 
         public int Id { get; set; }
         public int IdAgent { get; set; }

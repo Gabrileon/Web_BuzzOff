@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class VisitModels
+    public class VisitsModel
     {
-        public List<VisitModel> Visits { get; set; } = new List<VisitModel>();
+        public List<IVisit> Visits { get; set; } = new List<IVisit>();
 
     }
 }

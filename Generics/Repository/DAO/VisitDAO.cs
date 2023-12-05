@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    internal class VisitDAO
+    public class VisitDAO
     {
         public static List<IVisit> GetAll()
         {
@@ -67,7 +67,7 @@ namespace Business.Repository.DAO
             }
             return null;
         }
-        public static void Insert(int idAgent, int idDenunciation, DateTime dateTime, string assessment)
+        public static int Insert(IVisit visit)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -76,34 +76,35 @@ namespace Business.Repository.DAO
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
 
-                cmd.Parameters.Add(new SqlParameter("@IDAGENT", idAgent));
-                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", idDenunciation));
-                cmd.Parameters.Add(new SqlParameter("@DATAVISIT", dateTime));
-                cmd.Parameters.Add(new SqlParameter("@ASSESMENT", assessment));
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.Add(new SqlParameter("@IDAGENT", visit.IdAgent));
+                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", visit.IdDenunciation));
+                cmd.Parameters.Add(new SqlParameter("@DATAVISIT", visit.DateVisit));
+                cmd.Parameters.Add(new SqlParameter("@ASSESMENT", visit.Assessment));
+                return cmd.ExecuteNonQuery();
+                
             }
         }
-        public static List<IVisit> GetAllVisitsAgent()
+        public static List<IVisit> GetAllVisitsAgent(int id)
         {
             var list = new List<IVisit>();
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT ID, NAME, EMAIL, CPF, ACCESSLEVEL FROM Visit";
-
+                cmd.CommandText = "SELECT ID, IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT FROM VISITS WHERE IDAGENT = @IDAGENT";
+                cmd.Parameters.Add(new SqlParameter("@IDAGENT", id));
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        //IVisit model = new Visit(
-                        //    reader.GetString(1),
-                        //    reader.GetString(2),
-                        //    reader.GetString(3),
-                        //    (MyEnuns.Access)reader.GetInt32(4),
-                        //    reader.GetInt32(0));
+                        IVisit model = new Visit(
+                            reader.GetInt32(0),
+                            reader.GetInt32(1),
+                            reader.GetInt32(2),
+                            reader.GetDateTime(3),
+                            reader.GetString(4));
 
-                        //list.Add(model);
+                        list.Add(model);
                     }
 
                     return list;
