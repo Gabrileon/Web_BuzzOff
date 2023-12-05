@@ -21,8 +21,8 @@ namespace Business.Repository.DAO
                 cmd.CommandText = "INSERT INTO DengueFocus (IdAddress, IdVisit, Type, IsEradicated, Priority) " +
                                   "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated, @Priority)";
 
-                cmd.Parameters.AddWithValue("@IdVisit", model.IdVisit);
-                cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
+                cmd.Parameters.AddWithValue("@IdVisit", model.Visit.Id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@IsEradicated", model.IsEradicated);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
                 cmd.Parameters.AddWithValue("@Priority", (int)model.Priority);

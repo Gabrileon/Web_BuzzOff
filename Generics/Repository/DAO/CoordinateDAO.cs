@@ -68,10 +68,7 @@ namespace Business.Repository.DAO
                     }
                 }
             }
-
             return list;
         }
-
-
     }
 }
