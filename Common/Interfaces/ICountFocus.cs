@@ -8,12 +8,12 @@ namespace Common.Interfaces
 {
     public interface ICountFocus
     {
-        public int Counts { get; set; }
-        public string Neighborhood { get; set; }
+        public int Counts { get; set;}
+        public string Neighborhood { get; set;}
     }
 
     public interface IAmountFocus
     {
-        public int Value { get; set; }
+       public int Value { get; set;}
     }
 }

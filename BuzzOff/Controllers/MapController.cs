@@ -1,28 +1,37 @@
-﻿using Business.Generics;
-using Business.Repository.DAO;
-using BuzzOff.Models;
-using Common.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿//using Business.Repository.DAO;
+//using BuzzOff.Models;
+//using Common.Interfaces;
+//using Microsoft.AspNetCore.Mvc;
+//using System.Collections.Generic;
+//using System.Globalization;
+//using System.Linq;
 
-namespace BuzzOff.Controllers
-{
-    public class MapController : Controller
-    {
-        public IActionResult Index()
-        {
-            ViewBag.Message = "Olá combatente!";
-                     
-            return View();
-        }
+//namespace BuzzOff.Controllers
+//{
+//    public class MapController : Controller
+//    {
+//        public IActionResult Index()
+//        {
+//            ViewBag.Message = "Mapa de Focos";
+//            var model = new CountFocusesModel();
+//            model.TotalFocus.Add(CountFocusDAO.AmountByErradicated(false));
+//            model.CountFocus = CountFocusDAO.CountAllErraticated(false);
 
-        public IActionResult ShowNeighborhood() 
-        {
-            var model = new List<CountFocusModel>();
-            foreach (var focus in CountFocusDAO.CountByErraticatedAndNeighborhood(false))
-            {
-                model.Add(new CountFocusModel(focus));
-            }
-            return View(model);
-        }
-    }
-}
+//            var data = new List<MapParameterModel>();
+//            foreach (var bairro in CoordinateDAO.GetAll())
+//            {
+//                data.Add(new MapParameterModel()
+//                {
+//                    Id = bairro.Id,
+//                    Nome = bairro.Neighborhood,
+//                    Latitude = bairro.Latitude.ToString(new CultureInfo("en-US")),
+//                    Longitude = bairro.Longitude.ToString(new CultureInfo("en-US")),
+//                    Count = CountFocusDAO.CountByErraticatedAndNeighborhood(false, bairro.Neighborhood).Counts,
+//                });
+//            }
+
+//            ViewBag.MapData = data;
+//            return View(model);
+//        }
+//    }
+//}

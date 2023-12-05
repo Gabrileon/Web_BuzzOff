@@ -3,15 +3,42 @@
     ViewData["Title"] = "Mapa de focos";
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
+<head>
+    <title>Focos no mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+<div class="page w-50">   
 
-<div class="page w-30">
-    <img src="~/img/Campanha.svg" alt="Campanha" img-alig="left" class="d-flex, w-30 ">
-    <div class="d-flex justify-content-start m-2 ">Fonte: Ministério da Saúde <div class="divisao"></div> <div>Atualizado 23/11/2023</div></div>
+        <div id="map" style="height: 80vh; width: 100%;"></div>
+
+        <script>
+            var bounds = L.latLngBounds([-26.72644, -49.06737], [-26.9741, -49.0760]);
+            var map = L.map('map', {
+                center: [-25.94937, -49.071685],
+                zoom: 11.5,
+                maxBounds: bounds,
+                maxBoundsViscosity: 1
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            window.addEventListener('load', function () {
+                console.log('Página carregada');
+                cidadesJSON = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MapData))';
+                //console.log(cidadesJSON)
+                cidades = JSON.parse(cidadesJSON);
+                manipuladorDeMapa.Listar()
+            });
+        </script>    
 
 </div>
 
 <div class="informations w-50">
-    <table class="table" id="table-map">
+    <table class="table w-100" id="table-map">
         <thead>
             <tr>
                 <th>Bairros</th>
@@ -35,6 +62,7 @@
         </tbody>
     </table>
 </div>
+</body>
 @*<div class="circles">
     <ul>
 

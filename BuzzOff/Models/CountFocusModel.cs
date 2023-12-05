@@ -1,5 +1,5 @@
 ﻿using Common.Interfaces;
-using Business.Generics;
+using System.Diagnostics.Metrics;
 
 namespace BuzzOff.Models
 {
@@ -24,3 +24,4 @@ namespace BuzzOff.Models
         public int Value { get; set; }
     }
 }
+

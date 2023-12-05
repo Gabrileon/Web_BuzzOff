@@ -34,6 +34,7 @@
                         <li class="nav-item">
                             <a class="btn btn-success" asp-controller="CountFocus" asp-action="Index">Mapa de focos</a>
                         </li>
+                       
                         @if (LoggedUser.Identity.IsAuthenticated)
                         {
                             @if(LoggedUser.HasClaim("AccessLevel", "Administrator"))
@@ -89,7 +90,7 @@
 
                             <li class="nav-item">
                                 <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
-                            </li>
+                            </li>                          
                         }
                     </ul>
                 </div>

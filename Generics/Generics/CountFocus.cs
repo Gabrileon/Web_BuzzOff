@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Business.Generics
 {
-    public class CountFocus : ICountFocus
+    internal class CountFocus: ICountFocus
     {
         public CountFocus()
         {
-
+            
         }
         public CountFocus(int count, string neighborhood)
         {
@@ -23,7 +23,7 @@ namespace Business.Generics
         public string Neighborhood { get; set; }
     }
 
-    public class AmountFocus : IAmountFocus
+    public class AmountFocus: IAmountFocus
     {
         public int Value { get; set; }
     }
