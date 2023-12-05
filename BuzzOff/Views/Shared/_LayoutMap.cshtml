@@ -1,6 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Authentication
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
+@{
+    var LoggedUser = HttpContextAccessor.HttpContext.User;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +13,13 @@
     <title>@ViewData["Title"] - BuzzOff</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Map.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BuzzOff.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img class="logo" src="~/img/Logo_Mosquito.svg" alt="Logo Buzzoff" />
@@ -26,31 +30,50 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end d-flex">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="btn btn-success" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="Privacy">Denuncie</a>
+                            <a class="btn btn-success" asp-controller="CountFocus" asp-action="Index">Mapa de focos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-success" asp-area="" asp-controller="Map" asp-action="Index">Mapa de focos</a>
-                        </li>
-                        @if (!HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+
+                        @if (LoggedUser.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
-                            </li>
-                        }
-                        else
-                        {
+                            @if (LoggedUser.HasClaim("AccessLevel", "Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="User" asp-action="CommonUsers">Distribuir permissões</a>
+                                </li>
+                            }
+
+                            else if (LoggedUser.HasClaim("AccessLevel", "Agent"))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="AgentPendentDenunciations">Visitar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="Visit" asp-action="">Minhas Visitas</a>
+                                </li>
+                            }
+
+                            else if (LoggedUser.HasClaim("AccessLevel", "Common"))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="GetByUserId">Minhas Denúncias</a>
+                                </li>
+                            }
+
                             <li class="nav-item dropdown">
                                 <a style="font-size: 1rem; color: #2F3C33;" class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
-                                    @HttpContextAccessor.HttpContext.User.Identity.Name
+                                    @LoggedUser.Identity.Name
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                     <li>
-                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="Update" asp-route-id="@HttpContextAccessor.HttpContext.User.Claims.First().Value"><i class="fa-solid fa-gear"></i> Opções</a>
+                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="Update"><i class="fa-solid fa-gear"></i> Opções</a>
+                                    </li>
+                                    <li>
+                                        <a style="font-size: 1rem; color: #84CC16;" class="dropdown-item" asp-controller="User" asp-action="UpdatePassword"><i class="fa-solid fa-key"></i> Alterar senha</a>
                                     </li>
                                     <li style="font-size: 1rem;">
                                         <form asp-controller="Login" asp-action="Logout" method="post" id="logoutForm">
@@ -60,28 +83,26 @@
                                 </ul>
                             </li>
                         }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-success" asp-controller="Denunciation" asp-action="Add">Denunciar</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Index">Acesse sua conta</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
+    <main>
+        @RenderBody()
+    </main>
 
-            @RenderBody()
-        </div>
-
-        </main>
-
-    <footer class="border-top footer text-muted d-flex justify-content-lg-between">
-        <div class="mx-5">
-            &copy; 2023 - BuzzOff Ltda.
-        </div>
-        <div class="mx-5">
-            <a class="footer-text" asp-area="" asp-controller="Contact" asp-action="Index">Entre em contato</a>
-            <a class="footer-text" asp-area="" asp-controller="Home" asp-action="Privacy">Seja um agente</a>
-            <a class="footer-text" asp-area="" asp-controller="Home" asp-action="Privacy">O projeto</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
