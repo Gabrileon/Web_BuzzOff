@@ -7,14 +7,14 @@ namespace BuzzOff.Controllers
 {
     public class VisitController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    DenunciationsModel model = new()
-        //    {
-        //        Denunciations = DenunciationDAO.GetAllPendent()
-        //    };
-        //    return View(model);
-        //}
+        public IActionResult Index()
+        {
+            DenunciationsModel model = new()
+            {
+                Denunciations = DenunciationDAO.GetAllPendent()
+            };
+            return View(model);
+        }
         public IActionResult Add()
         {
             ViewBag.Message = "Informe sobre a visita";
