@@ -4,24 +4,10 @@
     float: left;
 }
 
-.informations {
-    padding-right: 15%;
-    padding-left:5%;
-    height: 100vh;
-    float: right;
-}
-
-.size-bar {
-    background-color: red;
-    width: 70px;
-    height: 25px;
-    float: right;
-}
 
 .page {
     float: left;
     height: 100vh;
-    
 }
 
 td {
@@ -35,31 +21,30 @@ td {
     border-radius: 100%;
     width: 20px;
     height: 20px;
-    background-color: purple;    
+    background-color: purple;
 }
 
 .circles {
-    display:flex;
+    display: flex;
     margin-top: 17%;
     margin-left: 2%;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    padding-left:2%
+    padding-left: 2%
 }
 
-.divisao{
-    width:49%;
+.divisao {
+    width: 49%;
 }
 
-li{
-    list-style:none;    
+li {
+    list-style: none;
 }
 
-progress{
-    display:block;
-    -webkit-appearance:none;
-    margin-top:4.5%;
+progress {
+    -webkit-appearance: none;
+    margin-top: 4.5%;
 }
 
     progress::-webkit-progress-value {
@@ -68,18 +53,29 @@ progress{
     }
 
     progress::-webkit-progress-bar {
-        background: white;       
         border-radius: 20px
     }
 
     progress::-moz-progress-bar {
-        background: black;
+        background: unset;
         border-radius: 20px
     }
 
-thead {
+.thead {
     background-color: #2F3C33;
-    border: double black 2px;
-    color: white;
+    color: #84CC16;
+    font-weight: bolder;
 }
 
+.col {
+    text-align: center;
+}
+
+.inside {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+progress {
+    background-color: white;
+}

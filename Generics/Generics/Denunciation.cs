@@ -22,7 +22,7 @@ namespace Business.Generics
         /// <param name="dataVisit"></param>
         /// <param name="media"></param>
         /// <param name="isAnswered"></param>
-        
+
         public Denunciation()
         {
         }
@@ -67,4 +67,4 @@ namespace Business.Generics
         public FocusType FocusType { get; set; }
         public string Comment { get; set; }
     }
-} 
+}

@@ -16,12 +16,12 @@ namespace BuzzOff.Models
         {
         }
 
-        public DenunciationModel(int id, int idInformer, IAddress address, DateTime dataDenunciation,  MyEnuns.DenunciationStage stage)
+        public DenunciationModel(int id, int idInformer, IAddress address, DateTime dataDenunciation, MyEnuns.DenunciationStage stage)
         {
             Id = id;
             IdInformer = idInformer;
             Address = address;
-            DataDenunciation = dataDenunciation;            
+            DataDenunciation = dataDenunciation;
             Stage = stage;
         }
 
@@ -84,7 +84,7 @@ namespace BuzzOff.Models
             this.Id = id;
             this.IdInformer = idInformer;
             this.Address = address;
-            this.DataDenunciation = dataDenunciation;            
+            this.DataDenunciation = dataDenunciation;
             this.Media = media;
         }
 
@@ -115,8 +115,8 @@ namespace BuzzOff.Models
         }
 
         public int Id { get; set; }
-        public int IdInformer { get; set; }        
-        public DateTime DataDenunciation { get; set; }        
+        public int IdInformer { get; set; }
+        public DateTime DataDenunciation { get; set; }
         public byte[]? Media { get; set; }
         public string MediaName { get; set; }
         public IAddress Address { get; set; }

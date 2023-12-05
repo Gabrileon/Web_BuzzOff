@@ -16,7 +16,7 @@ namespace Business.Repository.MidiaConverter
 
         public static MemoryStream ToMidia(byte[] bytes)
         {
-            var midia = new MemoryStream(bytes);            
+            var midia = new MemoryStream(bytes);
             return midia;
         }
     }
