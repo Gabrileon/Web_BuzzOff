@@ -53,7 +53,7 @@
                             </div>
                             <div class="d-flex flex-row justify-content-between w-100">
                                 <div style="color: darkred;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
-                                <div><a class="btn btn-success">Ver Denúncia</a></div>
+                                <div><a class="btn btn-success" asp-controller="Denunciation" asp-action="SeeDenunciation" asp-route-id="@denunciation.Id">Ver denúncia</a></div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 ﻿@using static Common.Others.MyEnuns;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <link rel="stylesheet" href="~/css/Denunciation.css" asp-append-version="true" />
 @model DenunciationAddressModel
 @functions {
@@ -19,6 +20,7 @@
 }
 @{
     ViewData["Title"] = "Ver minha denúncia";
+    var LoggedUser = HttpContextAccessor.HttpContext.User;
 }
 
 <div class="d-flex flex-row">
@@ -110,10 +112,21 @@
                         </div>
                     </div>
                 </div>
+                @if (LoggedUser.HasClaim("AccessLevel", "Agent"))
+                {
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <a class="btn btn-success mt-5" asp-controller="Visit" asp-action="Add" asp-route-id="Id">Visitar</a>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
+
 
 @if (Model.Denunciation.FormFile != null)
 {
