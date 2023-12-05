@@ -2,6 +2,7 @@
 using Business.Repository.DAO;
 using BuzzOff.Models;
 using Microsoft.AspNetCore.Mvc;
+using Common.Others;
 
 namespace BuzzOff.Controllers
 {
@@ -23,12 +24,13 @@ namespace BuzzOff.Controllers
         }
         [HttpPost]
         public IActionResult Add(VisitModel model, bool isFocus)
-        {
-            model.Id = Convert.ToInt32(HttpContext.User.Claims.First().Value); 
+        {            
+            model.IdAgent = Convert.ToInt32(HttpContext.User.Claims.First().Value);
             model.DateVisit = DateTime.Now;
-            VisitDAO.Insert(model);
             if (isFocus)
             {
+                model.Denunciation.Stage = MyEnuns.DenunciationStage.Pendent;
+                VisitDAO.Insert(model);
                 // Retorna ao método de adição na tabela DengueFocus
                 return RedirectToAction("Solicitation");
 
