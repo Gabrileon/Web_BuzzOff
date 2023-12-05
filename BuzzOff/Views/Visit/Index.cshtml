@@ -1,7 +1,7 @@
 ﻿@using Common.Interfaces;
 @using Common.Others;
 <link rel="stylesheet" href="~/css/ListDenunciation.css" asp-append-version="true" />
-@model DenunciationsModel 
+@model VisitsModel
 
 @functions {
     public string GetFocusIcon(MyEnuns.FocusType type)
@@ -25,7 +25,7 @@
 }
 
 @{
-    ViewData["Title"] = "Minhas denúncias";
+    ViewData["Title"] = "Minhas Visitas";
 
 }
 
@@ -33,56 +33,23 @@
     <div class="container">
         <div class="row">
             <div class="col denun-col denun-stage">
-                <span class="stage nao-respondida">Não respondidas</span>
+                <span class="stage pendente">Em andamento</span>
             </div>
-            <div class="col denun-col denun-stage">
-                <span class="stage pendente">Pendentes</span>
-            </div>
-            <div class="col denun-col denun-stage">
-                <span class="stage resolvida">Resolvidas</span>
             </div>
         </div>
         <hr style="color: #2F3C33" />
         <div class="row">
             <div class="col denun-col">
 
-                @foreach (var denunciation in Model.Denunciations)
+                @foreach (var visit in Model.Visits)
                 {
                     <div class="denunciation">
                         <div class="d-flex flex-column align-items-start h-100 w-100">
                             <div class="mb-auto w-100">
-                                <span>@denunciation.Address.Street, @denunciation.Address.Number</span>
-                                <br />
-                                <span>@denunciation.Comment</span>
-                                <br />
-                                <span>Data: @denunciation.DataDenunciation.Date</span>
-                            </div>
-                            <div class="d-flex flex-row justify-content-between w-100">
-                                <div style="color: darkred;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
-                                <div><a class="btn btn-success">Ver Denúncia</a></div>
+
                             </div>
                         </div>
                     </div>
                 }
             </div>
-            <div class="col denun-col">
-
-                @foreach (var denunciation in Model.Denunciations)
-                {
-                    <div class="denunciation">
-                        <div class="d-flex flex-column align-items-start h-100 w-100">
-                            <div class="mb-auto w-100">
-                                <span>@denunciation.Address.Street, @denunciation.Address.Number</span>
-                                <br />
-                                <span>@denunciation.Comment</span>
-                                <br />
-                                <span>Data: @denunciation.DataDenunciation.Date</span>
-                            </div>
-                            <div class="d-flex flex-row justify-content-between w-100">
-                                <div style="color: darkgoldenrod;"><i class="fa-solid @GetFocusIcon(denunciation.FocusType) fa-3x"></i></div>
-                                <div><a class="btn btn-success">Ver denúncia</a></div>
-                            </div>
-                        </div>
-                    </div>
-                }
-</div>
+        </div>

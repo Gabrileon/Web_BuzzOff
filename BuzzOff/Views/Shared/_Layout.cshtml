@@ -46,14 +46,17 @@
                             else if (LoggedUser.HasClaim("AccessLevel", "Agent"))
                             {
                                 <li class="nav-item">
-                                    <a class="btn btn-success" asp-controller="Visit" asp-action="Index">Visitar</a>
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="AgentPendentDenunciations">Visitar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-success" asp-controller="Visit" asp-action="">Minhas Visitas</a>
                                 </li>
                             }
 
                             else if (LoggedUser.HasClaim("AccessLevel", "Common"))
                             {
                                 <li class="nav-item">
-                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="GetByUserId">Denunciar</a>
+                                    <a class="btn btn-success" asp-controller="Denunciation" asp-action="GetByUserId">Minhas Denúncias</a>
                                 </li>
                             }
 

@@ -47,6 +47,15 @@ namespace Business.Generics
             FocusType = focusType;
             this.Media = media;
         }
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, FocusType focusType)
+        {
+            Id = id;
+            IdInformer = idInformer;
+            Address = address;
+            DataDenunciation = dataDenunciation;
+            FocusType = focusType;
+            this.Media = media;
+        }
 
         public int Id { get; set; }
         public int IdInformer { get; set; }

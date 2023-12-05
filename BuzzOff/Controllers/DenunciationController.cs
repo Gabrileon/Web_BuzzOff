@@ -106,5 +106,13 @@ namespace BuzzOff.Controllers
             var model = new DenunciationAddressModel(DenunciationDAO.GetOne(id));
             return View(model);
         }
+        public IActionResult AgentPendentDenunciations()
+        {
+            DenunciationsModel model = new()
+            {
+                Denunciations = DenunciationDAO.GetAllPendent()
+            };
+            return View(model);
+        }
     }
 }
