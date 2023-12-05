@@ -9,9 +9,10 @@ namespace BuzzOff.Controllers
     {
         public IActionResult Index()
         {
-            DenunciationsModel model = new()
+            var id = Convert.ToInt32(HttpContext.User.Claims.First().Value);
+            var model = new VisitsModel()
             {
-                Denunciations = DenunciationDAO.GetAllPendent()
+                Visits = VisitDAO.GetAllVisitsAgent(id),
             };
             return View(model);
         }
@@ -23,8 +24,7 @@ namespace BuzzOff.Controllers
         [HttpPost]
         public IActionResult Add(VisitModel model, bool isFocus)
         {
-            var id = Convert.ToInt32(HttpContext.User.Claims.First().Value);           
-            model.Id = id;
+            model.Id = Convert.ToInt32(HttpContext.User.Claims.First().Value); 
             model.DateVisit = DateTime.Now;
             VisitDAO.Insert(model);
             if (isFocus)
