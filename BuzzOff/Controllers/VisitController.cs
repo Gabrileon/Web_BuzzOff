@@ -1,6 +1,7 @@
 ﻿using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
+using Common.Others;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuzzOff.Controllers
@@ -29,6 +30,7 @@ namespace BuzzOff.Controllers
             VisitDAO.Insert(model);
             if (isFocus)
             {
+                model.Denunciation.Stage = MyEnuns.DenunciationStage.Pendent;
                 // Retorna ao método de adição na tabela DengueFocus
                 return RedirectToAction("Solicitation");
 
