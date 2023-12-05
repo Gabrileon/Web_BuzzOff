@@ -4,19 +4,6 @@
     float: left;
 }
 
-.informations {
-    padding-right: 15%;
-    padding-left: 5%;
-    height: 100vh;
-    float: right;
-}
-
-.size-bar {
-    background-color: red;
-    width: 70px;
-    height: 25px;
-    float: right;
-}
 
 .page {
     float: left;
@@ -62,8 +49,7 @@ progress {
 
     progress::-webkit-progress-value {
         background: #84CC16;
-        border-radius: 10px;
-        width: 105%;
+        border-radius: 10px
     }
 
     progress::-webkit-progress-bar {
@@ -81,10 +67,6 @@ progress {
     font-weight: bolder;
 }
 
-.neighborhood {
-    font-weight: bolder;
-}
-
 .col {
     text-align: center;
 }
@@ -96,8 +78,4 @@ progress {
 
 progress {
     background-color: white;
-}
-
-.container {
-    font-size: larger;
 }

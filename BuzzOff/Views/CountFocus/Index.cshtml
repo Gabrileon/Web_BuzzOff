@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Mapa de focos";
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
+
+    var countList = Model.CountFocus;
+    countList.Sort((x, y) => x.Counts.CompareTo(y.Counts));
+    var orderedList = countList.OrderByDescending(x => x.Counts);
 }
 <head>
     <title>Focos no mapa</title>
@@ -10,34 +14,9 @@
 </head>
 
 <body>
-<div class="page w-50">   
-
-        <div id="map" style="height: 80vh; width: 100%;"></div>
-
-        <script>
-            var bounds = L.latLngBounds([-26.72644, -49.06737], [-26.9741, -49.0760]);
-            var map = L.map('map', {
-                center: [-25.94937, -49.071685],
-                zoom: 11.5,
-                maxBounds: bounds,
-                maxBoundsViscosity: 1
-            });
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            window.addEventListener('load', function () {
-                console.log('Página carregada');
-                cidadesJSON = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MapData))';
-                //console.log(cidadesJSON)
-                cidades = JSON.parse(cidadesJSON);
-                manipuladorDeMapa.Listar()
-            });
-        </script>
-
-        <div class="informations w-75">
-            <div class="container" style="border: 2px black solid; width: 100%">
+    <div class="d-flex flex-row">
+        <div class="informations w-50">
+            <div class="container-lg w-75" style="border: 2px black solid">
                 <div class="row thead">
                     <div class="col">
                         <div class="title">BAIRROS</div>
@@ -48,7 +27,7 @@
                     <div class="col">
                     </div>
                 </div>
-                @foreach (var focus in Model.CountFocus)
+                @foreach (var focus in orderedList)
                 {
                     <div class="row">
                         <div class="col inside neighborhood">@focus.Neighborhood</div>
@@ -69,15 +48,33 @@
                 </div>
             </div>
         </div>
-    </div>
-</body>
-@*<div class="circles">
-    <ul>
 
-        <li><div class="circle">Teste</div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    </ul>
-</div>*@
+        <div class="map w-50" style="border: solid black 2px">
+            <div id="map" style="height: 80vh; width: 100%;"></div>
+            <script>
+                var bounds = L.latLngBounds([-26.72644, -49.06737], [-26.9741, -49.0760]);
+                var map = L.map('map', {
+                    center: [-26.90819, -49.09735],
+                    zoom: 11.5,
+                    maxBounds: bounds,
+                    maxBoundsViscosity: 1
+                });
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                window.addEventListener('load', function () {
+                    console.log('Página carregada');
+                    cidadesJSON = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MapData))';
+                    //console.log(cidadesJSON)
+                    cidades = JSON.parse(cidadesJSON);
+                    manipuladorDeMapa.Listar()
+                });
+            </script>
+        </div>
+    </div>
+
+
+
+</body>

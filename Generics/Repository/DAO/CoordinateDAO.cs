@@ -68,10 +68,27 @@ namespace Business.Repository.DAO
                     }
                 }
             }
-
             return list;
         }
 
+        public static List<String> GetAllNeighborhoods()
+        {
+            var list = new List<String>();
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "Select NEIGHBORHOOD from COORDINATEFORMAP";
 
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add((string)reader["NEIGHBORHOOD"]);
+                    }
+                }
+            }
+            return list;
+        }
     }
 }
