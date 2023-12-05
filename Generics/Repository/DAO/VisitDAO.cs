@@ -71,17 +71,27 @@ namespace Business.Repository.DAO
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
+                int insert = 0;
                 conn.Open();
 
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
+                cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) Output inserted.ID VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
 
                 cmd.Parameters.Add(new SqlParameter("@IDAGENT", visit.IdAgent));
                 cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", visit.Denunciation.Id));
                 cmd.Parameters.Add(new SqlParameter("@DATAVISIT", visit.DateVisit));
                 cmd.Parameters.Add(new SqlParameter("@ASSESMENT", visit.Assessment));
-                return cmd.ExecuteNonQuery();
-                
+                cmd.ExecuteNonQuery();
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        insert = reader.GetInt32(0);
+                    }
+                }
+
+                return insert;
             }
         }
         public static List<IVisit> GetAllVisitsAgent(int id)

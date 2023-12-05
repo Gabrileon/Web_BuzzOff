@@ -4,6 +4,7 @@ using BuzzOff.Models;
 using Common.Others;
 using Microsoft.AspNetCore.Mvc;
 using Common.Others;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BuzzOff.Controllers
 {
@@ -32,14 +33,24 @@ namespace BuzzOff.Controllers
             model.DateVisit = DateTime.Now;
             model.Denunciation.Stage = MyEnuns.DenunciationStage.Pendent;
             DenunciationDAO.Update(model.Denunciation);
-            VisitDAO.Insert(model);
+            model.Id = VisitDAO.Insert(model);
+
             if (isFocus)
             {
-
+                var dengueFocus = new DengueFocusModel()
+                {
+                    IsEradicated = false,
+                    Priority = MyEnuns.Priority.Média,
+                    Address = model.Denunciation.Address,
+                    Visit = model,
+                    Type = model.Denunciation.FocusType
+                };
+                DengueFocusDAO.Insert(dengueFocus);
+                return RedirectToAction("Index");
                 // Retorna ao método de adição na tabela DengueFocus
 
             }
-                return RedirectToAction("Visit", "Index");
+                return RedirectToAction("Index");
         }
         public IActionResult FocusConfirmed(int idVisit)
         {

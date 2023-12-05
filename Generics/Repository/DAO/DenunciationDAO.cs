@@ -49,9 +49,8 @@ namespace Business.Repository
                 cmd.CommandText = "UPDATE Denunciations SET " +
                     "IdInformer = @IdInformer, " +
                     "IdAddress = @IdAddress," +
-                    "DataDenunciation = @DataDenunciation, " +
-                    "Media = @Media, " +
-                    "MediaName = @MediaName, " +
+                    "DataDenunciation = @DataDenunciation " +
+                    $"{(model.Media != null ? ", Media = @Media, MediaName = @MediaName" : string.Empty)}," +
                     "Stage = @Stage, " +
                     "Comment = @Comment" +
                     " WHERE Id = @Id";
@@ -62,8 +61,11 @@ namespace Business.Repository
                 cmd.Parameters.AddWithValue("@FocusType", (int)model.FocusType);
                 cmd.Parameters.AddWithValue("@Stage", (int)model.Stage);
                 cmd.Parameters.AddWithValue("@Comment", model.Comment);
-                cmd.Parameters.AddWithValue("@Media", model.Media);
-                cmd.Parameters.AddWithValue("@MediaName", model.MediaName);
+                if (model.Media != null)
+                {
+                    cmd.Parameters.AddWithValue("@Media", model.Media);
+                    cmd.Parameters.AddWithValue("@MediaName", model.MediaName);
+                }
                 cmd.Parameters.AddWithValue("@Id", model.Id);
 
                 cmd.ExecuteNonQuery();

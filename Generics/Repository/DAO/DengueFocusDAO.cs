@@ -124,7 +124,8 @@ namespace Business.Repository.DAO
                                 (string)reader["Reference"],
                                 (string)reader["City"]
                             );
-                            focus.Visit = new Visit() {
+                            focus.Visit = new Visit()
+                            {
 
                                 Id = (int)reader["dbo.Visits.ID"],
                                 IdAgent = (int)reader["IDAgent"],
@@ -141,7 +142,7 @@ namespace Business.Repository.DAO
                     return (list);
                 }
             }
-        }      
+        }
 
         public List<IDengueFocus> GetAll()
         {
