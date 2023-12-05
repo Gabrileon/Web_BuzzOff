@@ -18,13 +18,14 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO DengueFocus (IdAddress, IdVisit, Type, IsEradicated) " +
-                                  "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated)";
+                cmd.CommandText = "INSERT INTO DengueFocus (IdAddress, IdVisit, Type, IsEradicated, Priority) " +
+                                  "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated, @Priority)";
 
                 cmd.Parameters.AddWithValue("@IdVisit", model.IdVisit);
                 cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
+                cmd.Parameters.AddWithValue("@IsEradicated", model.IsEradicated);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
-                cmd.Parameters.AddWithValue("@IsEradicated", 0);
+                cmd.Parameters.AddWithValue("@Priority", (int)model.Priority);
 
                 cmd.ExecuteNonQuery();
             }
@@ -41,14 +42,16 @@ namespace Business.Repository.DAO
                     "IdVisit =  @Idvisit" +
                     "Type = @Type, " +
                     "IsEradicated = @IsEradicated " +
+                    "Priority = @Priority " +
                     "WHERE Id = @Id";
 
 
-                cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
-                cmd.Parameters.AddWithValue("@IdVisit", model.IdVisit);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
+                cmd.Parameters.AddWithValue("@IdVisit", model.Visit.Id);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
                 cmd.Parameters.AddWithValue("@IsEradicated", (bool)model.IsEradicated);
                 cmd.Parameters.AddWithValue("@Id", model.Id);
+                cmd.Parameters.AddWithValue("@Priority", (int)model.Priority);
 
                 cmd.ExecuteNonQuery();
             }
@@ -61,7 +64,7 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, IdVisit, Type, IsEradicated  FROM DengueFocus WHERE Id = @Id";
+                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, Type, IsEradicated, Priority  FROM DengueFocus WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Id", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -72,14 +75,74 @@ namespace Business.Repository.DAO
                             (int)reader["Id"],
                             (int)reader["IdAddress"],
                             (int)reader["IdVisit"],
+                            (bool)reader["IsEradicated"],
                             (MyEnuns.FocusType)reader["Type"],
-                            (bool)reader["IsEradicated"]
+                            (MyEnuns.Priority)reader["Priority"]
                         );
                     }
                 }
             }
             return model;
         }
+
+        public List<IDengueFocus> GetByNeighborhood(string neighborhood)
+        {
+            using (var conn = new SqlConnection(DBConnect.Connect()))
+            {
+                conn.Open();
+
+                //IDADDRESSS, IDVISIT
+
+                var sql = @$"SELECT dbo.DengueFocus.ID, TYPE, PRIORITY, ISERADICATED, 
+                            dbo.Addresses.ID, CITY, NEIGHBORHOOD, STREET, NUMBER, REFERENCE, 
+                            dbo.Visits.ID, IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT 
+                            FROM DENGUEFOCUS WHERE Neighborhood = {neighborhood}
+                            INNER JOIN ADDRESSES ON IDADDRESS = dbo.Addresses.ID
+                            INNER JOIN VISITS ON IDVISIT = dbo.Visits.ID";
+
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    var list = new List<IDengueFocus>();
+                    IDengueFocus focus = null;
+
+
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            focus.Id = (int)reader["dbo.DengueFocus.ID"];
+                            focus.Type = (MyEnuns.FocusType)reader["TYPE"];
+                            focus.Priority = (MyEnuns.Priority)reader["PRIORITY"];
+                            focus.IsEradicated = (bool)reader["ISERADICATED"];
+
+                            focus.Address = new Address(
+                                (int)reader["dbo.Addresses.ID"],
+                                (string)reader["Neighborhood"],
+                                (string)reader["Street"],
+                                (string)reader["Number"],
+                                (string)reader["Reference"],
+                                (string)reader["City"]
+                            );
+
+                            focus.Visit = new Visit(
+
+                                (int)reader["dbo.Visits.ID"],
+                                (int)reader["IDAgent"],
+                                DenunciationDAO.GetOne((int)reader["IDDenunciation"]),
+                                (DateTime)reader["DateVisit"],
+                                (string)reader["Assessment"]
+                            );
+
+                            list.Add(focus);
+
+                        }
+                    }
+
+                    return (list);
+                }
+            }
+        }      
 
         public List<IDengueFocus> GetAll()
         {
@@ -88,7 +151,7 @@ namespace Business.Repository.DAO
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, IdVisit, Type, IsEradicated  FROM DengueFocus";
+                cmd.CommandText = "SELECT Id,IdAddress, IdVisit, Type, IsEradicated, Priority  FROM DengueFocus WHERE ID";
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -98,8 +161,9 @@ namespace Business.Repository.DAO
                             (int)reader["Id"],
                             (int)reader["IdAddress"],
                             (int)reader["IdVisit"],
+                            (bool)reader["IsEradicated"],
                             (MyEnuns.FocusType)reader["Type"],
-                            (bool)reader["IsEradicated"]
+                            (MyEnuns.Priority)reader["Priority"]
                         );
 
                         list.Add(model);

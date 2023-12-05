@@ -47,52 +47,14 @@ namespace Business.Generics
             FocusType = focusType;
             this.Media = media;
         }
-
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] ?media, int isAnswered, int focusType)
+        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, FocusType focusType)
         {
             Id = id;
             IdInformer = idInformer;
             Address = address;
             DataDenunciation = dataDenunciation;
-            Stage = (DenunciationStage)isAnswered;
-            FocusType = (FocusType)focusType;
+            FocusType = focusType;
             this.Media = media;
-        }
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, int isAnswered, int focusType)
-        {
-            Id = id;
-            IdInformer = idInformer;
-            Address = address;
-            DataDenunciation = dataDenunciation;
-            Stage = (DenunciationStage)isAnswered;
-            FocusType = (FocusType)focusType;
-        }
-        public Denunciation(int id, int idInformer, IAddress address1, DateTime dataDenunciation, DenunciationStage stage, IAddress address)
-        {
-            Id = id;
-            IdInformer = idInformer;
-            DataDenunciation = dataDenunciation;
-            Stage = stage;
-            Address = address;
-        }
-        public Denunciation(int id, int idInformer, DateTime dataDenunciation, IAddress address, byte[] media)
-        {
-            Id = id;
-            IdInformer = idInformer;
-            DataDenunciation = dataDenunciation;
-            Address = address;
-        }
-
-        public Denunciation(int id, int idInformer, IAddress address, DateTime dataDenunciation, byte[] media, int isAnswered, FocusType focusType, string comment)
-        {
-            Id = id;
-            IdInformer = idInformer;
-            DataDenunciation = dataDenunciation;
-            Address = address;
-            Media = media;
-            Stage = (DenunciationStage)isAnswered;
-            FocusType = (FocusType)focusType;
-            Comment = comment;
         }
 
         public int Id { get; set; }

@@ -17,10 +17,10 @@ namespace Business.Generics
         /// <param name="idAddress"></param>
         /// <param name="type"></param>
         /// <param name="isEradicated"></param>
-        public DengueFocus(int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
+        public DengueFocus(IAddress Address, IVisit Visit, MyEnuns.FocusType type, bool isEradicated)
         {
-            this.IdAddress = idAddress;
-            this.IdVisit = IdVisit;
+            this.Address = Address;
+            this.Visit = Visit;
             this.Type = type;
             this.IsEradicated = false;
         }
@@ -31,18 +31,19 @@ namespace Business.Generics
         /// <param name="idAddress"></param>
         /// <param name="type"></param>
         /// <param name="isEradicated"></param>
-        public DengueFocus(int id, int idAddress, int IdVisit, MyEnuns.FocusType type, bool isEradicated)
+        public DengueFocus(int id, int idAddress, int IdVisit, bool isEradicated, MyEnuns.FocusType type, MyEnuns.Priority priority)
         {
             this.Id = id;
-            this.IdAddress = idAddress;
-            this.IdVisit = IdVisit;
+            this.Address = Address;
+            this.Visit = Visit;
             this.Type = type;
             this.IsEradicated = isEradicated;
+            this.Priority = priority;
         }
 
         public int Id { get; set; }
-        public int IdAddress { get; set; }
-        public int IdVisit { get; set; }
+        public IAddress Address { get; set; }
+        public IVisit Visit { get; set; }
         public MyEnuns.FocusType Type { get; set; }
         public MyEnuns.Priority Priority { get; set; }
         public bool IsEradicated { get; set; }

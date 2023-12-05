@@ -10,7 +10,7 @@ namespace Common.Interfaces
     {
         public int Id { get; set; }
         public int IdAgent { get; set; }
-        public int IdDenunciation { get; set; }
+        public IDenunciation Denunciation { get; set; }
         public DateTime DateVisit { get; set; }
         public string Assessment { get; set; }
     }
