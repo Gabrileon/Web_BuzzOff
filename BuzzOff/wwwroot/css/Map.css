@@ -6,7 +6,7 @@
 
 .informations {
     padding-right: 15%;
-    padding-left:5%;
+    padding-left: 5%;
     height: 100vh;
     float: right;
 }
@@ -21,7 +21,6 @@
 .page {
     float: left;
     height: 100vh;
-    
 }
 
 td {
@@ -35,30 +34,30 @@ td {
     border-radius: 100%;
     width: 20px;
     height: 20px;
-    background-color: purple;    
+    background-color: purple;
 }
 
 .circles {
-    display:flex;
+    display: flex;
     margin-top: 17%;
     margin-left: 2%;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    padding-left:2%
+    padding-left: 2%
 }
 
-.divisao{
-    width:49%;
+.divisao {
+    width: 49%;
 }
 
-li{
-    list-style:none;    
+li {
+    list-style: none;
 }
 
-progress{
-    -webkit-appearance:none;
-    margin-top:4.5%;
+progress {
+    -webkit-appearance: none;
+    margin-top: 4.5%;
 }
 
     progress::-webkit-progress-value {
@@ -67,11 +66,11 @@ progress{
         width: 105%;
     }
 
-   progress::-webkit-progress-bar {
+    progress::-webkit-progress-bar {
         border-radius: 20px
     }
 
-   progress::-moz-progress-bar {
+    progress::-moz-progress-bar {
         background: unset;
         border-radius: 20px
     }
@@ -95,10 +94,10 @@ progress{
     margin-bottom: 1%;
 }
 
-progress{
+progress {
     background-color: white;
 }
 
-.container{
+.container {
     font-size: larger;
 }

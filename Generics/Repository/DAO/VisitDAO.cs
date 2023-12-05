@@ -30,7 +30,7 @@ namespace Business.Repository.DAO
                         IVisit model = new Visit(
                             reader.GetInt32(1),
                             reader.GetInt32(2),
-                            reader.GetInt32(3),
+                            DenunciationDAO.GetOne(reader.GetInt32(3)),
                             reader.GetDateTime(4),
                             reader.GetString(5)
                             );
@@ -58,7 +58,7 @@ namespace Business.Repository.DAO
                         return new Visit(
                             id: reader.GetInt32(0),
                             idAgent: reader.GetInt32(1),
-                            idDenunciation: reader.GetInt32(2),
+                            denunciation: DenunciationDAO.GetOne(reader.GetInt32(2)),
                             dateVisit: reader.GetDateTime(3),
                             assessment: reader.GetString(4)
                         );
@@ -77,7 +77,7 @@ namespace Business.Repository.DAO
                 cmd.CommandText = "INSERT INTO VISITS(IDAGENT, IDDENUNCIATION, DATAVISIT, ASSESSMENT) VALUES (@IDAGENT, @IDDENUNCIATION, @DATAVISIT, @ASSESMENT);";
 
                 cmd.Parameters.Add(new SqlParameter("@IDAGENT", visit.IdAgent));
-                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", visit.IdDenunciation));
+                cmd.Parameters.Add(new SqlParameter("@IDDENUNCIATION", visit.Denunciation));
                 cmd.Parameters.Add(new SqlParameter("@DATAVISIT", visit.DateVisit));
                 cmd.Parameters.Add(new SqlParameter("@ASSESMENT", visit.Assessment));
                 return cmd.ExecuteNonQuery();
@@ -100,7 +100,7 @@ namespace Business.Repository.DAO
                         IVisit model = new Visit(
                             reader.GetInt32(0),
                             reader.GetInt32(1),
-                            reader.GetInt32(2),
+                            DenunciationDAO.GetOne(reader.GetInt32(2)),
                             reader.GetDateTime(3),
                             reader.GetString(4));
 
