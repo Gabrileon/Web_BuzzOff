@@ -39,6 +39,14 @@ namespace BuzzOff.Controllers
                 return RedirectToAction("Visit","Index");
             }
         }
-
+        public IActionResult Solicitation()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddFocusDengue(int Id)
+        {
+            return RedirectToAction("Visit", "Index");
+        }
     }
 }

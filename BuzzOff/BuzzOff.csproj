@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\DengueFocusController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Shared\_LayoutContato.cshtml" />
   </ItemGroup>
 
@@ -19,10 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Generics\Business.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Denunciation\" />
   </ItemGroup>
 
 </Project>
