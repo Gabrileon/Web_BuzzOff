@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    internal class SolicitationDAO
+    public class SolicitationDAO
     {
         public static void Insert(ISolicitation model)
         {

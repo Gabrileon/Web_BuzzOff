@@ -19,6 +19,7 @@ namespace Business.Repository
 
         public static string Connect()
         {
+            // Prof esteve aqui
             if (Environment.MachineName == "x")
             {
                 dataSource = @"localhost\SQLSERVER";
