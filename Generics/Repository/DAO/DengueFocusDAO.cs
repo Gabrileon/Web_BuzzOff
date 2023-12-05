@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-    internal class DengueFocusDAO
+    public class DengueFocusDAO
     {
-        public void Insert(IDengueFocus model)
+        public static void Insert(IDengueFocus model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -21,8 +21,8 @@ namespace Business.Repository.DAO
                 cmd.CommandText = "INSERT INTO DengueFocus (IdAddress, IdVisit, Type, IsEradicated, Priority) " +
                                   "VALUES (@IdAddress, @IdVisit, @Type, @IsEradicated, @Priority)";
 
-                cmd.Parameters.AddWithValue("@IdVisit", model.IdVisit);
-                cmd.Parameters.AddWithValue("@IdAddress", model.IdAddress);
+                cmd.Parameters.AddWithValue("@IdVisit", model.Visit.Id);
+                cmd.Parameters.AddWithValue("@IdAddress", model.Address.Id);
                 cmd.Parameters.AddWithValue("@IsEradicated", model.IsEradicated);
                 cmd.Parameters.AddWithValue("@Type", (int)model.Type);
                 cmd.Parameters.AddWithValue("@Priority", (int)model.Priority);
@@ -31,7 +31,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public void Update(IDengueFocus model)
+        public static void Update(IDengueFocus model)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -57,7 +57,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        public IDengueFocus GetOne(int id)
+        public static IDengueFocus GetOne(int id)
         {
             IDengueFocus model = null;
             using (var conn = new SqlConnection(DBConnect.Connect()))
@@ -85,7 +85,7 @@ namespace Business.Repository.DAO
             return model;
         }
 
-        public List<IDengueFocus> GetByNeighborhood(string neighborhood)
+        public static List<IDengueFocus> GetByNeighborhood(string neighborhood)
         {
             using (var conn = new SqlConnection(DBConnect.Connect()))
             {
@@ -124,15 +124,14 @@ namespace Business.Repository.DAO
                                 (string)reader["Reference"],
                                 (string)reader["City"]
                             );
+                            focus.Visit = new Visit() {
 
-                            focus.Visit = new Visit(
-
-                                (int)reader["dbo.Visits.ID"],
-                                (int)reader["IDAgent"],
-                                DenunciationDAO.GetOne((int)reader["IDDenunciation"]),
-                                (DateTime)reader["DateVisit"],
-                                (string)reader["Assessment"]
-                            );
+                                Id = (int)reader["dbo.Visits.ID"],
+                                IdAgent = (int)reader["IDAgent"],
+                                Denunciation = DenunciationDAO.GetOne((int)reader["IDDenunciation"]),
+                                DateVisit = (DateTime)reader["DateVisit"],
+                                Assessment = (string)reader["Assessment"]
+                            };
 
                             list.Add(focus);
 

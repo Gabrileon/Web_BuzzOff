@@ -1,10 +1,13 @@
 ﻿using Business.Repository;
 using Business.Repository.DAO;
 using BuzzOff.Models;
+using Common.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuzzOff.Controllers
 {
+    [Authorize("Agent")]
     public class VisitController : Controller
     {
         public IActionResult Index()
@@ -29,8 +32,8 @@ namespace BuzzOff.Controllers
             VisitDAO.Insert(model);
             if (isFocus)
             {
-                // Retorna ao método de adição na tabela DengueFocus
-                return RedirectToAction("Solicitation");
+                // Direciona a tela de confirmação do foco
+                return RedirectToAction("FocusConfirmed");
 
             }
             else
@@ -39,13 +42,24 @@ namespace BuzzOff.Controllers
                 return RedirectToAction("Visit","Index");
             }
         }
-        public IActionResult Solicitation()
+        public IActionResult FocusConfirmed(int idVisit)
         {
-            return View();
+            return View(idVisit);
         }
         [HttpPost]
-        public IActionResult AddFocusDengue(int Id)
+        public IActionResult InsertFocusDengueAndSolicitation(SolicitationModel model, bool isEradicated, int idVisit)
         {
+            var visits = VisitDAO.GetOne(idVisit);
+            SolicitationDAO.Insert(model);
+            var dengueFocus = new DengueFocusModel()
+            {
+                IsEradicated = isEradicated,
+                Priority = model.Priority,
+                Address = visits.Denunciation.Address,
+                Visit = visits,
+                Type = visits.Denunciation.FocusType
+            };
+            DengueFocusDAO.Insert(dengueFocus);
             return RedirectToAction("Visit", "Index");
         }
     }

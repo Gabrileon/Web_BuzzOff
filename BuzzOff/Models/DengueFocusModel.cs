@@ -8,16 +8,22 @@ using System.Threading.Tasks;
 
 namespace BuzzOff.Models
 {
-    public class DengueFocusModel:IDengueFocus
+
+    public class DengueFocusModel : IDengueFocus
     {
+        public DengueFocusModel()
+        {
+            
+        }
         /// <summary>
         /// Insert
         /// </summary>
         /// <param name="idAddress"></param>
         /// <param name="type"></param>
         /// <param name="isEradicated"></param>
+
         public DengueFocusModel(IAddress idAddress, IVisit IdVisit, MyEnuns.FocusType type, bool isEradicated)
-        {            
+        {
             this.Address = idAddress;
             this.Visit = IdVisit;
             this.Type = type;
