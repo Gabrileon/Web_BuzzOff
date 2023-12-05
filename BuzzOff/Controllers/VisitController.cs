@@ -31,6 +31,7 @@ namespace BuzzOff.Controllers
             if (isFocus)
             {
                 model.Denunciation.Stage = MyEnuns.DenunciationStage.Pendent;
+                VisitDAO.Insert(model);
                 // Retorna ao método de adição na tabela DengueFocus
                 return RedirectToAction("Solicitation");
 
