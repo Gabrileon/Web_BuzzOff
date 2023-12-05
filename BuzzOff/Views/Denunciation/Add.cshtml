@@ -1,7 +1,10 @@
-﻿@model DenunciationAddressModel
+﻿@using Business.Repository.DAO;
+@model DenunciationAddressModel
 @{
     ViewData["Title"] = "Cadastro denuncias";
     Layout = "~/Views/Shared/_LayoutDenunciation.cshtml";
+
+    var neighborhoods = CoordinateDAO.GetAllNeighborhoods();
 }
 
 <div class="d-flex flex-row">
@@ -36,9 +39,14 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="d-flex flex-column mx-3">
-                                            <label for="neighborhood">Bairro</label>
-                                            <input type="text" class="form-control" id="neighborhood" asp-for="Address.Neighborhood" />
+                                        <div class="d-flex flex-column mx-3 ">
+                                            <label for="focusType">Bairro</label>
+                                            <select asp-for="Address.Neighborhood" id="neighborhood" class="form-control">
+                                                @foreach(var value in neighborhoods)
+                                                {
+                                                    <option value="@value">@value</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +60,7 @@
                                     <div class="col">
                                         <div class="d-flex flex-column mx-3">
                                             <label for="city">Cidade</label>
-                                            <input type="text" class="form-control" id="city" asp-for="Address.City" />
+                                            <input type="text" class="form-control" id="city" value="Blumenau" asp-for="Address.City" readonly/>
                                         </div>
                                     </div>
                                 </div>
