@@ -71,6 +71,14 @@ namespace BuzzOff.Controllers
             };
             DengueFocusDAO.Insert(dengueFocus);
             return RedirectToAction("Visit", "Index");
+        }        
+       
+        public IActionResult UpdateDenunciationStage(int id)
+        {
+            var denunciation = DenunciationDAO.GetOne(id);
+            denunciation.Stage = MyEnuns.DenunciationStage.Completed;
+            DenunciationDAO.Update(denunciation);
+            return RedirectToAction("Index");
         }
     }
 }
