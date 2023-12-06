@@ -113,12 +113,22 @@
                         </div>
                     </div>
                 </div>
-                @if (LoggedUser.HasClaim("AccessLevel", "Agent"))
+                @if (LoggedUser.HasClaim("AccessLevel", "Agent") && Model.Denunciation.Stage == DenunciationStage.NotAnswered)
                 {
                     <div class="row">
                         <div class="col"></div>
                         <div class="col">
                             <a class="btn btn-success mt-5" asp-controller="Visit" asp-route-id="@Model.Denunciation.Id" asp-action="Add" >Visitar</a>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                }
+                @if (LoggedUser.HasClaim("AccessLevel", "Agent") && Model.Denunciation.Stage == DenunciationStage.Pendent)
+                {
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <a class="btn btn-success mt-5" asp-controller="Visit" asp-route-id="@Model.Denunciation.Id" asp-action="UpdateDenunciationStage">Encerrar denuncia</a>
                         </div>
                         <div class="col"></div>
                     </div>
