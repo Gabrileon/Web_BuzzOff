@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Repository.DAO
 {
-     public class CountFocusDAO
+    public class CountFocusDAO
     {
         /// <summary>
         /// true para focos erradicados.
@@ -62,7 +62,7 @@ namespace Business.Repository.DAO
                     $"where dbo.DengueFocus.IsEradicated = @b and " +
                     $"dbo.Addresses.Neighborhood = @Neighborhood " +
                     $"group by Addresses.Neighborhood";
-                cmd.Parameters.AddWithValue("@b", b);                
+                cmd.Parameters.AddWithValue("@b", b);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -157,7 +157,7 @@ namespace Business.Repository.DAO
             }
         }
 
-        
+
     }
 }
 

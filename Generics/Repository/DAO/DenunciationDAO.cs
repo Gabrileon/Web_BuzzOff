@@ -182,26 +182,15 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "select d.Id, IdInformer, IdAddress, DataDenunciation, Media, MediaName, Comment, Stage, FocusType from Denunciations as d, Visits as v where v.IDDenunciation = d.ID and v.IDAgent = @IdAgent";
+                cmd.CommandText = "select distinct D.ID from Denunciations as D, Visits as V where V.IDDenunciation = D.ID and v.IDAgent = @IdAgent";
                 cmd.Parameters.AddWithValue("@IdAgent", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        IDenunciation model = new Denunciation()
-                        {
-                            Id = (int)reader["Id"],
-                            IdInformer = (int)reader["IdInformer"],
-                            Address = AddressDAO.GetOne((int)reader["IdAddress"]),
-                            DataDenunciation = (DateTime)reader["DataDenunciation"],
-                            Media = reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
-                            MediaName = reader["MediaName"] != DBNull.Value ? (string)reader["MediaName"] : null,
-                            Stage = (DenunciationStage)reader["Stage"],
-                            FocusType = (FocusType)reader["FocusType"],
-                            Comment = reader["Comment"] != DBNull.Value ? (string)reader["Comment"] : null
-                        };
-                        list.Add(model);
+                        var denunciation = DenunciationDAO.GetOne((int)reader["Id"]);
+                        list.Add(denunciation);
                     }
                 }
             }

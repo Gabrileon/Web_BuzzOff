@@ -39,7 +39,7 @@ namespace BuzzOff.Controllers
             {
                 var dengueFocus = new DengueFocusModel()
                 {
-                    IsEradicated = true,
+                    IsEradicated = false,
                     Priority = MyEnuns.Priority.Média,
                     Address = model.Denunciation.Address,
                     Visit = model,
