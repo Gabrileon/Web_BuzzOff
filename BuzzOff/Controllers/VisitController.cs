@@ -14,9 +14,9 @@ namespace BuzzOff.Controllers
         public IActionResult Index()
         {
             var id = Convert.ToInt32(HttpContext.User.Claims.First().Value);
-            var model = new VisitsModel()
+            var model = new DenunciationsModel()
             {
-                Visits = VisitDAO.GetAllVisitsAgent(id),
+                Denunciations = DenunciationDAO.GetByAgentId(id)
             };
             return View(model);
         }
@@ -39,7 +39,7 @@ namespace BuzzOff.Controllers
             {
                 var dengueFocus = new DengueFocusModel()
                 {
-                    IsEradicated = false,
+                    IsEradicated = true,
                     Priority = MyEnuns.Priority.Média,
                     Address = model.Denunciation.Address,
                     Visit = model,

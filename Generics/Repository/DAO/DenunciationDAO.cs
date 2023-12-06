@@ -138,7 +138,43 @@ namespace Business.Repository
             }
             return list;
         }
-        public static List<IDenunciation> GetByInformerIdAndStage(int id, bool b)
+
+        //public static List<IDenunciation> GetByInformerIdAndStage(int id, bool b)
+        //{
+        //    var list = new List<IDenunciation>();
+
+        //    using (var conn = new SqlConnection(DBConnect.Connect()))
+        //    {
+        //        conn.Open();
+        //        SqlCommand cmd = conn.CreateCommand();
+        //        cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, MediaName, Comment, Stage, FocusType FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
+        //        cmd.Parameters.AddWithValue("@Id", id);
+        //        cmd.Parameters.AddWithValue("@B", b);
+
+        //        using (SqlDataReader reader = cmd.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                IDenunciation model = new Denunciation()
+        //                {
+        //                    Id = (int)reader["Id"],
+        //                    IdInformer = (int)reader["IdInformer"],
+        //                    Address = AddressDAO.GetOne((int)reader["IdAddress"]),
+        //                    DataDenunciation = (DateTime)reader["DataDenunciation"],
+        //                    Media = reader["Media"] != DBNull.Value ? (byte[])reader["Media"] : null,
+        //                    MediaName = reader["MediaName"] != DBNull.Value ? (string)reader["MediaName"] : null,
+        //                    Stage = (DenunciationStage)reader["Stage"],
+        //                    FocusType = (FocusType)reader["FocusType"],
+        //                    Comment = reader["Comment"] != DBNull.Value ? (string)reader["Comment"] : null
+        //                };
+        //                list.Add(model);
+        //            }
+        //        }
+        //    }
+        //    return list;
+        //}
+
+        public static List<IDenunciation> GetByAgentId(int id)
         {
             var list = new List<IDenunciation>();
 
@@ -146,9 +182,8 @@ namespace Business.Repository
             {
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Id, IdInformer, IdAddress, DataDenunciation, Media, Comment, Stage, FocusType FROM Denunciations WHERE IdInformer = @Id and IsAnswered = @B";
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.Parameters.AddWithValue("@B", b);
+                cmd.CommandText = "select d.Id, IdInformer, IdAddress, DataDenunciation, Media, MediaName, Comment, Stage, FocusType from Denunciations as d, Visits as v where v.IDDenunciation = d.ID and v.IDAgent = @IdAgent";
+                cmd.Parameters.AddWithValue("@IdAgent", id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -172,7 +207,6 @@ namespace Business.Repository
             }
             return list;
         }
-
         public static List<IDenunciation> GetAll()
         {
             var list = new List<IDenunciation>();
